@@ -22,6 +22,7 @@
 #include <DcgmLogging.h>
 #include <DiagResponseUtils.h>
 #include <json/json.h>
+#include <span>
 #include <string>
 
 extern const std::string_view denylistName;

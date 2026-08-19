@@ -15,6 +15,7 @@
  */
 #pragma once
 
+#include <algorithm>
 #include <list>
 #include <map>
 #include <string>

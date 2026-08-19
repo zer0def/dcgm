@@ -20,6 +20,7 @@
 #include <linux/vm_sockets.h>
 #include <sys/un.h>
 //*****
+#include <charconv>
 #include <DcgmLogging.h>
 #include <dcgm_structs.h>
 #include <netinet/in.h>

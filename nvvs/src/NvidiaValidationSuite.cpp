@@ -33,7 +33,7 @@
 #include <DcgmUtilities.h>
 #include <HangDetectHandler.h>
 #include <HangDetectMonitor.h>
-#include <boost/process.hpp>
+#include <boost/process/v1.hpp>
 #include <cstdlib>
 #include <dcgm_fields.h>
 #include <dcgm_structs_internal.h>
@@ -1182,8 +1182,7 @@ bool NvidiaValidationSuite::FillTestVectors(suiteNames_enum suite, Test::testCla
                 testNames.push_back(CPU_SDC_PLUGIN_NAME);
                 testNames.push_back(NVBANDWIDTH_PLUGIN_NAME);
                 testNames.push_back(NCCL_TESTS_PLUGIN_NAME);
-                namespace tp = boost::this_process;
-                auto env     = tp::environment();
+                auto env     = boost::this_process::environment();
                 auto envPath = env.find(DCGM_RIST_BIN_PATH_ENV);
                 if (ShouldIncludeRistInLevelRun(envPath == env.end() ? std::nullopt
                                                                      : std::make_optional(envPath->to_string())))

@@ -31,7 +31,13 @@ void StartNcServers(ServerType serverType,
 {
     for (auto const &port : ports)
     {
-        boost::filesystem::path tcpServerPath = boost::process::search_path("nc");
+        boost::filesystem::path tcpServerPath =
+#if BOOST_VERSION >= 108600
+          boost::process::v1::search_path(
+#else
+          boost::process::search_path(
+#endif
+              "nc");
         std::vector<char const *> tcpServerArgs;
         if (serverType == ServerType::Tcp)
         {

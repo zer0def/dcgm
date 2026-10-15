@@ -37,8 +37,13 @@
 #include <boost/asio/dispatch.hpp>
 #include <boost/asio/post.hpp>
 #include <boost/asio/thread_pool.hpp>
+#if BOOST_VERSION >= 108600
+#include <boost/process/v1.hpp>
+#include <boost/process/v1/extend.hpp>
+#else
 #include <boost/process.hpp>
 #include <boost/process/extend.hpp>
+#endif
 #include <cerrno>
 #include <climits>
 #include <fcntl.h>
@@ -57,9 +62,17 @@ namespace DcgmNs::Common::Subprocess
 namespace
 {
 
+#if BOOST_VERSION >= 108600
+    boost::process::v1::environment ToBoostProcessEnvironment(ChildProcessEnvironment const &environment)
+#else
     boost::process::environment ToBoostProcessEnvironment(ChildProcessEnvironment const &environment)
+#endif
     {
+#if BOOST_VERSION >= 108600
+        boost::process::v1::environment boostEnvironment;
+#else
         boost::process::environment boostEnvironment;
+#endif
         for (auto const &pair : environment)
         {
             boostEnvironment.emplace(pair.first, pair.second);
@@ -612,8 +625,15 @@ struct ChildProcess::Impl
         co_return 0;
     }
 
-    static auto StdLinesProcess(ChildProcess::Impl &self, boost::process::async_pipe &sourcePipe, StdLines &target)
-        -> boost::asio::awaitable<int>
+    static auto StdLinesProcess(
+        ChildProcess::Impl &self,
+#if BOOST_VERSION >= 108600
+        boost::process::v1::async_pipe &sourcePipe,
+#else
+        boost::process::async_pipe &sourcePipe,
+#endif
+        StdLines &target
+    ) -> boost::asio::awaitable<int>
     {
         auto cancellationState = co_await boost::asio::this_coro::cancellation_state;
         boost::asio::streambuf buffer;
@@ -667,7 +687,11 @@ struct ChildProcess::Impl
 
     void Run()
     {
+#if BOOST_VERSION >= 108600
+        namespace bp = boost::process::v1;
+#else
         namespace bp = boost::process;
+#endif
         std::latch launchProcessLatch(1);
 
         // boost::process 1.85.0 throws out of _read_error before invoke's post-fork
@@ -1006,16 +1030,22 @@ struct ChildProcess::Impl
     std::unordered_map<int, std::unique_ptr<ChannelDesc>> channels;
     std::optional<int> legacyChannelFd;
 
+#if BOOST_VERSION >= 108600
+    boost::process::v1::async_pipe stdOutPipe;
+    boost::process::v1::async_pipe stdErrPipe;
+    boost::process::v1::child process;
+    boost::process::v1::environment environment;
+#else
     boost::process::async_pipe stdOutPipe;
     boost::process::async_pipe stdErrPipe;
-
     boost::process::child process;
+    boost::process::environment environment;
+#endif
     std::shared_ptr<ExitCallbackState> exitCallbackState;
 
     boost::filesystem::path executable;
     std::vector<std::string> args;
     std::optional<std::string> userName;
-    boost::process::environment environment;
     std::optional<ChildProcessFds> allowedFds;
 
     StdLines stdOutLines;

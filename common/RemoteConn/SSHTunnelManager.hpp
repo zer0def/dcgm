@@ -23,7 +23,11 @@
 #include <dcgm_structs_internal.h>
 
 #include <boost/filesystem/exception.hpp>
+#if BOOST_VERSION >= 108600
+#include <boost/process/v1.hpp>
+#else
 #include <boost/process.hpp>
+#endif
 #include <fmt/format.h>
 
 #include <expected>
@@ -281,7 +285,13 @@ namespace detail
         SSHTunnelManagerBase()
         {
             std::vector<boost::filesystem::path> const binarySearchDirs = { "/usr/bin", "/usr/sbin" };
-            m_binaryPath = boost::process::search_path("ssh", std::move(binarySearchDirs));
+            m_binaryPath =
+#if BOOST_VERSION >= 108600
+              boost::process::v1::search_path(
+#else
+              boost::process::search_path(
+#endif
+                  "ssh", std::move(binarySearchDirs));
             m_currentUid = getuid();
         }
 

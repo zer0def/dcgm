@@ -23,7 +23,7 @@
 #include <PluginStrings.h>
 #include <dcgm_structs.h>
 
-#include <boost/process.hpp>
+#include <boost/process/v1.hpp>
 #include <memory>
 #include <ranges>
 

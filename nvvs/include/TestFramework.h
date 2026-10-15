@@ -198,7 +198,7 @@ private:
 
     // new plugin loading
     std::vector<std::unique_ptr<PluginLibT>> m_plugins;
-    std::vector<dcgmDiagPluginEntityInfo_v1> m_entityInfo;
+    std::vector<struct dcgmDiagPluginEntityInfo_v1> m_entityInfo;
     std::vector<std::string> m_skipLibraryList;
 
     // methods
@@ -214,7 +214,7 @@ private:
     void LoadPluginWithDir(std::string const &pluginDir);
 
     /********************************************************************/
-    std::vector<dcgmDiagPluginEntityInfo_v1> PopulateEntityInfoForPlugins(EntitySet &entitySet);
+    std::vector<struct dcgmDiagPluginEntityInfo_v1> PopulateEntityInfoForPlugins(EntitySet &entitySet);
 
     /********************************************************************/
     /*

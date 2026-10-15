@@ -109,7 +109,7 @@ Software::Software(dcgmHandle_t handle,
     , m_dcgmRecorder(handle, m_dcgmOps, nvvsCommon)
     , m_dcgmSystem(dcgmSystem)
     , m_handle(handle)
-    , m_entityInfo(std::make_unique<dcgmDiagPluginEntityList_v1>())
+    , m_entityInfo(std::make_unique<struct dcgmDiagPluginEntityList_v1>())
 {
     m_infoStruct.testIndex        = DCGM_SOFTWARE_INDEX;
     m_infoStruct.shortDescription = "Software deployment checks plugin.";
@@ -126,7 +126,7 @@ Software::Software(dcgmHandle_t handle,
 }
 
 void Software::Go(std::string const &testName,
-                  dcgmDiagPluginEntityList_v1 const *entityInfo,
+                  struct dcgmDiagPluginEntityList_v1 const *entityInfo,
                   unsigned int numParameters,
                   dcgmDiagPluginTestParameter_t const *tpStruct)
 {
@@ -623,7 +623,7 @@ int Software::checkForGraphicsProcesses()
 }
 #pragma GCC diagnostic pop
 
-int Software::checkPersistenceMode(dcgmDiagPluginEntityList_v1 const &entityList)
+int Software::checkPersistenceMode(struct dcgmDiagPluginEntityList_v1 const &entityList)
 {
     unsigned const numEntities = std::min(
         entityList.numEntities, static_cast<unsigned>(sizeof(entityList.entities) / sizeof(entityList.entities[0])));

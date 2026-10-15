@@ -114,7 +114,7 @@ public:
     }
 
     void Go(std::string const &,
-            dcgmDiagPluginEntityList_v1 const *,
+            struct dcgmDiagPluginEntityList_v1 const *,
             unsigned int,
             dcgmDiagPluginTestParameter_t const *) override
     {}
@@ -172,7 +172,7 @@ public:
         return CheckPassFail(startTime, earliestStopTime);
     }
 
-    bool RunTestWrapper(dcgmDiagPluginEntityList_v1 const *entityInfo)
+    bool RunTestWrapper(struct dcgmDiagPluginEntityList_v1 const *entityInfo)
     {
         return RunTest(entityInfo);
     }
@@ -214,11 +214,11 @@ public:
     }
 };
 
-dcgmDiagPluginEntityList_v1 MakeTargetedPowerEntityList(unsigned int gpuCount,
+struct dcgmDiagPluginEntityList_v1 MakeTargetedPowerEntityList(unsigned int gpuCount,
                                                         DcgmEntityStatus_t status,
                                                         unsigned int pciDeviceId)
 {
-    dcgmDiagPluginEntityList_v1 entityList {};
+    struct dcgmDiagPluginEntityList_v1 entityList {};
     entityList.numEntities = gpuCount;
     for (unsigned int i = 0; i < gpuCount; ++i)
     {
@@ -234,11 +234,11 @@ dcgmDiagPluginEntityList_v1 MakeTargetedPowerEntityList(unsigned int gpuCount,
     return entityList;
 }
 
-std::unique_ptr<dcgmDiagPluginEntityList_v1> MakeTargetedPowerEntityListPtr(unsigned int gpuCount,
+std::unique_ptr<struct dcgmDiagPluginEntityList_v1> MakeTargetedPowerEntityListPtr(unsigned int gpuCount,
                                                                             DcgmEntityStatus_t status,
                                                                             unsigned int pciDeviceId)
 {
-    auto entityList = std::make_unique<dcgmDiagPluginEntityList_v1>();
+    auto entityList = std::make_unique<struct dcgmDiagPluginEntityList_v1>();
     *entityList     = MakeTargetedPowerEntityList(gpuCount, status, pciDeviceId);
     return entityList;
 }
@@ -357,7 +357,7 @@ TEST_CASE_METHOD(TargetedPowerTestFixture,
                           std::move(mockCudaCommonUnique),
                           &nvvsCommon);
 
-    std::unique_ptr<dcgmDiagPluginEntityList_v1> entityInfo = std::make_unique<dcgmDiagPluginEntityList_v1>();
+    std::unique_ptr<struct dcgmDiagPluginEntityList_v1> entityInfo = std::make_unique<struct dcgmDiagPluginEntityList_v1>();
 
     entityInfo->numEntities                      = 2;
     entityInfo->entities[0].entity.entityId      = 0;
@@ -429,7 +429,7 @@ TEST_CASE_METHOD(TargetedPowerTestFixture,
                           std::move(mockCudaCommonUnique),
                           &nvvsCommon);
 
-    std::unique_ptr<dcgmDiagPluginEntityList_v1> entityInfo = std::make_unique<dcgmDiagPluginEntityList_v1>();
+    std::unique_ptr<struct dcgmDiagPluginEntityList_v1> entityInfo = std::make_unique<struct dcgmDiagPluginEntityList_v1>();
 
     entityInfo->numEntities                      = 2;
     entityInfo->entities[0].entity.entityId      = 0;
@@ -481,7 +481,7 @@ TEST_CASE_METHOD(TargetedPowerTestFixture, "TargetedPower_wrapper: CudaInit() in
                               std::move(mockCublasOpsUnique),
                               std::move(mockCudaCommonUnique),
                               &nvvsCommon);
-        dcgmDiagPluginEntityList_v1 entityInfo = MakeTargetedPowerEntityList(1, DcgmEntityStatusOk, 1);
+        struct dcgmDiagPluginEntityList_v1 entityInfo = MakeTargetedPowerEntityList(1, DcgmEntityStatusOk, 1);
         cpt.InitializeForEntityList(cpt.GetTargetedPowerTestName(), entityInfo);
         cpt.MockDevices({ 0 }, { 500.0 });
         cpt.SetMaxMatrixDim(2);
@@ -530,7 +530,7 @@ TEST_CASE_METHOD(TargetedPowerTestFixture, "TargetedPower_wrapper: CudaInit hand
                           std::move(mockCudaCommonUnique),
                           &nvvsCommon);
     mockCudaOps->cudaStubAllocateMemory    = true;
-    dcgmDiagPluginEntityList_v1 entityInfo = MakeTargetedPowerEntityList(1, DcgmEntityStatusOk, 1);
+    struct dcgmDiagPluginEntityList_v1 entityInfo = MakeTargetedPowerEntityList(1, DcgmEntityStatusOk, 1);
     cpt.InitializeForEntityList(cpt.GetTargetedPowerTestName(), entityInfo);
     cpt.MockDevices({ 0 }, { 500.0 });
     cpt.SetMaxMatrixDim(2);
@@ -577,7 +577,7 @@ TEST_CASE_METHOD(TargetedPowerTestFixture,
                           std::move(mockCudaCommonUnique),
                           &nvvsCommon);
 
-    std::unique_ptr<dcgmDiagPluginEntityList_v1> entityInfo = std::make_unique<dcgmDiagPluginEntityList_v1>();
+    std::unique_ptr<struct dcgmDiagPluginEntityList_v1> entityInfo = std::make_unique<struct dcgmDiagPluginEntityList_v1>();
 
     entityInfo->numEntities                      = 2;
     entityInfo->entities[0].entity.entityId      = 0;
@@ -637,7 +637,7 @@ TEST_CASE_METHOD(TargetedPowerTestFixture,
                           std::move(mockCudaCommonUnique),
                           &nvvsCommon);
 
-    dcgmDiagPluginEntityList_v1 entityInfo = MakeTargetedPowerEntityList(1, DcgmEntityStatusOk, 1);
+    struct dcgmDiagPluginEntityList_v1 entityInfo = MakeTargetedPowerEntityList(1, DcgmEntityStatusOk, 1);
     cpt.InitializeForEntityList(cpt.GetTargetedPowerTestName(), entityInfo);
 
     CPDevice device(mockDcgmOps, mockCudaOps, mockCublasOps);
@@ -702,7 +702,7 @@ TEST_CASE_METHOD(TargetedPowerTestFixture, "ConstantPower: CheckPassFail sets GP
                           std::move(mockCublasOpsUnique),
                           std::move(mockCudaCommonUnique),
                           &nvvsCommon);
-    dcgmDiagPluginEntityList_v1 entityInfo = MakeTargetedPowerEntityList(2, DcgmEntityStatusOk, 1);
+    struct dcgmDiagPluginEntityList_v1 entityInfo = MakeTargetedPowerEntityList(2, DcgmEntityStatusOk, 1);
     cpt.InitializeForEntityList(cpt.GetTargetedPowerTestName(), entityInfo);
     cpt.MockDevices({ 0, 1 }, { 500.0, 500.0 });
     cpt.SetTargetedPower(100.0);
@@ -727,7 +727,7 @@ TEST_CASE_METHOD(TargetedPowerTestFixture, "ConstantPower: RunTest skips when en
                           std::move(mockCublasOpsUnique),
                           std::move(mockCudaCommonUnique),
                           &nvvsCommon);
-    dcgmDiagPluginEntityList_v1 entityInfo = MakeTargetedPowerEntityList(2, DcgmEntityStatusOk, 1);
+    struct dcgmDiagPluginEntityList_v1 entityInfo = MakeTargetedPowerEntityList(2, DcgmEntityStatusOk, 1);
     cpt.InitializeForEntityList(cpt.GetTargetedPowerTestName(), entityInfo);
     cpt.MockDevices({ 0, 1 }, { 10.0, 20.0 });
     cpt.SetTargetedPower(100.0);
@@ -750,7 +750,7 @@ TEST_CASE_METHOD(TargetedPowerTestFixture,
                           std::move(mockCudaCommonUnique),
                           &nvvsCommon);
     mockCudaOps->cudaStubAllocateMemory    = true;
-    dcgmDiagPluginEntityList_v1 entityInfo = MakeTargetedPowerEntityList(1, DcgmEntityStatusOk, 1);
+    struct dcgmDiagPluginEntityList_v1 entityInfo = MakeTargetedPowerEntityList(1, DcgmEntityStatusOk, 1);
     cpt.InitializeForEntityList(cpt.GetTargetedPowerTestName(), entityInfo);
     cpt.MockDevices({ 0 }, { 500.0 });
     cpt.SetTargetedPower(100.0);
@@ -779,7 +779,7 @@ TEST_CASE_METHOD(TargetedPowerTestFixture, "ConstantPower: RunTest queues short 
                           std::move(mockCudaCommonUnique),
                           &nvvsCommon);
     mockCudaOps->cudaStubAllocateMemory    = true;
-    dcgmDiagPluginEntityList_v1 entityInfo = MakeTargetedPowerEntityList(1, DcgmEntityStatusOk, 1);
+    struct dcgmDiagPluginEntityList_v1 entityInfo = MakeTargetedPowerEntityList(1, DcgmEntityStatusOk, 1);
     cpt.InitializeForEntityList(cpt.GetTargetedPowerTestName(), entityInfo);
     cpt.MockDevices({ 0 }, { 500.0 });
     cpt.SetTargetedPower(100.0);
@@ -811,7 +811,7 @@ TEST_CASE_METHOD(TargetedPowerTestFixture, "ConstantPower: RunTest queues SGEMM 
                           std::move(mockCudaCommonUnique),
                           &nvvsCommon);
     mockCudaOps->cudaStubAllocateMemory    = true;
-    dcgmDiagPluginEntityList_v1 entityInfo = MakeTargetedPowerEntityList(1, DcgmEntityStatusOk, 1);
+    struct dcgmDiagPluginEntityList_v1 entityInfo = MakeTargetedPowerEntityList(1, DcgmEntityStatusOk, 1);
     cpt.InitializeForEntityList(cpt.GetTargetedPowerTestName(), entityInfo);
     cpt.MockDevices({ 0 }, { 500.0 });
     cpt.SetTargetedPower(100.0);
@@ -845,7 +845,7 @@ TEST_CASE_METHOD(TargetedPowerTestFixture, "ConstantPower: RunTest queues FP16 w
                           std::move(mockCudaCommonUnique),
                           &nvvsCommon);
     mockCudaOps->cudaStubAllocateMemory    = true;
-    dcgmDiagPluginEntityList_v1 entityInfo = MakeTargetedPowerEntityList(1, DcgmEntityStatusOk, 1);
+    struct dcgmDiagPluginEntityList_v1 entityInfo = MakeTargetedPowerEntityList(1, DcgmEntityStatusOk, 1);
     cpt.InitializeForEntityList(cpt.GetTargetedPowerTestName(), entityInfo);
     cpt.MockDevices({ 0 }, { 500.0 });
     cpt.SetTargetedPower(100.0);

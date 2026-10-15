@@ -104,7 +104,7 @@ public:
 
     void ConstructMpiCommand(void const *params)
     {
-        m_runner.ConstructMpiCommand(params);
+        static_cast<void>(m_runner.ConstructMpiCommand(params));
     }
 
     void ParseDcgmMnDiagToMpiCommand(dcgmRunMnDiag_v2 const &drmnd)

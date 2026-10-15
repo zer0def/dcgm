@@ -120,7 +120,7 @@ public:
      *
      * @param fieldId[in]  - Field id to update.
      * @param buf[out]     - DcgmFvBuffer type which needs to be populated with fieldId value.
-     * @param entities[in] - Vector of dcgm_field_update_info_t to access entityGroupId and entityId.
+     * @param entities[in] - Vector of struct dcgm_field_update_info_t to access entityGroupId and entityId.
      * @param now[in]      - Current time
      *
      * Returns DCGM_ST_OK on success.
@@ -128,7 +128,7 @@ public:
      */
     dcgmReturn_t UpdateFieldsFromNvswitchLibrary(unsigned short fieldId,
                                                  DcgmFvBuffer &buf,
-                                                 const std::vector<dcgm_field_update_info_t> &entities,
+                                                 const std::vector<struct dcgm_field_update_info_t> &entities,
                                                  timelib64_t now) override;
 
     /*************************************************************************/
@@ -292,7 +292,7 @@ public:
      */
     template <typename... indexTypes>
     std::optional<dcgmGroupEntityPair_t> Find(unsigned short fieldId,
-                                              const std::vector<dcgm_field_update_info_t> &entities,
+                                              const std::vector<struct dcgm_field_update_info_t> &entities,
                                               std::tuple<indexTypes...> index)
     {
         return std::nullopt;
@@ -306,22 +306,22 @@ public:
     template <typename nscqFieldType, typename storageType, bool is_vector, typename... indexTypes>
     dcgmReturn_t UpdateFields(unsigned short fieldId,
                               DcgmFvBuffer &buf,
-                              const std::vector<dcgm_field_update_info_t> &entities,
+                              const std::vector<struct dcgm_field_update_info_t> &entities,
                               timelib64_t now);
 };
 
 template <>
 std::optional<dcgmGroupEntityPair_t> DcgmNscqManager::Find(unsigned short fieldId,
-                                                           const std::vector<dcgm_field_update_info_t> &entities,
+                                                           const std::vector<struct dcgm_field_update_info_t> &entities,
                                                            std::tuple<uuid_p> index);
 
 template <>
 std::optional<dcgmGroupEntityPair_t> DcgmNscqManager::Find(unsigned short fieldId,
-                                                           const std::vector<dcgm_field_update_info_t> &entities,
+                                                           const std::vector<struct dcgm_field_update_info_t> &entities,
                                                            std::tuple<uuid_p, link_id_t> index);
 
 template <>
 std::optional<dcgmGroupEntityPair_t> DcgmNscqManager::Find(unsigned short fieldId,
-                                                           const std::vector<dcgm_field_update_info_t> &entities,
+                                                           const std::vector<struct dcgm_field_update_info_t> &entities,
                                                            std::tuple<uuid_p, link_id_t, lane_vc_id_t> index);
 } // namespace DcgmNs

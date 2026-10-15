@@ -69,7 +69,7 @@ public:
     {}
 
     void Go(std::string const & /* testName */,
-            dcgmDiagPluginEntityList_v1 const * /* entityInfo */,
+            struct dcgmDiagPluginEntityList_v1 const * /* entityInfo */,
             unsigned int /* numParameters */,
             const dcgmDiagPluginTestParameter_t * /* testParameters */) override
     {}
@@ -161,8 +161,8 @@ TEST_CASE_METHOD(PluginTestFixture, "Plugin Results Reporting")
     auto pEntityResults                     = MakeUniqueZero<dcgmDiagEntityResults_v2>();
     dcgmDiagEntityResults_v2 &entityResults = *(pEntityResults.get());
 
-    auto pEntityList                        = std::make_unique<dcgmDiagPluginEntityList_v1>();
-    dcgmDiagPluginEntityList_v1 &entityList = *(pEntityList.get());
+    auto pEntityList                        = std::make_unique<struct dcgmDiagPluginEntityList_v1>();
+    struct dcgmDiagPluginEntityList_v1 &entityList = *(pEntityList.get());
 
     std::string const testName   = "capoo";
     char const *tempViolationSrc = "GPU";
@@ -210,8 +210,8 @@ TEST_CASE_METHOD(PluginTestFixture, "Plugin Results Reporting")
 
 TEST_CASE_METHOD(PluginTestFixture, "Plugin Duplicate Errors")
 {
-    std::unique_ptr<dcgmDiagPluginEntityList_v1> entityListUptr = std::make_unique<dcgmDiagPluginEntityList_v1>();
-    dcgmDiagPluginEntityList_v1 &entityList                     = *entityListUptr;
+    std::unique_ptr<struct dcgmDiagPluginEntityList_v1> entityListUptr = std::make_unique<struct dcgmDiagPluginEntityList_v1>();
+    struct dcgmDiagPluginEntityList_v1 &entityList                     = *entityListUptr;
 
     std::string const testName   = "capoo";
     char const *tempViolationSrc = "GPU";
@@ -270,8 +270,8 @@ TEST_CASE_METHOD(PluginTestFixture, "Entity-Centric Results Reporting")
 {
     SECTION("AddError(entity, diagError)")
     {
-        auto pEntityList                        = std::make_unique<dcgmDiagPluginEntityList_v1>();
-        dcgmDiagPluginEntityList_v1 &entityList = *(pEntityList.get());
+        auto pEntityList                        = std::make_unique<struct dcgmDiagPluginEntityList_v1>();
+        struct dcgmDiagPluginEntityList_v1 &entityList = *(pEntityList.get());
 
         std::string const testName = "capoo";
 
@@ -312,8 +312,8 @@ TEST_CASE_METHOD(PluginTestFixture, "Optional Errors")
     DCGM_ERROR_FORMAT_MESSAGE(
         DCGM_FR_HOSTENGINE_CONN, globalError2, "At Rex Kwon Do, we use the buddy system. No more flyin solo!");
 
-    std::unique_ptr<dcgmDiagPluginEntityList_v1> entityListUPtr = std::make_unique<dcgmDiagPluginEntityList_v1>();
-    dcgmDiagPluginEntityList_v1 &entityList                     = *entityListUPtr;
+    std::unique_ptr<struct dcgmDiagPluginEntityList_v1> entityListUPtr = std::make_unique<struct dcgmDiagPluginEntityList_v1>();
+    struct dcgmDiagPluginEntityList_v1 &entityList                     = *entityListUPtr;
 
     std::string const testName = "capoo";
 
@@ -357,7 +357,7 @@ TEST_CASE_METHOD(PluginTestFixture, "Optional Errors")
 
 TEST_CASE_METHOD(PluginTestFixture, "Plugin::InitializeForEntityList")
 {
-    std::unique_ptr<dcgmDiagPluginEntityList_v1> entityList = std::make_unique<dcgmDiagPluginEntityList_v1>();
+    std::unique_ptr<struct dcgmDiagPluginEntityList_v1> entityList = std::make_unique<struct dcgmDiagPluginEntityList_v1>();
     std::string const testName                              = "capoo";
 
     entityList->numEntities                      = 3;
@@ -402,8 +402,8 @@ TEST_CASE_METHOD(PluginTestFixture, "Plugin Attribute")
 
 TEST_CASE_METHOD(PluginTestFixture, "Plugin AddInfoVerbose")
 {
-    auto pEntityList                        = std::make_unique<dcgmDiagPluginEntityList_v1>();
-    dcgmDiagPluginEntityList_v1 &entityList = *(pEntityList.get());
+    auto pEntityList                        = std::make_unique<struct dcgmDiagPluginEntityList_v1>();
+    struct dcgmDiagPluginEntityList_v1 &entityList = *(pEntityList.get());
     std::string const testName              = "capoo";
 
     entityList.numEntities                      = 1;

@@ -47,7 +47,7 @@ public:
     {}
 
     void Go(std::string const &testName,
-            dcgmDiagPluginEntityList_v1 const *entityInfo,
+            struct dcgmDiagPluginEntityList_v1 const *entityInfo,
             unsigned int numParameters,
             const dcgmDiagPluginTestParameter_t *testParameters) override;
     void setArgs(std::string args)
@@ -81,7 +81,7 @@ protected:
     DcgmRecorder m_dcgmRecorder;
     DcgmSystemBase *m_dcgmSystem; // DCGM system interface.
     dcgmHandle_t m_handle;
-    std::unique_ptr<dcgmDiagPluginEntityList_v1> m_entityInfo;
+    std::unique_ptr<struct dcgmDiagPluginEntityList_v1> m_entityInfo;
 
     // methods
     void addError(DcgmError &d);
@@ -89,7 +89,7 @@ protected:
     bool checkLibraries(libraryCheck_t libs);
     bool checkDenylist();
     int checkDriverPathDenylist(std::string, std::vector<std::string> const &);
-    int checkPersistenceMode(dcgmDiagPluginEntityList_v1 const &entityList);
+    int checkPersistenceMode(struct dcgmDiagPluginEntityList_v1 const &entityList);
     int checkForSramThreshold();
     int checkForGraphicsProcesses();
     int checkForBadEnvVaribles();

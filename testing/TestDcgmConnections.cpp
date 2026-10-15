@@ -83,13 +83,13 @@ struct TestIpcSocketPairConnection_t
     std::atomic_bool gotDisconnect          = false;
 };
 
-typedef struct
+struct TestIpcSocketPair_t
 {
     bool testFailed = false;
     std::array<TestIpcSocketPairConnection_t, 2> connections;
-} TestIpcSocketPair_t;
+};
 
-static TestIpcSocketPairConnection_t *TispGetConnection(TestIpcSocketPair_t *socketPair,
+static TestIpcSocketPairConnection_t *TispGetConnection(struct TestIpcSocketPair_t *socketPair,
                                                         dcgm_connection_id_t connectionId)
 {
     for (int i = 0; i < 2; i++)
@@ -108,7 +108,7 @@ static void TispProcessMessage(dcgm_connection_id_t connectionId,
                                std::unique_ptr<DcgmMessage> /* message */,
                                void *userData)
 {
-    TestIpcSocketPair_t *tisp                 = (TestIpcSocketPair_t *)userData;
+    struct TestIpcSocketPair_t *tisp                 = (struct TestIpcSocketPair_t *)userData;
     TestIpcSocketPairConnection_t *connection = TispGetConnection(tisp, connectionId);
     if (!connection)
     {
@@ -120,7 +120,7 @@ static void TispProcessMessage(dcgm_connection_id_t connectionId,
 
 static void TispProcessDisconnect(dcgm_connection_id_t connectionId, void *userData)
 {
-    TestIpcSocketPair_t *tisp                 = (TestIpcSocketPair_t *)userData;
+    struct TestIpcSocketPair_t *tisp                 = (struct TestIpcSocketPair_t *)userData;
     TestIpcSocketPairConnection_t *connection = TispGetConnection(tisp, connectionId);
     if (!connection)
     {
@@ -136,7 +136,7 @@ int TestDcgmConnections::TestIpcSocketPair(void)
 
     DcgmIpc dcgmIpc { 1 };
 
-    TestIpcSocketPair_t tisp;
+    struct TestIpcSocketPair_t tisp;
 
     dcgmReturn = dcgmIpc.Init(std::nullopt, TispProcessMessage, &tisp, TispProcessDisconnect, &tisp);
     if (dcgmReturn != DCGM_ST_OK)

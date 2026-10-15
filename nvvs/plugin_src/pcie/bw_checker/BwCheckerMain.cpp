@@ -91,7 +91,7 @@ void TestHostDeviceBandwidth(std::vector<dcgmGpuPciIdPair_t> &pairs,
     }
 
     std::map<unsigned int, CUdevice> gpuIdToCudaHandle;
-    std::vector<bwTestResult_t> results(gpuCount);
+    std::vector<struct bwTestResult_t> results(gpuCount);
 
     for (size_t d = 0; d < gpuCount; d++)
     {

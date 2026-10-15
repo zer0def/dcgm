@@ -534,7 +534,7 @@ int Memtest::CudaInit()
 }
 
 /*****************************************************************************/
-dcgmReturn_t Memtest::Init(const dcgmDiagPluginEntityList_v1 &entityList)
+dcgmReturn_t Memtest::Init(const struct dcgmDiagPluginEntityList_v1 &entityList)
 {
     auto cudaOps = m_cudaOps;
 
@@ -589,7 +589,7 @@ dcgmReturn_t Memtest::Init(const dcgmDiagPluginEntityList_v1 &entityList)
 }
 
 /*****************************************************************************/
-int Memtest::Run(const dcgmDiagPluginEntityList_v1 &entityList)
+int Memtest::Run(const struct dcgmDiagPluginEntityList_v1 &entityList)
 {
     std::vector<std::unique_ptr<MemtestWorker>> workerThreads;
 

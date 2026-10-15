@@ -42,7 +42,7 @@ public:
     {}
 
     void Go(std::string const & /* testName */,
-            dcgmDiagPluginEntityList_v1 const * /* entityInfo */,
+            struct dcgmDiagPluginEntityList_v1 const * /* entityInfo */,
             unsigned int /* numParameters */,
             const dcgmDiagPluginTestParameter_t * /* testParameters */) override
     {}
@@ -89,9 +89,9 @@ public:
     }
 };
 
-dcgmDiagPluginEntityList_v1 MakeGpuEntityList(unsigned int count)
+struct dcgmDiagPluginEntityList_v1 MakeGpuEntityList(unsigned int count)
 {
-    dcgmDiagPluginEntityList_v1 entityList {};
+    struct dcgmDiagPluginEntityList_v1 entityList {};
     entityList.numEntities = count;
     for (unsigned int i = 0; i < count; ++i)
     {
@@ -139,7 +139,7 @@ TEST_CASE_METHOD(PluginCommonTestFixture, "SetCudaDriverMajorVersion", "[PluginC
 TEST_CASE_METHOD(PluginCommonTestFixture, "CheckAndSetResult updates per-GPU results and errors", "[PluginCommon]")
 {
     std::string const testName             = "plugin_common";
-    dcgmDiagPluginEntityList_v1 entityList = MakeGpuEntityList(3);
+    struct dcgmDiagPluginEntityList_v1 entityList = MakeGpuEntityList(3);
     std::vector<unsigned int> gpuList { 0, 1, 2 };
 
     GIVEN("an initialized plugin")

@@ -34,7 +34,7 @@ public:
     {}
 
     void Go(std::string const & /* testName */,
-            dcgmDiagPluginEntityList_v1 const * /* entityInfo */,
+            struct dcgmDiagPluginEntityList_v1 const * /* entityInfo */,
             unsigned int /* numParameters */,
             const dcgmDiagPluginTestParameter_t * /* testParameters */) override
     {}
@@ -92,7 +92,7 @@ private:
 
 void initializePluginWithGpus(Plugin &p, std::string const &testName, unsigned int count)
 {
-    std::unique_ptr<dcgmDiagPluginEntityList_v1> entityInfo = std::make_unique<dcgmDiagPluginEntityList_v1>();
+    std::unique_ptr<struct dcgmDiagPluginEntityList_v1> entityInfo = std::make_unique<struct dcgmDiagPluginEntityList_v1>();
 
     entityInfo->numEntities = count;
     for (unsigned int i = 0; i < count; i++)

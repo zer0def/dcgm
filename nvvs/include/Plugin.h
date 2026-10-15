@@ -59,7 +59,7 @@ public:
 
     /* Interface methods for running the plugin */
     virtual void Go(std::string const &testName,
-                    dcgmDiagPluginEntityList_v1 const *entityInfo,
+                    struct dcgmDiagPluginEntityList_v1 const *entityInfo,
                     unsigned int numParameters,
                     const dcgmDiagPluginTestParameter_t *testParameters) = 0;
 
@@ -219,7 +219,7 @@ public:
      * This method clears any existing warnings, info messages, and results as a side effect.
      *
      */
-    void InitializeForEntityList(std::string const &testName, dcgmDiagPluginEntityList_v1 const &entityInfo);
+    void InitializeForEntityList(std::string const &testName, struct dcgmDiagPluginEntityList_v1 const &entityInfo);
 
     /*************************************************************************/
     /*

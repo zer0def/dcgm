@@ -122,7 +122,7 @@ public:
     /*
      * Initialize devices and resources for this plugin.
      */
-    std::string Init(const dcgmDiagPluginEntityList_v1 &entityList);
+    std::string Init(const struct dcgmDiagPluginEntityList_v1 &entityList);
 
     /*************************************************************************/
     /*
@@ -138,7 +138,7 @@ public:
      * Returns 0 on success
      *        <0 on failure or early exit
      */
-    int Run(const dcgmDiagPluginEntityList_v1 &entityList);
+    int Run(const struct dcgmDiagPluginEntityList_v1 &entityList);
 
     /*************************************************************************/
     /*

@@ -125,7 +125,7 @@ public:
      *
      * @param fieldId[in]  - Field id to update.
      * @param buf[out]     - DcgmFvBuffer type which needs to be populated with fieldId value.
-     * @param entities[in] - Vector of dcgm_field_update_info_t to access entityGroupId and entityId.
+     * @param entities[in] - Vector of struct dcgm_field_update_info_t to access entityGroupId and entityId.
      * @param now[in]      - Current time
      *
      * Returns DCGM_ST_OK on success.
@@ -133,7 +133,7 @@ public:
      */
     dcgmReturn_t UpdateFieldsFromNvswitchLibrary(unsigned short fieldId,
                                                  DcgmFvBuffer &buf,
-                                                 const std::vector<dcgm_field_update_info_t> &entities,
+                                                 const std::vector<struct dcgm_field_update_info_t> &entities,
                                                  timelib64_t now) override;
 
     /*************************************************************************/

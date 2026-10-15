@@ -73,9 +73,9 @@ public:
 /**
  * Helper function to create an entity list with specified number of GPUs
  */
-std::unique_ptr<dcgmDiagPluginEntityList_v1> createEntityList(unsigned int numGpus)
+std::unique_ptr<struct dcgmDiagPluginEntityList_v1> createEntityList(unsigned int numGpus)
 {
-    auto entityList         = std::make_unique<dcgmDiagPluginEntityList_v1>();
+    auto entityList         = std::make_unique<struct dcgmDiagPluginEntityList_v1>();
     entityList->numEntities = numGpus;
 
     for (unsigned int i = 0; i < numGpus; i++)

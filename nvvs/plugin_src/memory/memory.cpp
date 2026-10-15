@@ -345,7 +345,7 @@ nvvsPluginResult_t combine_results(nvvsPluginResult_t mainResult, nvvsPluginResu
     return result;
 }
 
-testResult_t testUtilGetCuDevice(const dcgmDiagPluginEntityInfo_v1 &entityInfo,
+testResult_t testUtilGetCuDevice(const struct dcgmDiagPluginEntityInfo_v1 &entityInfo,
                                  CUdevice *cuDevice,
                                  std::stringstream &error,
                                  CudaOpsAnyPtr cudaOps)
@@ -426,7 +426,7 @@ void mem_cleanup(mem_globals_p memGlobals)
 }
 
 /*****************************************************************************/
-int mem_init(mem_globals_p memGlobals, const dcgmDiagPluginEntityInfo_v1 &entityInfo)
+int mem_init(mem_globals_p memGlobals, const struct dcgmDiagPluginEntityInfo_v1 &entityInfo)
 {
     int st;
     CUresult cuRes;
@@ -527,7 +527,7 @@ int mem_init(mem_globals_p memGlobals, const dcgmDiagPluginEntityInfo_v1 &entity
 /*****************************************************************************/
 #pragma GCC diagnostic push
 #pragma GCC diagnostic ignored "-Wformat-security"
-int main_entry(const dcgmDiagPluginEntityInfo_v1 &entityInfo,
+int main_entry(const struct dcgmDiagPluginEntityInfo_v1 &entityInfo,
                Memory *memory,
                TestParameters *tp,
                dcgmHandle_t handle,

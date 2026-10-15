@@ -31,13 +31,13 @@
 #include <DcgmOpsAnyPtr.hpp>
 #include <string>
 
-typedef struct
+struct dcgmMigValidity_t
 {
     bool migEnabled                   = false;
     bool migInvalidConfiguration      = false;
     unsigned int gpuInstanceCount     = 0;
     unsigned int computeInstanceCount = 0;
-} dcgmMigValidity_t;
+};
 
 // define logging mechanisms, meta data, etc.
 
@@ -169,7 +169,7 @@ public:
      * The MIG mode is compatible if it is disabled or if there is only 1
      * GPU instance configured.
      */
-    dcgmMigValidity_t IsMigModeDiagCompatible() const;
+    struct dcgmMigValidity_t IsMigModeDiagCompatible() const;
 
     /*
      * Sets enabled to true if MIG mode is enabled.

@@ -76,7 +76,7 @@ void RunTest(char const * /* testName */,
              unsigned int /* timeout */,
              unsigned int /* numParameters */,
              const dcgmDiagPluginTestParameter_t * /* testParameters */,
-             dcgmDiagPluginEntityList_v1 const *entityInfo,
+             struct dcgmDiagPluginEntityList_v1 const *entityInfo,
              void * /* userData */)
 {
     g_incompleteNumGpus = 0;

@@ -32,7 +32,7 @@ ContextCreatePlugin::ContextCreatePlugin(dcgmHandle_t handle,
     , m_cudaOps(std::move(cudaOps))
     , m_cudaCommon(std::move(cudaCommon))
     , m_handle(handle)
-    , m_entityInfo(std::make_unique<dcgmDiagPluginEntityList_v1>())
+    , m_entityInfo(std::make_unique<struct dcgmDiagPluginEntityList_v1>())
 {
     m_infoStruct.testIndex        = DCGM_CONTEXT_CREATE_INDEX;
     m_infoStruct.shortDescription = "This plugin will attempt to create a CUDA context.";
@@ -54,7 +54,7 @@ ContextCreatePlugin::ContextCreatePlugin(dcgmHandle_t handle,
 #pragma GCC diagnostic push
 #pragma GCC diagnostic ignored "-Wformat-security"
 void ContextCreatePlugin::Go(std::string const &testName,
-                             dcgmDiagPluginEntityList_v1 const *entityInfo,
+                             struct dcgmDiagPluginEntityList_v1 const *entityInfo,
                              unsigned int numParameters,
                              dcgmDiagPluginTestParameter_t const *tpStruct)
 {

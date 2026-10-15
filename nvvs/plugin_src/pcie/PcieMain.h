@@ -25,20 +25,20 @@
 
 /*****************************************************************************/
 int main_init(BusGrind &bg,
-              const dcgmDiagPluginEntityList_v1 &entityInfo,
+              const struct dcgmDiagPluginEntityList_v1 &entityInfo,
               DcgmNs::DcgmOpsAnyPtr dcgmOps,
               dcgmHandle_t handle,
               CudaOpsAnyPtr cudaOps);
 
 /*****************************************************************************/
 int main_entry(BusGrind *bg,
-               const dcgmDiagPluginEntityList_v1 &entityInfo,
+               const struct dcgmDiagPluginEntityList_v1 &entityInfo,
                DcgmNs::DcgmOpsAnyPtr dcgmOps,
                dcgmHandle_t handle,
                CudaOpsAnyPtr cudaOps);
 
 /*****************************************************************************/
-bool pcie_gpu_id_in_list(unsigned int gpuId, const dcgmDiagPluginEntityList_v1 &entityInfo);
+bool pcie_gpu_id_in_list(unsigned int gpuId, const struct dcgmDiagPluginEntityList_v1 &entityInfo);
 
 /**
  * Check whether the global PCIe stop flag is set.
@@ -73,7 +73,7 @@ void addBandwidthInfo(BusGrind &bg, unsigned int gpu, const std::string &key, do
 
 /*****************************************************************************/
 void pcie_check_nvlink_status(BusGrind *bg,
-                              const dcgmDiagPluginEntityList_v1 &entityInfo,
+                              const struct dcgmDiagPluginEntityList_v1 &entityInfo,
                               DcgmNs::DcgmOpsAnyPtr dcgmOps,
                               dcgmHandle_t handle);
 

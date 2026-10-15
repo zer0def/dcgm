@@ -90,7 +90,7 @@ struct mem_globals_t
 using mem_globals_p = mem_globals_t *;
 
 /*****************************************************************************/
-int main_entry(const dcgmDiagPluginEntityInfo_v1 &entity,
+int main_entry(const struct dcgmDiagPluginEntityInfo_v1 &entity,
                Memory *memObj,
                TestParameters *testParameters,
                dcgmHandle_t handle,
@@ -101,7 +101,7 @@ int main_entry(const dcgmDiagPluginEntityInfo_v1 &entity,
 
 /*****************************************************************************/
 void mem_cleanup(mem_globals_p memGlobals);
-int mem_init(mem_globals_p memGlobals, const dcgmDiagPluginEntityInfo_v1 &entityInfo);
+int mem_init(mem_globals_p memGlobals, const struct dcgmDiagPluginEntityInfo_v1 &entityInfo);
 nvvsPluginResult_t runTestDeviceMemory(mem_globals_p memGlobals);
 
 /*****************************************************************************/

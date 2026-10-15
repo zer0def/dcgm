@@ -34,7 +34,7 @@
  * Note that it's OK to copy this structure since everything is attributes
  * and handles that are managed by cuda
  */
-typedef struct
+struct CudaWorkerDevice_t
 {
     CUdevice m_device { 0 };              //!< Cuda ordinal of the device to use
     CUcontext m_context { nullptr };      //!< Cuda context
@@ -53,7 +53,7 @@ typedef struct
     int m_maxMemoryClockMhz {};           //!< max. memory clock rate (MHz)
     double m_maxMemBandwidth {};          //!< max. memory bandwidth
     int m_eccSupport {};                  //!< ECC support enabled.
-} CudaWorkerDevice_t;
+};
 
 /*****************************************************************************/
 /* Base class for all field workers. This is here so we can do initialization
@@ -68,7 +68,7 @@ protected:
 
 public:
     /* Attributes for the device we're running our workload on */
-    CudaWorkerDevice_t m_cudaDevice;
+    struct CudaWorkerDevice_t m_cudaDevice;
     CudaOpsAnyPtr m_cudaOps; //!< CUDA API interface.
 
     double m_achievedLoad = 0.0; /* Currently-achieved workload */
@@ -76,7 +76,7 @@ public:
 
     /*****************************************************************************/
     /* Constructor */
-    FieldWorkerBase(CudaWorkerDevice_t cudaDevice, CudaOpsAnyPtr cudaOps, unsigned int fieldId)
+    FieldWorkerBase(struct CudaWorkerDevice_t cudaDevice, CudaOpsAnyPtr cudaOps, unsigned int fieldId)
         : m_cudaDevice(cudaDevice)
         , m_cudaOps(cudaOps)
         , m_fieldId(fieldId)
@@ -331,7 +331,7 @@ public:
 class FieldWorkerGrActivity : public FieldWorkerBase
 {
 public:
-    FieldWorkerGrActivity(CudaWorkerDevice_t cudaDevice, CudaOpsAnyPtr cudaOps)
+    FieldWorkerGrActivity(struct CudaWorkerDevice_t cudaDevice, CudaOpsAnyPtr cudaOps)
         : FieldWorkerBase(cudaDevice, cudaOps, DCGM_FI_PROF_GR_ENGINE_UTIL_RATIO)
     {}
     ~FieldWorkerGrActivity() = default;
@@ -364,7 +364,7 @@ public:
 class FieldWorkerSmActivity : public FieldWorkerBase
 {
 public:
-    FieldWorkerSmActivity(CudaWorkerDevice_t cudaDevice, CudaOpsAnyPtr cudaOps)
+    FieldWorkerSmActivity(struct CudaWorkerDevice_t cudaDevice, CudaOpsAnyPtr cudaOps)
         : FieldWorkerBase(cudaDevice, cudaOps, DCGM_FI_PROF_SM_UTIL_RATIO)
     {}
 
@@ -394,7 +394,7 @@ public:
 class FieldWorkerSmOccupancy : public FieldWorkerBase
 {
 public:
-    FieldWorkerSmOccupancy(CudaWorkerDevice_t cudaDevice, CudaOpsAnyPtr cudaOps)
+    FieldWorkerSmOccupancy(struct CudaWorkerDevice_t cudaDevice, CudaOpsAnyPtr cudaOps)
         : FieldWorkerBase(cudaDevice, cudaOps, DCGM_FI_PROF_SM_OCCUPANCY_RATIO)
     {}
 
@@ -465,7 +465,7 @@ class FieldWorkerPciRxTxBytes : public FieldWorkerBase
     CUdeviceptr_v2 m_deviceMem = (CUdeviceptr_v2) nullptr;
 
 public:
-    FieldWorkerPciRxTxBytes(CudaWorkerDevice_t cudaDevice, CudaOpsAnyPtr cudaOps, unsigned int fieldId)
+    FieldWorkerPciRxTxBytes(struct CudaWorkerDevice_t cudaDevice, CudaOpsAnyPtr cudaOps, unsigned int fieldId)
         : FieldWorkerBase(cudaDevice, cudaOps, fieldId)
     {
         CUresult cuSt;
@@ -563,7 +563,7 @@ class FieldWorkerDramUtil : public FieldWorkerBase
     CUdeviceptr_v2 m_deviceMem2 = (CUdeviceptr_v2) nullptr;
 
 public:
-    FieldWorkerDramUtil(CudaWorkerDevice_t cudaDevice, CudaOpsAnyPtr cudaOps)
+    FieldWorkerDramUtil(struct CudaWorkerDevice_t cudaDevice, CudaOpsAnyPtr cudaOps)
         : FieldWorkerBase(cudaDevice, cudaOps, DCGM_FI_PROF_DRAM_UTIL_RATIO)
     {
         CUresult cuSt;
@@ -650,7 +650,7 @@ class FieldWorkerNvLinkRwBytes : public FieldWorkerBase
     CUcontext m_deviceCtx1      = nullptr;
 
 public:
-    FieldWorkerNvLinkRwBytes(CudaWorkerDevice_t cudaDevice,
+    FieldWorkerNvLinkRwBytes(struct CudaWorkerDevice_t cudaDevice,
                              CudaOpsAnyPtr cudaOps,
                              unsigned int fieldId,
                              std::string peerBusId)
@@ -802,7 +802,7 @@ class FieldWorkerTensorActivity : public FieldWorkerBase
     double m_flopsPerOp = 0.0; /* How many flops are in a single matrix multiply? */
 
 public:
-    FieldWorkerTensorActivity(CudaWorkerDevice_t cudaDevice,
+    FieldWorkerTensorActivity(struct CudaWorkerDevice_t cudaDevice,
                               CudaOpsAnyPtr cudaOps,
                               CublasOpsAnyPtr cublasOps,
                               unsigned int fieldId)
@@ -1161,7 +1161,7 @@ public:
 class FieldWorkerDataTypeActivity : public FieldWorkerBase
 {
 public:
-    FieldWorkerDataTypeActivity(CudaWorkerDevice_t cudaDevice, CudaOpsAnyPtr cudaOps, unsigned int fieldId)
+    FieldWorkerDataTypeActivity(struct CudaWorkerDevice_t cudaDevice, CudaOpsAnyPtr cudaOps, unsigned int fieldId)
         : FieldWorkerBase(cudaDevice, cudaOps, fieldId)
     {}
 

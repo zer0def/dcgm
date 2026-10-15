@@ -424,7 +424,7 @@ TEST_CASE("MnDiagMpiRunner command construction")
         ScopedEnvVars envVars("DCGM_MNDIAG_MPIRUN_PATH", "/usr/bin/test_mpirun");
 
         // Construct the command
-        mpiRunner.ConstructMpiCommand(&diagStruct);
+        static_cast<void>(mpiRunner.ConstructMpiCommand(&diagStruct));
 
         // Get the generated command args
         auto cmdArgs = mpiRunner.GetLastCommandArgs();
@@ -448,7 +448,7 @@ TEST_CASE("MnDiagMpiRunner command construction")
         MnDiagMpiMnubergemmRunnerTests mpiRunner;
 
         // This should not crash
-        mpiRunner.ConstructMpiCommand(nullptr);
+        static_cast<void>(mpiRunner.ConstructMpiCommand(nullptr));
 
         // Verify the command is empty
         auto const &command = mpiRunner.GetLastCommand();
@@ -464,7 +464,7 @@ TEST_CASE("MnDiagMpiRunner command construction")
         diagStruct.version = 9999;
 
         // This should not crash
-        mpiRunner.ConstructMpiCommand(&diagStruct);
+        static_cast<void>(mpiRunner.ConstructMpiCommand(&diagStruct));
 
         // Verify the command is empty
         auto const &command = mpiRunner.GetLastCommand();
@@ -524,7 +524,7 @@ TEST_CASE("MnDiagMpiRunner binary paths")
         mpiRunner.SetTestBinaryPath(customMnubergemmPath);
 
         // Construct the command
-        mpiRunner.ConstructMpiCommand(&diagStruct);
+        static_cast<void>(mpiRunner.ConstructMpiCommand(&diagStruct));
 
         // Get the command as a string
         std::string commandStr = mpiRunner.GetLastCommand();
@@ -804,7 +804,7 @@ TEST_CASE("MnDiagMpiRunner user info via constructor")
         auto diagStruct = CreateTestDiagStruct();
 
         ScopedEnvVars envVars(MnDiagConstants::ENV_ALLOW_RUN_AS_ROOT.data(), "1");
-        mpiRunner.ConstructMpiCommand(&diagStruct);
+        static_cast<void>(mpiRunner.ConstructMpiCommand(&diagStruct));
         auto args = mpiRunner.GetLastCommandArgs();
 
         REQUIRE_FALSE(args.empty());
@@ -817,7 +817,7 @@ TEST_CASE("MnDiagMpiRunner user info via constructor")
         auto diagStruct = CreateTestDiagStruct();
 
         ScopedEnvVars envVars(MnDiagConstants::ENV_ALLOW_RUN_AS_ROOT.data(), std::nullopt);
-        mpiRunner.ConstructMpiCommand(&diagStruct);
+        static_cast<void>(mpiRunner.ConstructMpiCommand(&diagStruct));
         auto args = mpiRunner.GetLastCommandArgs();
 
         REQUIRE_FALSE(args.empty());
@@ -830,7 +830,7 @@ TEST_CASE("MnDiagMpiRunner user info via constructor")
         auto diagStruct = CreateTestDiagStruct();
 
         ScopedEnvVars envVars(MnDiagConstants::ENV_ALLOW_RUN_AS_ROOT.data(), "1");
-        mpiRunner.ConstructMpiCommand(&diagStruct);
+        static_cast<void>(mpiRunner.ConstructMpiCommand(&diagStruct));
         auto args = mpiRunner.GetLastCommandArgs();
 
         REQUIRE_FALSE(args.empty());

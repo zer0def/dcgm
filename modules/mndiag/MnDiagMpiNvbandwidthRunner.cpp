@@ -1376,7 +1376,7 @@ std::expected<void, dcgmReturn_t> MnDiagMpiNvbandwidthRunner::RunBatch(dcgmRunMn
         {
             SafeCopyTo(pairParams->hostList[1], pair.second.hostname.c_str());
         }
-        MnDiagMpiRunner::ConstructMpiCommand(pairParams.get());
+        static_cast<void>(MnDiagMpiRunner::ConstructMpiCommand(pairParams.get()));
         if (m_lastCommand.empty())
         {
             log_error("Unable to construct mnnvbandwidth command for GPU pair {}:{} and {}:{}",

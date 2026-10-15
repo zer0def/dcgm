@@ -45,7 +45,7 @@ public:
     {}
 
     void Go(std::string const &testName,
-            dcgmDiagPluginEntityList_v1 const *entityInfo,
+            struct dcgmDiagPluginEntityList_v1 const *entityInfo,
             unsigned int numParameters,
             dcgmDiagPluginTestParameter_t const *testParameters) override;
 
@@ -58,7 +58,7 @@ private:
     //! NVVS common state
     NvvsCommon *m_nvvsCommon;
     dcgmHandle_t m_handle;
-    std::unique_ptr<dcgmDiagPluginEntityList_v1> m_entityInfo;
+    std::unique_ptr<struct dcgmDiagPluginEntityList_v1> m_entityInfo;
     std::unique_ptr<TestParameters> m_defaultTestParameters;
 };
 

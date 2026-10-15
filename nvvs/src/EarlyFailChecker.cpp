@@ -21,7 +21,7 @@
 EarlyFailChecker::EarlyFailChecker(TestParameters *tp,
                                    bool failEarly,
                                    unsigned long failCheckInterval,
-                                   const dcgmDiagPluginEntityList_v1 &entityInfos)
+                                   const struct dcgmDiagPluginEntityList_v1 &entityInfos)
     : m_testParameters(tp)
     , m_failEarly(failEarly)
     , m_failCheckInterval(failCheckInterval)

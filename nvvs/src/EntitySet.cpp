@@ -123,14 +123,14 @@ unsigned int EntitySet::GetNumTests() const
     return m_tests.size();
 }
 
-std::vector<dcgmDiagPluginEntityInfo_v1> EntitySet::PopulateEntityInfo() const
+std::vector<struct dcgmDiagPluginEntityInfo_v1> EntitySet::PopulateEntityInfo() const
 {
-    std::vector<dcgmDiagPluginEntityInfo_v1> entityInfo;
+    std::vector<struct dcgmDiagPluginEntityInfo_v1> entityInfo;
     for (auto const &entityId : m_entityIds)
     {
         if (!m_skippedForFutureTests.contains(entityId))
         {
-            dcgmDiagPluginEntityInfo_v1 ei;
+            struct dcgmDiagPluginEntityInfo_v1 ei;
             ei.entity.entityId      = entityId;
             ei.entity.entityGroupId = m_entityGroup;
             entityInfo.push_back(ei);

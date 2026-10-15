@@ -944,7 +944,7 @@ dcgmReturn_t DcgmMnDiagManager::GetNodeInfo(dcgmMultinodeTestType_t testType)
         return DCGM_ST_BADPARAM;
     }
 
-    nodeInfo_t localNodeInfo;
+    struct nodeInfo_t localNodeInfo;
     localNodeInfo.dcgmVersion   = dummyMsgOnHeadNode.nodeInfo.dcgmVersion;
     localNodeInfo.driverVersion = dummyMsgOnHeadNode.nodeInfo.driverVersion;
     for (auto const &gpu : std::span(dummyMsgOnHeadNode.nodeInfo.gpus, dummyMsgOnHeadNode.nodeInfo.numGpus))

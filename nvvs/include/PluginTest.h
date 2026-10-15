@@ -83,7 +83,7 @@ public:
 
     std::string const &GetTestName() const;
 
-    void InitializeForEntityList(dcgmDiagPluginEntityList_v1 const &entityInfo);
+    void InitializeForEntityList(struct dcgmDiagPluginEntityList_v1 const &entityInfo);
 
     std::vector<unsigned int> const &GetGpuList() const;
 
@@ -94,7 +94,7 @@ private:
     void ResetResultsAndMessages();
 
     // TO BE REMOVED
-    void InitializeForGpuList(dcgmDiagPluginEntityList_v1 const &entityInfo);
+    void InitializeForGpuList(struct dcgmDiagPluginEntityList_v1 const &entityInfo);
 
     std::vector<nvvsPluginResult_t> m_nonGpuResults; /* Results for non-GPU specific tests */
     std::vector<DcgmError> m_errors;                 /* List of errors from the plugin */

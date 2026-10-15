@@ -82,7 +82,7 @@ public:
     }
     dcgmReturn_t UpdateFieldsFromNvswitchLibrary(unsigned short,
                                                  DcgmFvBuffer &,
-                                                 const std::vector<dcgm_field_update_info_t> &,
+                                                 const std::vector<struct dcgm_field_update_info_t> &,
                                                  timelib64_t) override
     {
         return DCGM_ST_OK;

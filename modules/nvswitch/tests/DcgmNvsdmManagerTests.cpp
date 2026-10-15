@@ -763,8 +763,8 @@ TEST_CASE("DcgmNvsdmManager::UpdateFieldsFromNvswitchLibrary")
     {
         DcgmFvBuffer buf;
         timelib64_t now = timelib_usecSince1970();
-        std::vector<dcgm_field_update_info_t> entities;
-        dcgm_field_update_info_t entity;
+        std::vector<struct dcgm_field_update_info_t> entities;
+        struct dcgm_field_update_info_t entity;
         entity.entityGroupId = DCGM_FE_CONNECTX;
         entity.entityId      = 0;
         entity.fieldMeta     = DcgmFieldGetById(DCGM_FI_DEV_CONNECTX_TEMP_CELSIUS);
@@ -1148,8 +1148,8 @@ TEST_CASE("DcgmNvsdmManager::HandleCompositeFieldId")
         // Get composite field (DCGM_FI_DEV_NVSWITCH_THROUGHPUT_TX) value
         DcgmFvBuffer buf;
         timelib64_t now = timelib_usecSince1970();
-        std::vector<dcgm_field_update_info_t> entities;
-        dcgm_field_update_info_t entity;
+        std::vector<struct dcgm_field_update_info_t> entities;
+        struct dcgm_field_update_info_t entity;
         entity.entityGroupId = DCGM_FE_SWITCH;
         entity.entityId      = switchID;
         entity.fieldMeta     = DcgmFieldGetById(DCGM_FI_DEV_NVSWITCH_THROUGHPUT_TX);
@@ -1395,8 +1395,8 @@ TEST_CASE("DcgmNvsdmManager::HandleInfoField")
     {
         DcgmFvBuffer buf;
         timelib64_t now = timelib_usecSince1970();
-        std::vector<dcgm_field_update_info_t> entities;
-        dcgm_field_update_info_t entity;
+        std::vector<struct dcgm_field_update_info_t> entities;
+        struct dcgm_field_update_info_t entity;
         entity.entityGroupId = DCGM_FE_SWITCH;
         entity.entityId      = 0;
         entity.fieldMeta     = DcgmFieldGetById(DCGM_FI_DEV_NVSWITCH_PCIE_BUS);
@@ -1418,8 +1418,8 @@ TEST_CASE("DcgmNvsdmManager::HandleInfoField")
     {
         DcgmFvBuffer buf;
         timelib64_t now = timelib_usecSince1970();
-        std::vector<dcgm_field_update_info_t> entities;
-        dcgm_field_update_info_t entity;
+        std::vector<struct dcgm_field_update_info_t> entities;
+        struct dcgm_field_update_info_t entity;
         entity.entityGroupId = DCGM_FE_LINK;
         entity.entityId      = NvsdmTestLinkEid(0, 0); // First port
         entity.fieldMeta     = DcgmFieldGetById(DCGM_FI_DEV_NVSWITCH_LINK_ID);
@@ -1441,8 +1441,8 @@ TEST_CASE("DcgmNvsdmManager::HandleInfoField")
     {
         DcgmFvBuffer buf;
         timelib64_t now = timelib_usecSince1970();
-        std::vector<dcgm_field_update_info_t> entities;
-        dcgm_field_update_info_t entity;
+        std::vector<struct dcgm_field_update_info_t> entities;
+        struct dcgm_field_update_info_t entity;
         entity.entityGroupId = DCGM_FE_LINK;
         entity.entityId      = NvsdmTestLinkEid(0, 0);
         entity.fieldMeta     = DcgmFieldGetById(DCGM_FI_DEV_NVSWITCH_LINK_STATUS);
@@ -1464,8 +1464,8 @@ TEST_CASE("DcgmNvsdmManager::HandleInfoField")
     {
         DcgmFvBuffer buf;
         timelib64_t now = timelib_usecSince1970();
-        std::vector<dcgm_field_update_info_t> entities;
-        dcgm_field_update_info_t entity;
+        std::vector<struct dcgm_field_update_info_t> entities;
+        struct dcgm_field_update_info_t entity;
         entity.entityGroupId = DCGM_FE_SWITCH;
         entity.entityId      = 0;
         entity.fieldMeta     = DcgmFieldGetById(DCGM_FI_DEV_NVSWITCH_FIRMWARE_VERSION);
@@ -1509,8 +1509,8 @@ TEST_CASE("DcgmNvsdmManager::HandleInfoField - Missing info returns NOT_SUPPORTE
     {
         DcgmFvBuffer buf;
         timelib64_t now = timelib_usecSince1970();
-        std::vector<dcgm_field_update_info_t> entities;
-        dcgm_field_update_info_t entity;
+        std::vector<struct dcgm_field_update_info_t> entities;
+        struct dcgm_field_update_info_t entity;
         entity.entityGroupId = DCGM_FE_SWITCH;
         entity.entityId      = 0;
         entity.fieldMeta     = DcgmFieldGetById(DCGM_FI_DEV_NVSWITCH_PCIE_BUS);
@@ -1537,8 +1537,8 @@ TEST_CASE("DcgmNvsdmManager::HandleInfoField - Missing info returns NOT_SUPPORTE
             CAPTURE(fieldId);
             DcgmFvBuffer buf;
             timelib64_t now = timelib_usecSince1970();
-            std::vector<dcgm_field_update_info_t> entities;
-            dcgm_field_update_info_t entity;
+            std::vector<struct dcgm_field_update_info_t> entities;
+            struct dcgm_field_update_info_t entity;
             entity.entityGroupId = DCGM_FE_LINK;
             entity.entityId      = NvsdmTestLinkEid(0, 0);
             entity.fieldMeta     = DcgmFieldGetById(fieldId);
@@ -1558,8 +1558,8 @@ TEST_CASE("DcgmNvsdmManager::HandleInfoField - Missing info returns NOT_SUPPORTE
     {
         DcgmFvBuffer buf;
         timelib64_t now = timelib_usecSince1970();
-        std::vector<dcgm_field_update_info_t> entities;
-        dcgm_field_update_info_t entity;
+        std::vector<struct dcgm_field_update_info_t> entities;
+        struct dcgm_field_update_info_t entity;
         entity.entityGroupId = DCGM_FE_SWITCH;
         entity.entityId      = 0;
         entity.fieldMeta     = DcgmFieldGetById(DCGM_FI_DEV_NVSWITCH_FIRMWARE_VERSION);
@@ -1611,7 +1611,7 @@ TEST_CASE("DcgmNvsdmManager::HandleInfoField - LINK_REMOTE_LINK_SID returned as 
     REQUIRE(nsm.Init() == DCGM_ST_OK);
 
     DcgmFvBuffer buf;
-    dcgm_field_update_info_t entity;
+    struct dcgm_field_update_info_t entity;
     entity.entityGroupId = DCGM_FE_LINK;
     entity.entityId      = NvsdmTestLinkEid(0, 0);
     entity.fieldMeta     = DcgmFieldGetById(DCGM_FI_DEV_NVSWITCH_LINK_REMOTE_LINK_SID);

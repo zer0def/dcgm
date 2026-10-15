@@ -89,7 +89,7 @@ public:
 
     void ConstructMpiCommand(void const *params)
     {
-        m_runner.ConstructMpiCommand(params);
+        static_cast<void>(m_runner.ConstructMpiCommand(params));
     }
 
     dcgmReturn_t LaunchMpiProcess()

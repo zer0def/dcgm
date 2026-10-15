@@ -308,7 +308,7 @@ TEST_CASE_METHOD(MemtestPluginTestFixture, "Memtest: negative test for DCGM_FR_M
     unsigned int gpuCount    = 4;
     unsigned int targetGpuId = 1;
 
-    std::unique_ptr<dcgmDiagPluginEntityList_v1> entityList = std::make_unique<dcgmDiagPluginEntityList_v1>();
+    std::unique_ptr<struct dcgmDiagPluginEntityList_v1> entityList = std::make_unique<struct dcgmDiagPluginEntityList_v1>();
     entityList->numEntities                                 = gpuCount;
     for (unsigned int i = 0; i < entityList->numEntities; i++)
     {

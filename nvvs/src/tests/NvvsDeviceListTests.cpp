@@ -35,7 +35,7 @@ public:
     {}
 
     void Go(std::string const & /* testName */,
-            dcgmDiagPluginEntityList_v1 const * /* entityInfo */,
+            struct dcgmDiagPluginEntityList_v1 const * /* entityInfo */,
             unsigned int /* numParameters */,
             dcgmDiagPluginTestParameter_t const * /* testParameters */) override
     {}
@@ -109,9 +109,9 @@ TEST_CASE_METHOD(NvvsDeviceListTestFixture,
 
     std::string testName = "NvvsDeviceList_Negative_Test";
 
-    auto pEntityList = std::make_unique<dcgmDiagPluginEntityList_v1>();
+    auto pEntityList = std::make_unique<struct dcgmDiagPluginEntityList_v1>();
 
-    dcgmDiagPluginEntityList_v1 &entityList = *(pEntityList.get());
+    struct dcgmDiagPluginEntityList_v1 &entityList = *(pEntityList.get());
 
     dcgmGroupEntityPair_t entity0 = { .entityGroupId = DCGM_FE_GPU, .entityId = 0 };
     dcgmGroupEntityPair_t entity1 = { .entityGroupId = DCGM_FE_GPU, .entityId = 1 };
@@ -210,7 +210,7 @@ TEST_CASE_METHOD(NvvsDeviceListTestFixture, "NvvsDeviceList: RestoreState and re
     {
         NvvsDeviceList ndl(&plugin, dcgmOps, mockDcgmOps->m_handleId);
 
-        auto entityList                = std::make_unique<dcgmDiagPluginEntityList_v1>();
+        auto entityList                = std::make_unique<struct dcgmDiagPluginEntityList_v1>();
         entityList->numEntities        = 1;
         entityList->entities[0].entity = { .entityGroupId = DCGM_FE_GPU, .entityId = 0 };
         plugin.InitializeForEntityList(testName, *entityList);

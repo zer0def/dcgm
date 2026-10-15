@@ -33,7 +33,7 @@ Memory::Memory(dcgmHandle_t handle,
     , m_cudaCommon(std::move(cudaCommon))
     , m_nvvsCommon(nvvsCommon)
     , m_handle(handle)
-    , m_entityInfo(std::make_unique<dcgmDiagPluginEntityList_v1>())
+    , m_entityInfo(std::make_unique<struct dcgmDiagPluginEntityList_v1>())
 {
     m_infoStruct.testIndex        = DCGM_MEMORY_INDEX;
     m_infoStruct.shortDescription = "This plugin will test the memory of a given GPU.";
@@ -63,7 +63,7 @@ Memory::Memory(dcgmHandle_t handle,
 
 /*****************************************************************************/
 void Memory::Go(std::string const &testName,
-                dcgmDiagPluginEntityList_v1 const *entityInfo,
+                struct dcgmDiagPluginEntityList_v1 const *entityInfo,
                 unsigned int numParameters,
                 dcgmDiagPluginTestParameter_t const *tpStruct)
 {

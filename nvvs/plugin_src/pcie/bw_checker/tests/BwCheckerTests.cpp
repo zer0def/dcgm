@@ -28,7 +28,7 @@ TEST_CASE("BwChecker: AppendResultsToJson")
     double maxRxBw[TEST_GPU_COUNT];
     double maxTxBw[TEST_GPU_COUNT];
     double maxBidirBw[TEST_GPU_COUNT];
-    std::vector<bwTestResult_t> results(TEST_GPU_COUNT);
+    std::vector<struct bwTestResult_t> results(TEST_GPU_COUNT);
 
     for (unsigned int gpuId = 0; gpuId < TEST_GPU_COUNT; gpuId++)
     {

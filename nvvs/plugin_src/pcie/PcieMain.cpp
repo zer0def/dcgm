@@ -2491,7 +2491,7 @@ int outputP2PLatencyMatrix(BusGrind *bg, CudaOpsAnyPtr cudaOps, bool p2p)
 
 /*****************************************************************************/
 int main_init(BusGrind &bg,
-              const dcgmDiagPluginEntityList_v1 &entityInfo,
+              const struct dcgmDiagPluginEntityList_v1 &entityInfo,
               DcgmNs::DcgmOpsAnyPtr dcgmOps,
               dcgmHandle_t handle,
               CudaOpsAnyPtr cudaOps)
@@ -2800,7 +2800,7 @@ bool bg_check_global_pass_fail(BusGrind *bg, timelib64_t startTime, timelib64_t 
     return allPassed;
 }
 
-bool pcie_gpu_id_in_list(unsigned int gpuId, const dcgmDiagPluginEntityList_v1 &entityInfo)
+bool pcie_gpu_id_in_list(unsigned int gpuId, const struct dcgmDiagPluginEntityList_v1 &entityInfo)
 {
     for (unsigned int i = 0; i < entityInfo.numEntities; i++)
     {
@@ -2818,7 +2818,7 @@ bool pcie_gpu_id_in_list(unsigned int gpuId, const dcgmDiagPluginEntityList_v1 &
 }
 
 void pcie_check_nvlink_status(BusGrind *bg,
-                              const dcgmDiagPluginEntityList_v1 &entityInfo,
+                              const struct dcgmDiagPluginEntityList_v1 &entityInfo,
                               DcgmNs::DcgmOpsAnyPtr dcgmOps,
                               dcgmHandle_t handle)
 {
@@ -2935,7 +2935,7 @@ std::unique_ptr<DcgmGroup> StartDcgmGroupWatch(BusGrind *bg,
 
 /*****************************************************************************/
 int main_entry_wrapped(BusGrind *bg,
-                       const dcgmDiagPluginEntityList_v1 &entityInfo,
+                       const struct dcgmDiagPluginEntityList_v1 &entityInfo,
                        DcgmNs::DcgmOpsAnyPtr dcgmOps,
                        dcgmHandle_t handle,
                        CudaOpsAnyPtr cudaOps)
@@ -3148,7 +3148,7 @@ NO_MORE_TESTS:
 
 /*****************************************************************************/
 int main_entry(BusGrind *bg,
-               const dcgmDiagPluginEntityList_v1 &entityInfo,
+               const struct dcgmDiagPluginEntityList_v1 &entityInfo,
                DcgmNs::DcgmOpsAnyPtr dcgmOps,
                dcgmHandle_t handle,
                CudaOpsAnyPtr cudaOps)

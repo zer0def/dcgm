@@ -33,7 +33,7 @@ Common helper functions and classes relating to DCGM Multi Node GPU Diagnostics
 #include <vector>
 
 /** Per-host version metadata collected from each hostengine. */
-typedef struct
+struct nodeInfo_t
 {
     /** GPU identity discovered from one multinode host. */
     struct GpuInfo
@@ -46,10 +46,10 @@ typedef struct
     std::string driverVersion {}; //!< NVIDIA driver version reported by the host.
     std::vector<GpuInfo> gpus {}; //!< Active GPUs reported by the host.
     std::string mpiNodeName {};   //!< Node identifier stored in Open MPI rank assignments.
-} nodeInfo_t;
+};
 
 /** Map from hostname (or IP) to per-host version metadata. */
-typedef std::unordered_map<std::string, nodeInfo_t> nodeInfoMap_t;
+typedef std::unordered_map<std::string, struct nodeInfo_t> nodeInfoMap_t;
 
 /** Validate that hostList and runValue are non-empty; throws on failure.
  *

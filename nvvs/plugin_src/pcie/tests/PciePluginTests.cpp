@@ -140,7 +140,7 @@ dcgmNvLinkStatus_v5 MakeNvLinkStatus()
 
 TEST_CASE_METHOD(PciePluginTestFixture, "Pcie: pcie_gpu_id_in_list")
 {
-    std::unique_ptr<dcgmDiagPluginEntityList_v1> entityInfo = std::make_unique<dcgmDiagPluginEntityList_v1>();
+    std::unique_ptr<struct dcgmDiagPluginEntityList_v1> entityInfo = std::make_unique<struct dcgmDiagPluginEntityList_v1>();
     entityInfo->numEntities                                 = 2;
     for (unsigned idx = 0; idx < entityInfo->numEntities; ++idx)
     {
@@ -162,7 +162,7 @@ TEST_CASE_METHOD(PciePluginTestFixture, "Pcie: pcie_gpu_id_in_list")
 
 TEST_CASE_METHOD(PciePluginTestFixture, "Pcie: pcie_check_nvlink_status_expected")
 {
-    std::unique_ptr<dcgmDiagPluginEntityList_v1> entityInfo = std::make_unique<dcgmDiagPluginEntityList_v1>();
+    std::unique_ptr<struct dcgmDiagPluginEntityList_v1> entityInfo = std::make_unique<struct dcgmDiagPluginEntityList_v1>();
     mockDcgmOps->m_discoveryState.nvLinkStatus              = MakeNvLinkStatus();
     dcgmHandle_t handle                                     = mockDcgmOps->m_handleId;
     entityInfo->numEntities                                 = 2;
@@ -254,7 +254,7 @@ TEST_CASE_METHOD(PciePluginTestFixture, "Pcie: ProcessChildrenOutputs")
     dcgmHandle_t handle = {};
 
     auto entityResults                                      = MakeUniqueZero<dcgmDiagEntityResults_v2>();
-    std::unique_ptr<dcgmDiagPluginEntityList_v1> entityInfo = std::make_unique<dcgmDiagPluginEntityList_v1>();
+    std::unique_ptr<struct dcgmDiagPluginEntityList_v1> entityInfo = std::make_unique<struct dcgmDiagPluginEntityList_v1>();
     // This test keeps six MockDcgmOps-backed BusGrind objects alive at once.
     // The fixture owns the heap-backed mocks because stacking all six can exceed the test thread stack.
     TestBusGrind bg(handle, std::move(mockDcgmOpsUnique), &nvvsCommon);
@@ -698,7 +698,7 @@ public:
 TEST_CASE_METHOD(PciePluginTestFixture, "BusGrind: SetCudaCapabilityInfo, negative test for DCGM_FR_DCGM_API")
 {
     dcgmHandle_t handle                                     = 42;
-    std::unique_ptr<dcgmDiagPluginEntityList_v1> entityInfo = std::make_unique<dcgmDiagPluginEntityList_v1>();
+    std::unique_ptr<struct dcgmDiagPluginEntityList_v1> entityInfo = std::make_unique<struct dcgmDiagPluginEntityList_v1>();
     TestBusGrind bg(handle, std::move(mockDcgmOpsUnique), &nvvsCommon);
     entityInfo->numEntities                      = 2;
     entityInfo->entities[0].entity.entityId      = 0;
@@ -747,7 +747,7 @@ TEST_CASE_METHOD(PciePluginTestFixture, "BusGrind: negative test for DCGM_FR_CON
     unsigned int numGpus = 1;
 
     dcgmHandle_t handle                                     = 42;
-    std::unique_ptr<dcgmDiagPluginEntityList_v1> entityInfo = std::make_unique<dcgmDiagPluginEntityList_v1>();
+    std::unique_ptr<struct dcgmDiagPluginEntityList_v1> entityInfo = std::make_unique<struct dcgmDiagPluginEntityList_v1>();
     TestBusGrind bg(handle, std::move(mockDcgmOpsUnique), &nvvsCommon);
     entityInfo->numEntities                      = numGpus;
     entityInfo->entities[0].entity.entityId      = 0;
@@ -780,7 +780,7 @@ TEST_CASE_METHOD(PciePluginTestFixture, "BusGrind: negative test for DCGM_FR_PCI
 {
     unsigned int gpuCount                                   = 4;
     unsigned int targetGpuId                                = 1;
-    std::unique_ptr<dcgmDiagPluginEntityList_v1> entityInfo = std::make_unique<dcgmDiagPluginEntityList_v1>();
+    std::unique_ptr<struct dcgmDiagPluginEntityList_v1> entityInfo = std::make_unique<struct dcgmDiagPluginEntityList_v1>();
     entityInfo->numEntities                                 = gpuCount;
     TestBusGrind bg(42, std::move(mockDcgmOpsUnique), &nvvsCommon);
 
@@ -852,7 +852,7 @@ TEST_CASE_METHOD(PciePluginTestFixture, "BusGrind: negative test for DCGM_FR_PCI
 {
     unsigned int gpuCount                                   = 4;
     unsigned int targetGpuId                                = 1;
-    std::unique_ptr<dcgmDiagPluginEntityList_v1> entityInfo = std::make_unique<dcgmDiagPluginEntityList_v1>();
+    std::unique_ptr<struct dcgmDiagPluginEntityList_v1> entityInfo = std::make_unique<struct dcgmDiagPluginEntityList_v1>();
     entityInfo->numEntities                                 = gpuCount;
     TestBusGrind bg(42, std::move(mockDcgmOpsUnique), &nvvsCommon);
 

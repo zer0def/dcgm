@@ -28,10 +28,10 @@
 namespace
 {
 
-std::unique_ptr<dcgmDiagPluginEntityList_v1> PopulateEntityList(
-    std::vector<dcgmDiagPluginEntityInfo_v1> const &entityInfos)
+std::unique_ptr<struct dcgmDiagPluginEntityList_v1> PopulateEntityList(
+    std::vector<struct dcgmDiagPluginEntityInfo_v1> const &entityInfos)
 {
-    std::unique_ptr<dcgmDiagPluginEntityList_v1> entityInfoList = std::make_unique<dcgmDiagPluginEntityList_v1>();
+    std::unique_ptr<struct dcgmDiagPluginEntityList_v1> entityInfoList = std::make_unique<struct dcgmDiagPluginEntityList_v1>();
     entityInfoList->numEntities                                 = entityInfos.size();
     if (entityInfoList->numEntities > DCGM_GROUP_MAX_ENTITIES_V2)
     {
@@ -432,7 +432,7 @@ EntityResultsType const &PluginLib::GetEntityResults(std::string const &testName
 }
 
 /*****************************************************************************/
-std::vector<unsigned int> GetGpuIds(std::vector<dcgmDiagPluginEntityInfo_v1> const &entityInfos)
+std::vector<unsigned int> GetGpuIds(std::vector<struct dcgmDiagPluginEntityInfo_v1> const &entityInfos)
 {
     std::vector<unsigned int> gpuIds;
     for (auto const &entityInfo : entityInfos)
@@ -498,11 +498,11 @@ std::string PluginLib::SetIgnoreErrorCodesParam(std::vector<dcgmDiagPluginTestPa
 }
 
 void PluginLib::RunTest(std::string const &testName,
-                        std::vector<dcgmDiagPluginEntityInfo_v1> const &entityInfos,
+                        std::vector<struct dcgmDiagPluginEntityInfo_v1> const &entityInfos,
                         unsigned int timeout,
                         TestParameters *tp)
 {
-    std::unique_ptr<dcgmDiagPluginEntityList_v1> pEntityList = PopulateEntityList(entityInfos);
+    std::unique_ptr<struct dcgmDiagPluginEntityList_v1> pEntityList = PopulateEntityList(entityInfos);
     std::vector<dcgmDiagPluginTestParameter_t> parameters;
     if (tp != nullptr)
     {

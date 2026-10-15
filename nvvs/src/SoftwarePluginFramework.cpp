@@ -54,7 +54,7 @@ SoftwarePluginFramework::SoftwarePluginFramework(std::vector<Gpu *> gpuList,
     , m_dcgmOps(dcgmOps)
     , m_dcgmHandle(dcgmHandle)
     , m_dcgmSystem(dcgmSystem)
-    , m_entityList(std::make_unique<dcgmDiagPluginEntityList_v1>())
+    , m_entityList(std::make_unique<struct dcgmDiagPluginEntityList_v1>())
     , m_entitySet(entitySet)
 {
     // initalizing the test name map
@@ -118,7 +118,7 @@ void SoftwarePluginFramework::populateGpuInfo(const std::vector<Gpu *> &gpuList)
     {
         if (gpuList[i] != nullptr)
         {
-            dcgmDiagPluginEntityInfo_v1 ei = {};
+            struct dcgmDiagPluginEntityInfo_v1 ei = {};
             ei.entity.entityId             = gpuList[i]->GetGpuId();
             ei.entity.entityGroupId        = DCGM_FE_GPU;
             ei.auxField.gpu.attributes     = gpuList[i]->GetAttributes();

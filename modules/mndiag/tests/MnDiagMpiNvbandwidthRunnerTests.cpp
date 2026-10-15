@@ -759,7 +759,7 @@ TEST_CASE("MnDiagMpiNvbandwidthRunner command construction")
         runner.SetRoutingInterfaceResolver([](std::vector<std::string> const &) { return "eth0"; });
 
         auto diagStruct = CreateNvbandwidthDiagStruct();
-        runner.ConstructMpiCommand(&diagStruct);
+        static_cast<void>(runner.ConstructMpiCommand(&diagStruct));
 
         auto const &cmdArgs = runner.GetLastCommandArgs();
         REQUIRE_FALSE(cmdArgs.empty());
@@ -798,7 +798,7 @@ TEST_CASE("MnDiagMpiNvbandwidthRunner command construction")
                                                         "mnnvbandwidth.testSamples=5",
                                                         "mnnvbandwidth.targetNumPairs=2",
                                                         "openmpi.detect_interfaces=0" });
-        runner.ConstructMpiCommand(&diagStruct);
+        static_cast<void>(runner.ConstructMpiCommand(&diagStruct));
 
         auto const &cmdArgs = runner.GetLastCommandArgs();
         REQUIRE_FALSE(cmdArgs.empty());
@@ -821,7 +821,7 @@ TEST_CASE("MnDiagMpiNvbandwidthRunner command construction")
         TestableNvbandwidthRunner runner(coreProxy);
 
         auto diagStruct = CreateNvbandwidthDiagStruct();
-        runner.ConstructMpiCommand(&diagStruct);
+        static_cast<void>(runner.ConstructMpiCommand(&diagStruct));
 
         auto const &cmdArgs = runner.GetLastCommandArgs();
         CHECK(CommandLineArgUtils::ArgAfter(cmdArgs, "-np") == "16");
@@ -834,7 +834,7 @@ TEST_CASE("MnDiagMpiNvbandwidthRunner command construction")
         TestableNvbandwidthRunner runner(coreProxy);
 
         auto diagStruct = CreateNvbandwidthDiagStruct({ "mnnvbandwidth.gpuPairs=all" });
-        runner.ConstructMpiCommand(&diagStruct);
+        static_cast<void>(runner.ConstructMpiCommand(&diagStruct));
 
         auto const &cmdArgs = runner.GetLastCommandArgs();
         CHECK_FALSE(CommandLineArgUtils::ContainsArg(cmdArgs, "--gpuPairs"));
@@ -853,7 +853,7 @@ TEST_CASE("MnDiagMpiNvbandwidthRunner command construction")
                                                         "mnnvbandwidth.testcase=multinode_custom_test",
                                                         "mnnvbandwidth.bufferSize=64",
                                                         "mnnvbandwidth.testSamples=7" });
-        runner.ConstructMpiCommand(&diagStruct);
+        static_cast<void>(runner.ConstructMpiCommand(&diagStruct));
 
         auto const &cmdArgs = runner.GetLastCommandArgs();
         CHECK(CommandLineArgUtils::ArgAfter(cmdArgs, "--testcase") == "multinode_custom_test");
@@ -889,7 +889,7 @@ TEST_CASE("MnDiagMpiNvbandwidthRunner command construction")
         TestableNvbandwidthRunner runner(coreProxy);
 
         auto diagStruct = CreateNvbandwidthDiagStruct({}, 1);
-        runner.ConstructMpiCommand(&diagStruct);
+        static_cast<void>(runner.ConstructMpiCommand(&diagStruct));
 
         auto const &cmdArgs = runner.GetLastCommandArgs();
         CHECK(CommandLineArgUtils::ArgAfter(cmdArgs, "-np") == "17");
@@ -902,7 +902,7 @@ TEST_CASE("MnDiagMpiNvbandwidthRunner command construction")
         TestableNvbandwidthRunner runner(coreProxy);
 
         auto diagStruct = CreateNvbandwidthDiagStruct({ "mnnvbandwidth.targetNumPairs=2" }, 1);
-        runner.ConstructMpiCommand(&diagStruct);
+        static_cast<void>(runner.ConstructMpiCommand(&diagStruct));
 
         auto const &cmdArgs = runner.GetLastCommandArgs();
         CHECK(CommandLineArgUtils::ArgAfter(cmdArgs, "-np") == "17");
@@ -915,7 +915,7 @@ TEST_CASE("MnDiagMpiNvbandwidthRunner command construction")
         TestableNvbandwidthRunner runner(coreProxy);
 
         auto diagStruct = CreateNvbandwidthDiagStruct({ "mnnvbandwidth.testcase=0 1 host_to_device_memcpy_ce" });
-        runner.ConstructMpiCommand(&diagStruct);
+        static_cast<void>(runner.ConstructMpiCommand(&diagStruct));
 
         auto const &cmdArgs = runner.GetLastCommandArgs();
         auto option         = std::find(cmdArgs.begin(), cmdArgs.end(), "--testcase");
@@ -932,7 +932,7 @@ TEST_CASE("MnDiagMpiNvbandwidthRunner command construction")
         TestableNvbandwidthRunner runner(coreProxy);
 
         auto diagStruct = CreateNvbandwidthDiagStruct({ "mnnvbandwidth.testcasePrefixes=host multinode" });
-        runner.ConstructMpiCommand(&diagStruct);
+        static_cast<void>(runner.ConstructMpiCommand(&diagStruct));
 
         auto const &cmdArgs = runner.GetLastCommandArgs();
         auto option         = std::find(cmdArgs.begin(), cmdArgs.end(), "--testcasePrefixes");
@@ -950,7 +950,7 @@ TEST_CASE("MnDiagMpiNvbandwidthRunner command construction")
 
         auto diagStruct
             = CreateNvbandwidthDiagStruct({ "mnnvbandwidth.testcase=0", "mnnvbandwidth.testcasePrefixes=multinode" });
-        runner.ConstructMpiCommand(&diagStruct);
+        static_cast<void>(runner.ConstructMpiCommand(&diagStruct));
 
         CHECK(runner.GetLastCommandArgs().empty());
     }
@@ -963,7 +963,7 @@ TEST_CASE("MnDiagMpiNvbandwidthRunner command construction")
         TestableNvbandwidthRunner runner(coreProxy);
 
         auto diagStruct = CreateNvbandwidthDiagStruct({ "mnnvbandwidth.targetNumPairs=" + targetNumPairs });
-        runner.ConstructMpiCommand(&diagStruct);
+        static_cast<void>(runner.ConstructMpiCommand(&diagStruct));
 
         CHECK(CommandLineArgUtils::ArgAfter(runner.GetLastCommandArgs(), "--targetNumPairs") == targetNumPairs);
     }
@@ -975,7 +975,7 @@ TEST_CASE("MnDiagMpiNvbandwidthRunner command construction")
         TestableNvbandwidthRunner runner(coreProxy);
 
         auto diagStruct = CreateNvbandwidthDiagStruct({ "mnnvbandwidth.bufferSize=" + bufferSize });
-        runner.ConstructMpiCommand(&diagStruct);
+        static_cast<void>(runner.ConstructMpiCommand(&diagStruct));
 
         CHECK(CommandLineArgUtils::ArgAfter(runner.GetLastCommandArgs(), "--bufferSize") == bufferSize);
     }
@@ -986,7 +986,7 @@ TEST_CASE("MnDiagMpiNvbandwidthRunner command construction")
         TestableNvbandwidthRunner runner(coreProxy);
 
         auto diagStruct = CreateNvbandwidthDiagStruct({ "mnnvbandwidth.time_to_run=300" });
-        runner.ConstructMpiCommand(&diagStruct);
+        static_cast<void>(runner.ConstructMpiCommand(&diagStruct));
         auto const runTime = runner.GetTestRunTime(diagStruct);
 
         REQUIRE(runTime.has_value());
@@ -1036,7 +1036,7 @@ TEST_CASE("MnDiagMpiNvbandwidthRunner command construction")
         TestableNvbandwidthRunner runner(coreProxy);
 
         auto diagStruct = CreateNvbandwidthDiagStruct({ invalidParam });
-        runner.ConstructMpiCommand(&diagStruct);
+        static_cast<void>(runner.ConstructMpiCommand(&diagStruct));
 
         CHECK(runner.GetLastCommandArgs().empty());
     }

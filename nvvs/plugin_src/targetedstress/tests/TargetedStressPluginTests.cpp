@@ -61,11 +61,11 @@ struct TargetedStressTestFixture
 
 namespace
 {
-dcgmDiagPluginEntityList_v1 MakeTargetedStressEntityList(unsigned int gpuCount,
+struct dcgmDiagPluginEntityList_v1 MakeTargetedStressEntityList(unsigned int gpuCount,
                                                          DcgmEntityStatus_t status,
                                                          unsigned int pciDeviceId)
 {
-    dcgmDiagPluginEntityList_v1 entityList {};
+    struct dcgmDiagPluginEntityList_v1 entityList {};
     entityList.numEntities = gpuCount;
     for (unsigned int i = 0; i < gpuCount; ++i)
     {
@@ -81,11 +81,11 @@ dcgmDiagPluginEntityList_v1 MakeTargetedStressEntityList(unsigned int gpuCount,
     return entityList;
 }
 
-std::unique_ptr<dcgmDiagPluginEntityList_v1> MakeTargetedStressEntityListPtr(unsigned int gpuCount,
+std::unique_ptr<struct dcgmDiagPluginEntityList_v1> MakeTargetedStressEntityListPtr(unsigned int gpuCount,
                                                                              DcgmEntityStatus_t status,
                                                                              unsigned int pciDeviceId)
 {
-    auto entityList = std::make_unique<dcgmDiagPluginEntityList_v1>();
+    auto entityList = std::make_unique<struct dcgmDiagPluginEntityList_v1>();
     *entityList     = MakeTargetedStressEntityList(gpuCount, status, pciDeviceId);
     return entityList;
 }
@@ -246,7 +246,7 @@ TEST_CASE_METHOD(TargetedStressTestFixture, "TargetedStress::CheckGpuPerf valida
                             std::move(mockCublasOpsUnique),
                             std::move(mockCudaCommonUnique),
                             &nvvsCommon);
-        dcgmDiagPluginEntityList_v1 entityList = MakeTargetedStressEntityList(1, DcgmEntityStatusOk, 1);
+        struct dcgmDiagPluginEntityList_v1 entityList = MakeTargetedStressEntityList(1, DcgmEntityStatusOk, 1);
         cp.InitializeForEntityList(cp.GetTargetedStressTestName(), entityList);
         REQUIRE(cp.Init(&entityList));
         cp.m_targetPerf = 100.0;
@@ -300,7 +300,7 @@ TEST_CASE_METHOD(TargetedStressTestFixture,
                         std::move(mockCublasOpsUnique),
                         std::move(mockCudaCommonUnique),
                         &nvvsCommon);
-    dcgmDiagPluginEntityList_v1 entityList = MakeTargetedStressEntityList(1, DcgmEntityStatusOk, 1);
+    struct dcgmDiagPluginEntityList_v1 entityList = MakeTargetedStressEntityList(1, DcgmEntityStatusOk, 1);
     cp.InitializeForEntityList(cp.GetTargetedStressTestName(), entityList);
     REQUIRE(cp.Init(&entityList));
 
@@ -323,7 +323,7 @@ TEST_CASE_METHOD(TargetedStressTestFixture, "TargetedStress::CheckPassFail sets 
                         std::move(mockCublasOpsUnique),
                         std::move(mockCudaCommonUnique),
                         &nvvsCommon);
-    dcgmDiagPluginEntityList_v1 entityList = MakeTargetedStressEntityList(2, DcgmEntityStatusOk, 1);
+    struct dcgmDiagPluginEntityList_v1 entityList = MakeTargetedStressEntityList(2, DcgmEntityStatusOk, 1);
     cp.InitializeForEntityList(cp.GetTargetedStressTestName(), entityList);
     REQUIRE(cp.Init(&entityList));
     cp.m_targetPerf = 100.0;
@@ -359,7 +359,7 @@ TEST_CASE_METHOD(TargetedStressTestFixture,
                         std::move(mockCudaCommonUnique),
                         &nvvsCommon);
     mockCudaOps->cudaStubAllocateMemory    = true;
-    dcgmDiagPluginEntityList_v1 entityList = MakeTargetedStressEntityList(1, DcgmEntityStatusOk, 1);
+    struct dcgmDiagPluginEntityList_v1 entityList = MakeTargetedStressEntityList(1, DcgmEntityStatusOk, 1);
     cp.InitializeForEntityList(cp.GetTargetedStressTestName(), entityList);
     REQUIRE(cp.Init(&entityList));
     cp.m_testDuration = 0.0;
@@ -412,7 +412,7 @@ TEST_CASE_METHOD(TargetedStressTestFixture, "TargetedStress::RunTest queues SGEM
                         std::move(mockCudaCommonUnique),
                         &nvvsCommon);
     mockCudaOps->cudaStubAllocateMemory    = true;
-    dcgmDiagPluginEntityList_v1 entityList = MakeTargetedStressEntityList(1, DcgmEntityStatusOk, 1);
+    struct dcgmDiagPluginEntityList_v1 entityList = MakeTargetedStressEntityList(1, DcgmEntityStatusOk, 1);
     cp.InitializeForEntityList(cp.GetTargetedStressTestName(), entityList);
     REQUIRE(cp.Init(&entityList));
     cp.m_testDuration = 0.02;
@@ -432,7 +432,7 @@ TEST_CASE_METHOD(TargetedStressTestFixture, "TargetedStress::RunTest queues SGEM
 
 TEST_CASE_METHOD(TargetedStressTestFixture, "TargetedStress::CudaInit()")
 {
-    std::unique_ptr<dcgmDiagPluginEntityList_v1> entityList = std::make_unique<dcgmDiagPluginEntityList_v1>();
+    std::unique_ptr<struct dcgmDiagPluginEntityList_v1> entityList = std::make_unique<struct dcgmDiagPluginEntityList_v1>();
 
     entityList->numEntities = 4;
     for (unsigned int i = 0; i < entityList->numEntities; i++)
@@ -489,7 +489,7 @@ TEST_CASE_METHOD(TargetedStressTestFixture, "TargetedStress::CudaInit initialize
                         std::move(mockCudaCommonUnique),
                         &nvvsCommon);
     mockCudaOps->cudaStubAllocateMemory    = true;
-    dcgmDiagPluginEntityList_v1 entityList = MakeTargetedStressEntityList(1, DcgmEntityStatusOk, 1);
+    struct dcgmDiagPluginEntityList_v1 entityList = MakeTargetedStressEntityList(1, DcgmEntityStatusOk, 1);
     cp.InitializeForEntityList(cp.GetTargetedStressTestName(), entityList);
     REQUIRE(cp.Init(&entityList));
     cp.m_useDgemm = 1;
@@ -522,7 +522,7 @@ TEST_CASE_METHOD(TargetedStressTestFixture, "TargetedStress::CudaInit handles CU
                         std::move(mockCudaCommonUnique),
                         &nvvsCommon);
     mockCudaOps->cudaStubAllocateMemory    = true;
-    dcgmDiagPluginEntityList_v1 entityList = MakeTargetedStressEntityList(1, DcgmEntityStatusOk, 1);
+    struct dcgmDiagPluginEntityList_v1 entityList = MakeTargetedStressEntityList(1, DcgmEntityStatusOk, 1);
     cp.InitializeForEntityList(cp.GetTargetedStressTestName(), entityList);
     REQUIRE(cp.Init(&entityList));
     cp.m_useDgemm = 1;

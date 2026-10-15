@@ -92,7 +92,7 @@ public:
         return getTestParamMap();
     }
 
-    dcgmDiagPluginEntityList_v1 const &WrapperGetEntityList() const
+    struct dcgmDiagPluginEntityList_v1 const &WrapperGetEntityList() const
     {
         return getEntityList();
     }
@@ -181,7 +181,7 @@ TEST_CASE_METHOD(SoftwarePluginFrameworkTestFixture, "Test 1 - Software object c
 
     // ---------------
     // check the gpu information
-    dcgmDiagPluginEntityList_v1 const &entityInfo = softwareObj.WrapperGetEntityList();
+    struct dcgmDiagPluginEntityList_v1 const &entityInfo = softwareObj.WrapperGetEntityList();
     REQUIRE(entityInfo.numEntities == softwareObjLocal.m_visibleGpus.size());
 
     // ---------------------------------------
@@ -252,7 +252,7 @@ TEST_CASE_METHOD(SoftwarePluginFrameworkTestFixture, "Test 4 - Populate GPU Info
     softwareObjLocal.WrapperPopulateGpuInfo(softwareObjLocal.m_visibleGpus);
 
     // check m_AllGpuInformation
-    dcgmDiagPluginEntityList_v1 const &entityInfo = softwareObjLocal.WrapperGetEntityList();
+    struct dcgmDiagPluginEntityList_v1 const &entityInfo = softwareObjLocal.WrapperGetEntityList();
 
     // ---------------
     // check number of gpus

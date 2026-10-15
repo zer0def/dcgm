@@ -79,7 +79,7 @@ bool ContextCreate::GpusAreNonExclusive()
     return true;
 }
 
-std::string ContextCreate::Init(const dcgmDiagPluginEntityList_v1 &entityList)
+std::string ContextCreate::Init(const struct dcgmDiagPluginEntityList_v1 &entityList)
 {
     std::vector<unsigned int> gpuVec;
 
@@ -147,7 +147,7 @@ int ContextCreate::CanCreateContext()
         [this](CUresult cuSt, const char **errStr) { return m_cudaOps->cuGetErrorString(cuSt, errStr); });
 }
 
-int ContextCreate::Run(const dcgmDiagPluginEntityList_v1 &entityList)
+int ContextCreate::Run(const struct dcgmDiagPluginEntityList_v1 &entityList)
 {
     std::string error = Init(entityList);
 

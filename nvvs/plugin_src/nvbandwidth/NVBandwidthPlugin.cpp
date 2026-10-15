@@ -47,7 +47,7 @@ NVBandwidthPlugin::NVBandwidthPlugin(dcgmHandle_t handle, DcgmNs::DcgmOpsAnyUniq
     , m_dcgmRecorder(handle, m_dcgmOps, nvvsCommon)
     , m_handle(handle)
     , m_cudaDriverMajorVersion(DEFAULT_CUDA_DRIVER_MAJOR_VERSION)
-    , m_entityInfo(std::make_unique<dcgmDiagPluginEntityList_v1>())
+    , m_entityInfo(std::make_unique<struct dcgmDiagPluginEntityList_v1>())
 {
     m_infoStruct.testIndex      = DCGM_NVBANDWIDTH_INDEX;
     m_infoStruct.testCategories = "Hardware";
@@ -139,7 +139,7 @@ void NVBandwidthPlugin::appendExtraArgv(std::vector<std::string> &execArgv) cons
 }
 
 void NVBandwidthPlugin::Go(std::string const &testName,
-                           dcgmDiagPluginEntityList_v1 const *entityInfo,
+                           struct dcgmDiagPluginEntityList_v1 const *entityInfo,
                            unsigned int numParameters,
                            dcgmDiagPluginTestParameter_t const *testParameters)
 {
@@ -353,7 +353,7 @@ std::string NVBandwidthPlugin::GetNvBandwidthTestName() const
 
 NVBandwidthPlugin::WaitForIdleResult NVBandwidthPlugin::WaitForMemoryCopyIdle(
     std::string const &testName,
-    dcgmDiagPluginEntityList_v1 const *entityInfo,
+    struct dcgmDiagPluginEntityList_v1 const *entityInfo,
     double timeoutSeconds,
     int64_t maxUtilizationPercentage)
 {

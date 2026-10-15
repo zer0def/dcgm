@@ -21,6 +21,8 @@
 #include <PluginStrings.h>
 #include <dcgm_structs.h>
 
+// for whatever reason the condition here breaks, so this is suboptimal
+#include <boost/process/v1.hpp>
 #include <boost/process.hpp>
 #include <ranges>
 

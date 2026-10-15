@@ -32,8 +32,13 @@
 #include <Defer.hpp>
 
 #include <atomic>
+#if BOOST_VERSION >= 108600
+#include <boost/process/v1.hpp>
+#include <boost/process/v1/extend.hpp>
+#else
 #include <boost/process.hpp>
 #include <boost/process/extend.hpp>
+#endif
 #include <cerrno>
 #include <latch>
 #include <thread>
@@ -156,8 +161,15 @@ struct ChildProcess::Impl
         co_return 0;
     }
 
-    static auto StdLinesProcess(ChildProcess::Impl &self, boost::process::async_pipe &sourcePipe, StdLines &target)
-        -> boost::asio::awaitable<int>
+    static auto StdLinesProcess(
+        ChildProcess::Impl &self,
+#if BOOST_VERSION >= 108600
+        boost::process::v1::async_pipe &sourcePipe,
+#else
+        boost::process::async_pipe &sourcePipe,
+#endif
+        StdLines &target
+    ) -> boost::asio::awaitable<int>
     {
         auto cancellationState = co_await boost::asio::this_coro::cancellation_state;
         boost::asio::streambuf buffer;
@@ -202,7 +214,11 @@ struct ChildProcess::Impl
 
     void Run()
     {
+#if BOOST_VERSION >= 108600
+        namespace bp = boost::process::v1;
+#else
         namespace bp = boost::process;
+#endif
         std::latch launchProcessLatch(1);
         bool failedToLaunch = false;
         auto launchProcess  = [this, &launchProcessLatch, &failedToLaunch]() {
@@ -501,15 +517,21 @@ struct ChildProcess::Impl
 
     std::unique_ptr<ChannelDesc> fdChannelOpt;
 
+#if BOOST_VERSION >= 108600
+    boost::process::v1::async_pipe stdOutPipe;
+    boost::process::v1::async_pipe stdErrPipe;
+    boost::process::v1::child process;
+    boost::process::v1::environment environment;
+#else
     boost::process::async_pipe stdOutPipe;
     boost::process::async_pipe stdErrPipe;
-
     boost::process::child process;
+    boost::process::environment environment;
+#endif
 
     boost::filesystem::path executable;
     std::vector<std::string> args;
     std::optional<std::string> userName;
-    boost::process::environment environment;
 
     StdLines stdOutLines;
     StdLines stdErrLines;
@@ -599,7 +621,13 @@ void ChildProcess::Create(IoContext &ioContext,
     }
     if (env.has_value())
     {
-        m_impl->environment = static_cast<boost::process::environment>(boost::this_process::environment());
+        m_impl->environment = static_cast<
+#if BOOST_VERSION >= 108600
+          boost::process::v1::environment
+#else
+          boost::process::environment
+#endif
+          >(boost::this_process::environment());
         for (auto const &pair : env.value())
         {
             m_impl->environment.emplace(pair.first, pair.second);

@@ -21,7 +21,11 @@
 #include <PluginCommon.h>
 
 #include <boost/filesystem.hpp>
+#if BOOST_VERSION >= 108600
+#include <boost/process/v1.hpp>
+#else
 #include <boost/process.hpp>
+#endif
 
 #include <fstream>
 #include <sstream>

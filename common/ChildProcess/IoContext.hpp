@@ -17,6 +17,7 @@
 #pragma once
 
 #include <boost/asio/io_context.hpp>
+#include <boost/asio/post.hpp>
 
 #include <functional>
 #include <memory>

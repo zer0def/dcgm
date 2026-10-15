@@ -48,7 +48,11 @@ struct IoContext::Impl
                 while (!cancellationToken.stop_requested())
                 {
                     ioContext.run_for(boost::asio::chrono::milliseconds(500));
+#if BOOST_VERSION > 108600  // target ASIO version specifically? would be more precise.
+                    ioContext.restart();
+#else
                     ioContext.reset();
+#endif
                 }
             }
             catch (std::exception const &e)
@@ -113,5 +117,9 @@ std::mutex &IoContext::GetProcessCreationMutex()
 
 void IoContext::Post(std::function<void()> func)
 {
+#if BOOST_VERSION >= 108700
+    boost::asio::post(m_impl->Get(), func);
+#else
     m_impl->Get().post(func);
+#endif
 }

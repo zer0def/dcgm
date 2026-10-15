@@ -603,6 +603,8 @@ int ConstantPower::CudaInit(mallocFunc mallocImpl)
 }
 
 /*************************************************************************/
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wformat-security"
 void ConstantPower::Go(std::string const &testName,
                        dcgmDiagPluginEntityList_v1 const *entityInfo,
                        unsigned int numParameters,
@@ -678,6 +680,7 @@ void ConstantPower::Go(std::string const &testName,
         SetResult(testName, NVVS_RESULT_FAIL);
     }
 }
+#pragma GCC diagnostic pop
 
 /*************************************************************************/
 bool ConstantPower::CheckGpuPowerUsage(CPDevice *device,
@@ -939,7 +942,7 @@ bool ConstantPower::RunTest(dcgmDiagPluginEntityList_v1 const *entityInfo)
 {
     int st, Nrunning = 0;
     ConstantPowerWorker *workerThreads[TP_MAX_DEVICES] = { 0 };
-    unsigned int timeCount                             = 0;
+    [[maybe_unused]] unsigned int timeCount            = 0;
     timelib64_t earliestStopTime;
     timelib64_t startTime = timelib_usecSince1970();
 

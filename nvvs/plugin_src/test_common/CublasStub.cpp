@@ -114,4 +114,4 @@ cublasStatus_t CublasHgemm(cublasHandle_t /* handle */,
 }
 
 
-}; // namespace Dcgm::CublasProxy
+} // namespace Dcgm::CublasProxy

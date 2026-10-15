@@ -1164,7 +1164,14 @@ dcgmReturn_t DcgmCoreCommunication::ProcessGetServiceAccount(dcgm_module_command
 
     auto const &serviceAccount = DcgmHostEngineHandler::Instance()->GetServiceAccount();
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wstringop-truncation"
+    /*
+    char *serviceAccount_c = (char*)serviceAccount.c_str();
+    serviceAccount_c[sizeof(serviceAccount_c) - 1] = '\0';
+    */
     std::strncpy(query.response.serviceAccount, serviceAccount.c_str(), sizeof(query.response.serviceAccount));
+#pragma GCC diagnostic pop
     query.response.serviceAccount[sizeof(query.response.serviceAccount) - 1] = '\0';
 
     memcpy(header, &query, sizeof(query));

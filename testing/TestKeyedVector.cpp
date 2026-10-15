@@ -1150,7 +1150,7 @@ int TestKeyedVector::TestFindByKey()
 int TestKeyedVector::Run()
 {
     int st;
-    int Nfailed = 0;
+    [[maybe_unused]] int Nfailed = 0;
 
     st = TestLinearInsertForward();
     if (st)

@@ -471,6 +471,8 @@ int DcgmRecorder::GetValueIndex(unsigned short fieldId)
     return index;
 }
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wformat-security"
 void DcgmRecorder::FormatFieldViolationError(DcgmError &d,
                                              unsigned short fieldId,
                                              unsigned int gpuId,
@@ -1091,6 +1093,7 @@ int DcgmRecorder::GetLatestValuesForWatchedFields(unsigned int flags, std::vecto
 
     return DR_SUCCESS;
 }
+#pragma GCC diagnostic pop
 
 std::string DcgmRecorder::GetGpuUtilizationNote(unsigned int gpuId, timelib64_t startTime)
 {
@@ -1340,6 +1343,8 @@ int DcgmRecorder::CheckHBMErrorFields(dcgmDiagPluginEntityInfo_v1 const &entityI
 }
 
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wformat-security"
 int DcgmRecorder::VerifyHBMTemperature(unsigned int gpuId,
                                        std::vector<DcgmError> &errorList,
                                        long long maxTemp,
@@ -1396,6 +1401,7 @@ int DcgmRecorder::VerifyHBMTemperature(unsigned int gpuId,
 
     return st;
 }
+#pragma GCC diagnostic pop
 
 void DcgmRecorder::SetWatchFrequency(long long watchFrequency)
 {

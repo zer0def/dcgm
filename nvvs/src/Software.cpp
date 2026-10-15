@@ -227,6 +227,8 @@ bool Software::CountDevEntry(std::string const &entryName)
     return false;
 }
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wformat-security"
 bool Software::checkPermissions(bool checkFileCreation, bool skipDeviceTest)
 {
     // check how many devices we see reporting and compare to
@@ -317,6 +319,7 @@ bool Software::checkPermissions(bool checkFileCreation, bool skipDeviceTest)
 
     return false;
 }
+#pragma GCC diagnostic pop
 
 // This function suggests time-of-check/time-of-use (TOCTOU) race conditions
 bool Software::checkLibraries(libraryCheck_t checkLib)
@@ -571,6 +574,8 @@ int Software::checkForSramThreshold()
     return 0;
 }
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wformat-security"
 int Software::checkForGraphicsProcesses()
 {
     unsigned int flags = DCGM_FV_FLAG_LIVE_DATA;
@@ -616,6 +621,7 @@ int Software::checkForGraphicsProcesses()
 
     return 0;
 }
+#pragma GCC diagnostic pop
 
 int Software::checkPersistenceMode(dcgmDiagPluginEntityList_v1 const &entityList)
 {

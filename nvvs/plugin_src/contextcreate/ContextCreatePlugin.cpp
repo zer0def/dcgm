@@ -40,6 +40,8 @@ ContextCreatePlugin::ContextCreatePlugin(dcgmHandle_t handle)
     m_infoStruct.defaultTestParameters = m_testParameters.get();
 }
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wformat-security"
 void ContextCreatePlugin::Go(std::string const &testName,
                              dcgmDiagPluginEntityList_v1 const *entityInfo,
                              unsigned int numParameters,
@@ -109,6 +111,7 @@ void ContextCreatePlugin::Go(std::string const &testName,
         AddError(GetCtxCreateTestName(), d);
     }
 }
+#pragma GCC diagnostic pop
 
 dcgmHandle_t ContextCreatePlugin::GetHandle()
 {

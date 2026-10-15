@@ -216,6 +216,8 @@ dcgmReturn_t DcgmSystem::GetGpuLatestValue(unsigned int gpuId,
     return ret;
 }
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wformat-security"
 dcgmReturn_t DcgmSystem::GetLatestValuesForGpus(const std::vector<unsigned int> &gpuIds,
                                                 std::vector<unsigned short> &fieldIds,
                                                 unsigned int flags,
@@ -295,6 +297,7 @@ dcgmReturn_t DcgmSystem::GetLatestValuesForGpus(const std::vector<unsigned int> 
     }
     return ret;
 }
+#pragma GCC diagnostic pop
 
 bool DcgmSystem::IsInitialized() const
 {

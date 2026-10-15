@@ -1665,8 +1665,8 @@ bool PhysicalGpu::Advance(DistributedCudaContext &ignoreWorker, unsigned int act
     unsigned int ignoreWorkerPart;
     unsigned int ignoreWorkerParts;
 
-    unsigned int workerIdx { 0 };
-    unsigned int ignoreWorkerIdx { 0 };
+    [[maybe_unused]] unsigned int workerIdx { 0 };
+    [[maybe_unused]] unsigned int ignoreWorkerIdx { 0 };
 
     ignoreWorker.GetParts(ignoreWorkerPart, ignoreWorkerParts);
 

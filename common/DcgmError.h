@@ -246,6 +246,8 @@ private:
 
 
 // Convenience macro for formatting and setting the error message
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wformat-security"
 #define DCGM_ERROR_FORMAT_MESSAGE(errCode, errorObj, ...)                          \
     do                                                                             \
     {                                                                              \
@@ -256,6 +258,7 @@ private:
         errorObj.SetNextSteps(dcgmGetErrorMeta(errCode)->suggestion);              \
         errorObj.SetCode(errCode);                                                 \
     } while (0)
+#pragma GCC diagnostic pop
 
 // Convenience macro for formatting and setting the error message and adding an nvml error
 #define DCGM_ERROR_FORMAT_MESSAGE_DCGM(errCode, errorObj, dcgmRet, ...)            \

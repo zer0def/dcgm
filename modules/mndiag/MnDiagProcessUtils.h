@@ -56,7 +56,7 @@ public:
     {
         constexpr size_t MAX_OUTPUT_SIZE = 4 * 1024; // 4KB limit
 
-        std::unique_ptr<FILE, decltype(&pclose)> pipe(popen(cmd.c_str(), "r"), pclose);
+        std::unique_ptr<FILE, int(*)(FILE*)> pipe(popen(cmd.c_str(), "r"), pclose);
         if (!pipe)
         {
             throw std::runtime_error("popen() failed for command: " + cmd);

@@ -24,16 +24,16 @@
 #define PCIE_MAX_GPUS 16
 
 /*****************************************************************************/
-int main_init(BusGrind &bg, const dcgmDiagPluginEntityList_v1 &entityInfo);
+int main_init(BusGrind &bg, const struct dcgmDiagPluginEntityList_v1 &entityInfo);
 
 /*****************************************************************************/
-int main_entry(BusGrind *bg, const dcgmDiagPluginEntityList_v1 &entityInfo);
+int main_entry(BusGrind *bg, const struct dcgmDiagPluginEntityList_v1 &entityInfo);
 
 /*****************************************************************************/
-bool pcie_gpu_id_in_list(unsigned int gpuId, const dcgmDiagPluginEntityList_v1 &entityInfo);
+bool pcie_gpu_id_in_list(unsigned int gpuId, const struct dcgmDiagPluginEntityList_v1 &entityInfo);
 
 /*****************************************************************************/
-void pcie_check_nvlink_status(BusGrind *bg, const dcgmDiagPluginEntityList_v1 &entityInfo);
+void pcie_check_nvlink_status(BusGrind *bg, const struct dcgmDiagPluginEntityList_v1 &entityInfo);
 
 typedef struct
 {

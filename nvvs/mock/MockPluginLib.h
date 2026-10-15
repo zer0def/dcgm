@@ -118,7 +118,7 @@ public:
     }
 
     void RunTest(std::string const &testName,
-                 std::vector<dcgmDiagPluginEntityInfo_v1> const &entityInfos,
+                 std::vector<struct dcgmDiagPluginEntityInfo_v1> const &entityInfos,
                  unsigned int,
                  TestParameters *)
     {

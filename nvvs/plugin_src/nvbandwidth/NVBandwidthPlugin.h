@@ -43,7 +43,7 @@ public:
      *
      */
     void Go(std::string const &testName,
-            dcgmDiagPluginEntityList_v1 const *entityInfo,
+            struct dcgmDiagPluginEntityList_v1 const *entityInfo,
             unsigned int numParameters,
             dcgmDiagPluginTestParameter_t const *testParameters) override;
 
@@ -102,7 +102,7 @@ private:
      * @return WaitForIdleResult containing success status and list of non-idle GPUs if timeout occurred
      */
     WaitForIdleResult WaitForMemoryCopyIdle(std::string const &testName,
-                                            dcgmDiagPluginEntityList_v1 const *entityInfo,
+                                            struct dcgmDiagPluginEntityList_v1 const *entityInfo,
                                             double timeoutSeconds,
                                             int64_t maxUtilizationPercentage);
 
@@ -114,7 +114,7 @@ private:
     bool m_dcgmRecorderInitialized { true };                   /* Has DcgmRecorder been initialized? */
     unsigned int m_cudaDriverMajorVersion;                     /* Cuda driver major version */
     unsigned int m_cudaDriverMinorVersion { 0 };               /* Cuda driver minor version */
-    std::unique_ptr<dcgmDiagPluginEntityList_v1> m_entityInfo; // The information about each GPU
+    std::unique_ptr<struct dcgmDiagPluginEntityList_v1> m_entityInfo; // The information about each GPU
     std::string m_nvbandwidthDir;
     std::string m_originalCudaVisibleDevices; // Store the original CUDA_VISIBLE_DEVICES value
     DcgmMutex m_envMutex { 0 };               // Mutex for protecting environment variable operations

@@ -58,8 +58,8 @@ TEST_CASE("PluginLib: General")
     ret = pl.GetPluginInfo();
     CHECK(ret == DCGM_ST_OK);
 
-    std::vector<dcgmDiagPluginEntityInfo_v1> entityInfo;
-    dcgmDiagPluginEntityInfo_v1 ei = {};
+    std::vector<struct dcgmDiagPluginEntityInfo_v1> entityInfo;
+    struct dcgmDiagPluginEntityInfo_v1 ei = {};
     dcgmHandle_t handle            = {};
     ei.entity.entityId             = 0;
     ei.entity.entityGroupId        = DCGM_FE_GPU;

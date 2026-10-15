@@ -38,10 +38,10 @@ char DcgmFieldGetType(unsigned short fieldId)
     return ' ';
 }
 
-std::unique_ptr<dcgmDiagPluginEntityList_v1> GetEntityList(unsigned int gpuCount, DcgmEntityStatus_t status)
+std::unique_ptr<struct dcgmDiagPluginEntityList_v1> GetEntityList(unsigned int gpuCount, DcgmEntityStatus_t status)
 {
-    auto pEntityInfo                        = std::make_unique<dcgmDiagPluginEntityList_v1>();
-    dcgmDiagPluginEntityList_v1 &entityInfo = *pEntityInfo;
+    auto pEntityInfo                        = std::make_unique<struct dcgmDiagPluginEntityList_v1>();
+    struct dcgmDiagPluginEntityList_v1 &entityInfo = *pEntityInfo;
 
     entityInfo.numEntities = gpuCount;
     for (unsigned int i = 0; i < gpuCount; i++)
@@ -56,7 +56,7 @@ std::unique_ptr<dcgmDiagPluginEntityList_v1> GetEntityList(unsigned int gpuCount
 
 void InitializeDiagPlugin(GpuBurnPlugin &gbp, unsigned int gpuCount, DcgmEntityStatus_t status)
 {
-    std::unique_ptr<dcgmDiagPluginEntityList_v1> entityList = GetEntityList(gpuCount, status);
+    std::unique_ptr<struct dcgmDiagPluginEntityList_v1> entityList = GetEntityList(gpuCount, status);
     gbp.InitializeForEntityList(gbp.GetDiagnosticTestName(), *entityList);
 }
 
@@ -82,7 +82,7 @@ bool CheckPassFailWithDevices(GpuBurnPlugin &gbp,
 
 TEST_CASE("Diagnostic: SetPrecisionFromString")
 {
-    std::unique_ptr<dcgmDiagPluginEntityList_v1> entityList = GetEntityList(1, DcgmEntityStatusOk);
+    std::unique_ptr<struct dcgmDiagPluginEntityList_v1> entityList = GetEntityList(1, DcgmEntityStatusOk);
 
     GpuBurnPlugin gbp((dcgmHandle_t)0); // we don't need real values for these
     // Make sure the correct defaults are set - it has no test parameters so far

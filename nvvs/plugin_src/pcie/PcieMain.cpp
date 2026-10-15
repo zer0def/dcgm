@@ -2427,7 +2427,7 @@ int outputP2PLatencyMatrix(BusGrind *bg, bool p2p)
 }
 
 /*****************************************************************************/
-int main_init(BusGrind &bg, const dcgmDiagPluginEntityList_v1 &entityInfo)
+int main_init(BusGrind &bg, const struct dcgmDiagPluginEntityList_v1 &entityInfo)
 {
     for (unsigned int gpuListIndex = 0; gpuListIndex < entityInfo.numEntities; ++gpuListIndex)
     {
@@ -2730,7 +2730,7 @@ bool bg_check_global_pass_fail(BusGrind *bg, timelib64_t startTime, timelib64_t 
     return allPassed;
 }
 
-bool pcie_gpu_id_in_list(unsigned int gpuId, const dcgmDiagPluginEntityList_v1 &entityInfo)
+bool pcie_gpu_id_in_list(unsigned int gpuId, const struct dcgmDiagPluginEntityList_v1 &entityInfo)
 {
     for (unsigned int i = 0; i < entityInfo.numEntities; i++)
     {
@@ -2747,7 +2747,7 @@ bool pcie_gpu_id_in_list(unsigned int gpuId, const dcgmDiagPluginEntityList_v1 &
     return false;
 }
 
-void pcie_check_nvlink_status(BusGrind *bg, const dcgmDiagPluginEntityList_v1 &entityInfo)
+void pcie_check_nvlink_status(BusGrind *bg, const struct dcgmDiagPluginEntityList_v1 &entityInfo)
 {
     dcgmNvLinkStatus_v5 linkStatus;
     memset(&linkStatus, 0, sizeof(linkStatus));
@@ -2859,7 +2859,7 @@ std::unique_ptr<DcgmGroup> StartDcgmGroupWatch(BusGrind *bg,
 }
 
 /*****************************************************************************/
-int main_entry_wrapped(BusGrind *bg, const dcgmDiagPluginEntityList_v1 &entityInfo)
+int main_entry_wrapped(BusGrind *bg, const struct dcgmDiagPluginEntityList_v1 &entityInfo)
 {
     int st;
     timelib64_t startTime = timelib_usecSince1970();
@@ -3068,7 +3068,7 @@ NO_MORE_TESTS:
 }
 
 /*****************************************************************************/
-int main_entry(BusGrind *bg, const dcgmDiagPluginEntityList_v1 &entityInfo)
+int main_entry(BusGrind *bg, const struct dcgmDiagPluginEntityList_v1 &entityInfo)
 {
     int st = 1; /* Default to failed in case we catch an exception */
 

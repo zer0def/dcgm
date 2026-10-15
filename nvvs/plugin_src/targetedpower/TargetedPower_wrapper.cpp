@@ -44,7 +44,7 @@ ConstantPower::ConstantPower(dcgmHandle_t handle)
     , m_hostA(nullptr)
     , m_hostB(nullptr)
     , m_hostC(nullptr)
-    , m_entityInfo(std::make_unique<dcgmDiagPluginEntityList_v1>())
+    , m_entityInfo(std::make_unique<struct dcgmDiagPluginEntityList_v1>())
     , m_dcgmRecorderPtr(&m_dcgmRecorder, [](DcgmRecorderBase *) {})
 {
     m_infoStruct.testIndex        = DCGM_TARGETED_POWER_INDEX;
@@ -167,7 +167,7 @@ void ConstantPower::Cleanup()
 }
 
 /*************************************************************************/
-bool ConstantPower::Init(dcgmDiagPluginEntityList_v1 const *entityInfo)
+bool ConstantPower::Init(struct dcgmDiagPluginEntityList_v1 const *entityInfo)
 {
     std::unique_ptr<CPDevice> device;
 
@@ -604,7 +604,7 @@ int ConstantPower::CudaInit(mallocFunc mallocImpl)
 
 /*************************************************************************/
 void ConstantPower::Go(std::string const &testName,
-                       dcgmDiagPluginEntityList_v1 const *entityInfo,
+                       struct dcgmDiagPluginEntityList_v1 const *entityInfo,
                        unsigned int numParameters,
                        dcgmDiagPluginTestParameter_t const *testParameters)
 {
@@ -935,7 +935,7 @@ private:
  * ConstantPower RunTest
  */
 /****************************************************************************/
-bool ConstantPower::RunTest(dcgmDiagPluginEntityList_v1 const *entityInfo)
+bool ConstantPower::RunTest(struct dcgmDiagPluginEntityList_v1 const *entityInfo)
 {
     int st, Nrunning = 0;
     ConstantPowerWorker *workerThreads[TP_MAX_DEVICES] = { 0 };

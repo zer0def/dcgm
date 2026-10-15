@@ -32,17 +32,17 @@ public:
         : NVBandwidthPlugin(handle)
     {}
     void WrapperGo(std::string const &testName,
-                   dcgmDiagPluginEntityList_v1 const *entityList,
+                   struct dcgmDiagPluginEntityList_v1 const *entityList,
                    unsigned int numParameters,
                    dcgmDiagPluginTestParameter_t const *testParameters);
     std::vector<DcgmError> const WrapperGetErrors(std::string const &testName) const;
-    void WrapperInitializeForEntityList(std::string const &testName, dcgmDiagPluginEntityList_v1 const &entityInfo);
+    void WrapperInitializeForEntityList(std::string const &testName, struct dcgmDiagPluginEntityList_v1 const &entityInfo);
     std::string WrapperGetNvBandwidthTestName() const;
     std::pair<bool, std::optional<NVBandwidthResult>> WrapperAttemptToReadOutput(std::string_view output);
 };
 
 void WrapperNVBandwidthPlugin::WrapperGo(std::string const &testName,
-                                         dcgmDiagPluginEntityList_v1 const *entityList,
+                                         struct dcgmDiagPluginEntityList_v1 const *entityList,
                                          unsigned int numParameters,
                                          dcgmDiagPluginTestParameter_t const *testParameters)
 {
@@ -55,7 +55,7 @@ std::vector<DcgmError> const WrapperNVBandwidthPlugin::WrapperGetErrors(std::str
 }
 
 void WrapperNVBandwidthPlugin::WrapperInitializeForEntityList(std::string const &testName,
-                                                              dcgmDiagPluginEntityList_v1 const &entityInfo)
+                                                              struct dcgmDiagPluginEntityList_v1 const &entityInfo)
 {
     InitializeForEntityList(testName, entityInfo);
 }
@@ -76,8 +76,8 @@ TEST_CASE("NVBandwidthPlugin: AttemptToReadOutput()")
 {
     using namespace DcgmNs::Nvvs::Plugins::NVBandwidth;
     WrapperNVBandwidthPlugin wnvbp((dcgmHandle_t)1); // we don't need a real DCGM handle
-    std::unique_ptr<dcgmDiagPluginEntityList_v1> entityListUptr = std::make_unique<dcgmDiagPluginEntityList_v1>();
-    dcgmDiagPluginEntityList_v1 &entityList                     = *entityListUptr;
+    std::unique_ptr<struct dcgmDiagPluginEntityList_v1> entityListUptr = std::make_unique<struct dcgmDiagPluginEntityList_v1>();
+    struct dcgmDiagPluginEntityList_v1 &entityList                     = *entityListUptr;
 
     entityList.numEntities                      = 1;
     entityList.entities[0].entity.entityGroupId = DCGM_FE_GPU;
@@ -104,8 +104,8 @@ TEST_CASE("NVBandwidthPlugin: AttemptToReadOutput() with error messages in stdou
 {
     using namespace DcgmNs::Nvvs::Plugins::NVBandwidth;
     WrapperNVBandwidthPlugin wnvbp((dcgmHandle_t)1); // we don't need a real DCGM handle
-    std::unique_ptr<dcgmDiagPluginEntityList_v1> entityListUptr = std::make_unique<dcgmDiagPluginEntityList_v1>();
-    dcgmDiagPluginEntityList_v1 &entityList                     = *entityListUptr;
+    std::unique_ptr<struct dcgmDiagPluginEntityList_v1> entityListUptr = std::make_unique<struct dcgmDiagPluginEntityList_v1>();
+    struct dcgmDiagPluginEntityList_v1 &entityList                     = *entityListUptr;
 
     entityList.numEntities                      = 1;
     entityList.entities[0].entity.entityGroupId = DCGM_FE_GPU;
@@ -140,8 +140,8 @@ TEST_CASE("NVBandwidthPlugin: Restore CUDA_VISIBLE_DEVICES after Go()")
     {
         using namespace DcgmNs::Nvvs::Plugins::NVBandwidth;
         WrapperNVBandwidthPlugin wnvbp((dcgmHandle_t)1); // we don't need a real DCGM handle
-        std::unique_ptr<dcgmDiagPluginEntityList_v1> entityListUptr = std::make_unique<dcgmDiagPluginEntityList_v1>();
-        dcgmDiagPluginEntityList_v1 &entityList                     = *entityListUptr;
+        std::unique_ptr<struct dcgmDiagPluginEntityList_v1> entityListUptr = std::make_unique<struct dcgmDiagPluginEntityList_v1>();
+        struct dcgmDiagPluginEntityList_v1 &entityList                     = *entityListUptr;
 
         entityList.numEntities                      = 1;
         entityList.entities[0].entity.entityGroupId = DCGM_FE_GPU;

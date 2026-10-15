@@ -480,7 +480,7 @@ std::string const &PluginTest::GetTestName() const
     return m_testName;
 }
 
-void PluginTest::InitializeForEntityList(dcgmDiagPluginEntityList_v1 const &entityInfo)
+void PluginTest::InitializeForEntityList(struct dcgmDiagPluginEntityList_v1 const &entityInfo)
 {
     ResetResultsAndMessages();
 
@@ -524,7 +524,7 @@ void PluginTest::ResetResultsAndMessages()
     m_resultsPerEntity.clear();
 }
 
-void PluginTest::InitializeForGpuList(dcgmDiagPluginEntityList_v1 const &entityInfo)
+void PluginTest::InitializeForGpuList(struct dcgmDiagPluginEntityList_v1 const &entityInfo)
 {
     m_gpuList.clear();
 

@@ -106,7 +106,7 @@ public:
     /**
      * Take cuda device attributes.
      */
-    CudaWorkerDevice_t const &GetCudaWorkerDevice() const;
+    struct CudaWorkerDevice_t const &GetCudaWorkerDevice() const;
 
     /*************************************************************************/
 private:
@@ -175,7 +175,7 @@ private:
                                          would mean 100% graphics activity */
 
     // Simple attributes, computed by Init().
-    CudaWorkerDevice_t m_cudaDevice;
+    struct CudaWorkerDevice_t m_cudaDevice;
 
     bool m_isInitialized = false; /* Has Init() succeeded on this instance yet? */
 

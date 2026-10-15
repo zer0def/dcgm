@@ -199,7 +199,7 @@ public:
 
     /*************************************************************************/
     void Go(std::string const &testName,
-            dcgmDiagPluginEntityList_v1 const *entityInfo,
+            struct dcgmDiagPluginEntityList_v1 const *entityInfo,
             unsigned int numParameters,
             dcgmDiagPluginTestParameter_t const *testParameters) override;
 
@@ -227,7 +227,7 @@ public:
      * Returns: true on success
      *          false on error
      */
-    bool Init(dcgmDiagPluginEntityList_v1 const *entityInfo);
+    bool Init(struct dcgmDiagPluginEntityList_v1 const *entityInfo);
 
     std::string GetTargetedPowerTestName() const;
 
@@ -255,7 +255,7 @@ private:
      *      false if there were issues running the test (test failures are not considered issues),
      *      true otherwise.
      */
-    bool RunTest(dcgmDiagPluginEntityList_v1 const *entityInfo);
+    bool RunTest(struct dcgmDiagPluginEntityList_v1 const *entityInfo);
     /*************************************************************************/
     /*
      * Clean up any resources used by this object, freeing all memory and closing
@@ -320,7 +320,7 @@ private:
     void *m_hostB_fp16 = nullptr;
     void *m_hostC_fp16 = nullptr;
 
-    std::unique_ptr<dcgmDiagPluginEntityList_v1> m_entityInfo;
+    std::unique_ptr<struct dcgmDiagPluginEntityList_v1> m_entityInfo;
     std::unique_ptr<DcgmRecorderBase, std::function<void(DcgmRecorderBase *)>> m_dcgmRecorderPtr;
     friend class ConstantPowerTest;
 };

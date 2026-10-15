@@ -95,7 +95,7 @@ void TestHostDeviceBandwidth(std::vector<dcgmGpuPciIdPair_t> &pairs,
     }
 
     std::map<unsigned int, CUdevice> gpuIdToCudaHandle;
-    std::vector<bwTestResult_t> results(gpuCount);
+    std::vector<struct bwTestResult_t> results(gpuCount);
 
     for (size_t d = 0; d < gpuCount; d++)
     {
@@ -253,7 +253,7 @@ cleanup:
 
 #endif
 
-void AppendResultsToJson(std::vector<bwTestResult_t> &results, Json::Value &root)
+void AppendResultsToJson(std::vector<struct bwTestResult_t> &results, Json::Value &root)
 {
     for (unsigned int i = 0; i < results.size(); i++)
     {

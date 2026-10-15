@@ -110,7 +110,7 @@ void ConstantPerf::Cleanup()
 }
 
 /*****************************************************************************/
-bool ConstantPerf::Init(dcgmDiagPluginEntityList_v1 const *entityInfo)
+bool ConstantPerf::Init(struct dcgmDiagPluginEntityList_v1 const *entityInfo)
 {
     CPerfDevice *cpDevice = 0;
 
@@ -363,7 +363,7 @@ int ConstantPerf::CudaInit()
 
 /*****************************************************************************/
 void ConstantPerf::Go(std::string const &testName,
-                      dcgmDiagPluginEntityList_v1 const *entityInfo,
+                      struct dcgmDiagPluginEntityList_v1 const *entityInfo,
                       unsigned int numParameters,
                       dcgmDiagPluginTestParameter_t const *testParameters)
 {
@@ -663,7 +663,7 @@ private:
 /*****************************************************************************/
 //#pragma GCC diagnostic push
 //#pragma GCC diagnostic ignored "-Wunused-but-set-variable"
-bool ConstantPerf::RunTest(dcgmDiagPluginEntityList_v1 const *entityInfo)
+bool ConstantPerf::RunTest(struct dcgmDiagPluginEntityList_v1 const *entityInfo)
 {
     int st, Nrunning = 0;
     ConstantPerfWorker *workerThreads[TS_MAX_DEVICES] = { 0 };

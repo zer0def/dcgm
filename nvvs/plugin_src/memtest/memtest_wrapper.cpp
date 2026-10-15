@@ -53,7 +53,7 @@ MemtestPlugin::MemtestPlugin(dcgmHandle_t handle)
 
 /*****************************************************************************/
 void MemtestPlugin::Go(std::string const &testName,
-                       dcgmDiagPluginEntityList_v1 const *entityInfo,
+                       struct dcgmDiagPluginEntityList_v1 const *entityInfo,
                        unsigned int numParameters,
                        dcgmDiagPluginTestParameter_t const *tpStruct)
 {

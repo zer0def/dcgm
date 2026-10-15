@@ -68,28 +68,28 @@ typedef void *HangDetectMonitorPtr;
 #define DCGM_MEMBER_INIT(init)
 #endif
 
-typedef struct
+struct dcgmDiagPluginEntityGpuAux_v1
 {
     DcgmEntityStatus_t status DCGM_MEMBER_INIT({});
     dcgmDeviceAttributes_t attributes DCGM_MEMBER_INIT({});
-} dcgmDiagPluginEntityGpuAux_v1;
+};
 
 union dcgmDiagPluginEntityAux_v1
 {
-    dcgmDiagPluginEntityGpuAux_v1 gpu DCGM_MEMBER_INIT({});
+    struct dcgmDiagPluginEntityGpuAux_v1 gpu DCGM_MEMBER_INIT({});
 };
 
-typedef struct
+struct dcgmDiagPluginEntityInfo_v1
 {
     dcgmGroupEntityPair_t entity DCGM_MEMBER_INIT({});
     dcgmDiagPluginEntityAux_v1 auxField DCGM_MEMBER_INIT({});
-} dcgmDiagPluginEntityInfo_v1;
+};
 
-typedef struct
+struct dcgmDiagPluginEntityList_v1
 {
     unsigned int numEntities DCGM_MEMBER_INIT(0);
-    dcgmDiagPluginEntityInfo_v1 entities[DCGM_GROUP_MAX_ENTITIES_V2] DCGM_MEMBER_INIT({});
-} dcgmDiagPluginEntityList_v1;
+    struct dcgmDiagPluginEntityInfo_v1 entities[DCGM_GROUP_MAX_ENTITIES_V2] DCGM_MEMBER_INIT({});
+};
 
 #define DCGM_MAX_PLUGIN_DESC_LEN       128
 #define DCGM_MAX_PLUGIN_NAME_LEN       20
@@ -364,13 +364,13 @@ DCGM_PUBLIC_API void RunTest(char const *testName,
                              unsigned int timeout,
                              unsigned int numParameters,
                              const dcgmDiagPluginTestParameter_t *testParameters,
-                             dcgmDiagPluginEntityList_v1 const *entityInfo,
+                             struct dcgmDiagPluginEntityList_v1 const *entityInfo,
                              void *userData);
 typedef void (*dcgmDiagRunTest_f)(char const *testName,
                                   unsigned int timeout,
                                   unsigned int numParameters,
                                   const dcgmDiagPluginTestParameter_t *testParameters,
-                                  dcgmDiagPluginEntityList_v1 const *entityInfo,
+                                  struct dcgmDiagPluginEntityList_v1 const *entityInfo,
                                   void *userData);
 
 /**

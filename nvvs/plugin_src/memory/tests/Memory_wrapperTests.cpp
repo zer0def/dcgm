@@ -26,7 +26,7 @@
 
 TEST_CASE("Memory Go With Multiple Gpus")
 {
-    std::unique_ptr<dcgmDiagPluginEntityList_v1> entityList = std::make_unique<dcgmDiagPluginEntityList_v1>();
+    std::unique_ptr<struct dcgmDiagPluginEntityList_v1> entityList = std::make_unique<struct dcgmDiagPluginEntityList_v1>();
 
     entityList->numEntities = 4;
     for (unsigned int i = 0; i < entityList->numEntities; i++)

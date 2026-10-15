@@ -59,7 +59,7 @@ namespace impl
 namespace
 {
 
-    void FillGpuEntityAuxData(EntitySet &entitySet, std::vector<dcgmDiagPluginEntityInfo_v1> &entityInfos)
+    void FillGpuEntityAuxData(EntitySet &entitySet, std::vector<struct dcgmDiagPluginEntityInfo_v1> &entityInfos)
     {
         assert(entitySet.GetEntityGroup() == DCGM_FE_GPU);
         GpuSet *gpuSet = ToGpuSet(&entitySet);
@@ -847,13 +847,13 @@ template <typename PluginLibT,
           typename DynamicLibraryLoaderT,
           typename SoftwarePluginFrameworkT,
           typename FileSystemOperatorT>
-std::vector<dcgmDiagPluginEntityInfo_v1> TestFramework<PluginLibT,
+std::vector<struct dcgmDiagPluginEntityInfo_v1> TestFramework<PluginLibT,
                                                        DynamicLibraryLoaderT,
                                                        SoftwarePluginFrameworkT,
                                                        FileSystemOperatorT>::PopulateEntityInfoForPlugins(EntitySet &
                                                                                                               entitySet)
 {
-    std::vector<dcgmDiagPluginEntityInfo_v1> entityInfo = entitySet.PopulateEntityInfo();
+    std::vector<struct dcgmDiagPluginEntityInfo_v1> entityInfo = entitySet.PopulateEntityInfo();
 
     if (entitySet.GetEntityGroup() == DCGM_FE_GPU)
     {
@@ -1015,7 +1015,7 @@ void TestFramework<PluginLibT, DynamicLibraryLoaderT, SoftwarePluginFrameworkT, 
                     }
                 });
 
-                std::vector<dcgmDiagPluginEntityInfo_v1> entityInfos = PopulateEntityInfoForPlugins(*entitySet);
+                std::vector<struct dcgmDiagPluginEntityInfo_v1> entityInfos = PopulateEntityInfoForPlugins(*entitySet);
 
                 log_debug("Test {} start", testName);
                 auto const testStart = std::chrono::steady_clock::now();

@@ -120,7 +120,7 @@ DcgmNvsdmManager::~DcgmNvsdmManager()
 /**
  * Map of fieldIds to the entities for which we want the data for that field.
  */
-using fieldEntityMapType = std::map<unsigned short, std::vector<dcgm_field_update_info_t>>;
+using fieldEntityMapType = std::map<unsigned short, std::vector<struct dcgm_field_update_info_t>>;
 
 /*************************************************************************/
 static unsigned int getNvsdmPortFieldId(unsigned int dcgmFieldId)
@@ -742,7 +742,7 @@ dcgmReturn_t DcgmNvsdmManager::HandleInfoField(dcgm_field_entity_group_t entityG
 /*************************************************************************/
 dcgmReturn_t DcgmNvsdmManager::UpdateFieldsFromNvswitchLibrary(unsigned short fieldId,
                                                                DcgmFvBuffer &buf,
-                                                               const std::vector<dcgm_field_update_info_t> &entities,
+                                                               const std::vector<struct dcgm_field_update_info_t> &entities,
                                                                timelib64_t now)
 {
     nvsdmTelemParam_t param;

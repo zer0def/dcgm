@@ -292,14 +292,14 @@ dcgmReturn_t DcgmNvSwitchManagerBase::UpdateFatalErrorsAllSwitches()
 /**
  * Map of fieldIds to the entities for which we want the data for that field.
  */
-using fieldEntityMapType = std::map<unsigned short, std::vector<dcgm_field_update_info_t>>;
+using fieldEntityMapType = std::map<unsigned short, std::vector<struct dcgm_field_update_info_t>>;
 
 /*************************************************************************/
 /* Helper to buffer up a blank value for every entity. This is useful when
    the fieldId in question isn't supported by DCGM/NSCQ/NVSDM yet. */
 void DcgmNvSwitchManagerBase::BufferBlankValueForAllEntities(unsigned short fieldId,
                                                              DcgmFvBuffer &buf,
-                                                             const std::vector<dcgm_field_update_info_t> &entities)
+                                                             const std::vector<struct dcgm_field_update_info_t> &entities)
 {
     auto fieldMeta = DcgmFieldGetById(fieldId);
 
@@ -323,7 +323,7 @@ void DcgmNvSwitchManagerBase::BufferBlankValueForAllEntities(unsigned short fiel
 /*************************************************************************/
 dcgmReturn_t DcgmNvSwitchManagerBase::UpdateFields(timelib64_t &nextUpdateTime, timelib64_t now)
 {
-    std::vector<dcgm_field_update_info_t> toUpdate;
+    std::vector<struct dcgm_field_update_info_t> toUpdate;
     dcgmReturn_t ret = m_watchTable.GetFieldsToUpdate(DcgmModuleIdNvSwitch, now, toUpdate, nextUpdateTime);
 
     if (ret != DCGM_ST_OK)

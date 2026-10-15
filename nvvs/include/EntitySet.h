@@ -60,7 +60,7 @@ public:
      *
      * @return A vector of entity info.
      */
-    std::vector<dcgmDiagPluginEntityInfo_v1> PopulateEntityInfo() const;
+    std::vector<struct dcgmDiagPluginEntityInfo_v1> PopulateEntityInfo() const;
 
     /*
      * Get the skipped entities and their reasons.

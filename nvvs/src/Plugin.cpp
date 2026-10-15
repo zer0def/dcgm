@@ -35,7 +35,7 @@ Plugin::Plugin()
 Plugin::~Plugin()
 {}
 
-void Plugin::InitializeForEntityList(std::string const &testName, dcgmDiagPluginEntityList_v1 const &entityInfo)
+void Plugin::InitializeForEntityList(std::string const &testName, struct dcgmDiagPluginEntityList_v1 const &entityInfo)
 {
     DcgmLockGuard lock(&m_dataMutex);
     m_tests.erase(testName);

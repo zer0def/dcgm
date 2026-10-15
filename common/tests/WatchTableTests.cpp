@@ -176,7 +176,7 @@ TEST_CASE("WatchTable: GetFieldsToUpdate")
     REQUIRE(minUpdateInterval == 1);
     REQUIRE(maxUpdateInterval == 1000000);
 
-    std::vector<dcgm_field_update_info_t> toUpdate;
+    std::vector<struct dcgm_field_update_info_t> toUpdate;
     timelib64_t now                = timelib_usecSince1970();
     timelib64_t earliestNextUpdate = 0;
 

@@ -488,7 +488,7 @@ double CudaWorkerThread::GetCurrentAchievedLoad(void)
     return m_achievedLoad;
 }
 
-CudaWorkerDevice_t const &CudaWorkerThread::GetCudaWorkerDevice() const
+struct CudaWorkerDevice_t const &CudaWorkerThread::GetCudaWorkerDevice() const
 {
     return m_cudaDevice;
 }

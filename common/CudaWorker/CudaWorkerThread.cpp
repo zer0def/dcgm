@@ -268,7 +268,7 @@ std::string FmtCudaError(std::string_view call,
 
     return fmt::format("Call to '{}' returned {} - {}", call, cuSt, errStr);
 }
-}; //namespace
+} //namespace
 
 // See also LOG_CUDA_ERROR in nvvs/plugin_src/cuda_common/CudaCommon.h.
 #define LOG_CUDA_ERROR(fn, cuSt, ...) log_error(FmtCudaError((fn), (cuSt), ##__VA_ARGS__))

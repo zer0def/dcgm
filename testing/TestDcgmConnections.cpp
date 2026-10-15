@@ -83,11 +83,11 @@ struct TestIpcSocketPairConnection_t
     std::atomic_bool gotDisconnect          = false;
 };
 
-typedef struct
+struct TestIpcSocketPair_t
 {
     bool testFailed = false;
     std::array<TestIpcSocketPairConnection_t, 2> connections;
-} TestIpcSocketPair_t;
+};
 
 static TestIpcSocketPairConnection_t *TispGetConnection(TestIpcSocketPair_t *socketPair,
                                                         dcgm_connection_id_t connectionId)

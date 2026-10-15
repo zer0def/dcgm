@@ -661,11 +661,13 @@ private:
  * Method returns whether the test ran sucessfully - this is *not* the same as whether the test passed
  */
 /*****************************************************************************/
+//#pragma GCC diagnostic push
+//#pragma GCC diagnostic ignored "-Wunused-but-set-variable"
 bool ConstantPerf::RunTest(dcgmDiagPluginEntityList_v1 const *entityInfo)
 {
     int st, Nrunning = 0;
     ConstantPerfWorker *workerThreads[TS_MAX_DEVICES] = { 0 };
-    unsigned int timeCount                            = 0;
+    [[maybe_unused]] unsigned int timeCount           = 0;
     timelib64_t earliestStopTime;
     timelib64_t startTime = timelib_usecSince1970();
 
@@ -803,6 +805,7 @@ bool ConstantPerf::RunTest(dcgmDiagPluginEntityList_v1 const *entityInfo)
     Cleanup();
     return true;
 }
+//#pragma GCC diagnostic pop
 
 std::string ConstantPerf::GetTargetedStressTestName() const
 {

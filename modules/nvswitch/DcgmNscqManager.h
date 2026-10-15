@@ -302,6 +302,7 @@ public:
     /**
      * Update Fields.
      */
+    using DcgmNvSwitchManagerBase::UpdateFields;
     template <typename nscqFieldType, typename storageType, bool is_vector, typename... indexTypes>
     dcgmReturn_t UpdateFields(unsigned short fieldId,
                               DcgmFvBuffer &buf,

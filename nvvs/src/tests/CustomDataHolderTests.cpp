@@ -75,7 +75,7 @@ void check_vector_for_completeness(std::vector<dcgmDiagCustomStats_t> &statsList
                                    std::unordered_set<long long> bridgemenSet)
 {
     // Make sure we find everything in the list
-    unsigned int wrongTypeCount = 0;
+    [[maybe_unused]] unsigned int wrongTypeCount = 0;
 
     for (auto &&stats : statsList)
     {

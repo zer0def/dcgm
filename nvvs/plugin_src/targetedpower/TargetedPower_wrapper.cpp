@@ -939,7 +939,7 @@ bool ConstantPower::RunTest(dcgmDiagPluginEntityList_v1 const *entityInfo)
 {
     int st, Nrunning = 0;
     ConstantPowerWorker *workerThreads[TP_MAX_DEVICES] = { 0 };
-    unsigned int timeCount                             = 0;
+    [[maybe_unused]] unsigned int timeCount            = 0;
     timelib64_t earliestStopTime;
     timelib64_t startTime = timelib_usecSince1970();
 

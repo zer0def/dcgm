@@ -267,7 +267,7 @@ struct EntityMapTypedIterator
 
     bool operator==(EntityMapTypedIterator const &other) const
     {
-        return m_it == other.it;
+        return m_it == other.m_it;  // ?
     }
 
     template <typename Y>

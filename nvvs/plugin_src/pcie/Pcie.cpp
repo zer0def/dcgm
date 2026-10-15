@@ -901,7 +901,7 @@ bool BusGrind::RunTest_sm(dcgmDiagPluginEntityList_v1 const *entityInfo)
 {
     int st = 0, Nrunning = 0;
     SmPerfWorker *workerThreads[SMSTRESS_MAX_DEVICES] = { 0 };
-    unsigned int timeCount                            = 0;
+    [[maybe_unused]] unsigned int timeCount           = 0;
     timelib64_t earliestStopTime;
     timelib64_t startTime = timelib_usecSince1970();
 

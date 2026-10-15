@@ -66,6 +66,8 @@ MemtestPlugin::MemtestPlugin(dcgmHandle_t handle,
 }
 
 /*****************************************************************************/
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wformat-security"
 void MemtestPlugin::Go(std::string const &testName,
                        dcgmDiagPluginEntityList_v1 const *entityInfo,
                        unsigned int numParameters,
@@ -162,6 +164,7 @@ void MemtestPlugin::Go(std::string const &testName,
         SetResult(testName, NVVS_RESULT_FAIL);
     }
 }
+#pragma GCC diagnostic pop
 
 std::string MemtestPlugin::GetMmeTestTestName() const
 {

@@ -525,6 +525,8 @@ int mem_init(mem_globals_p memGlobals, const dcgmDiagPluginEntityInfo_v1 &entity
 }
 
 /*****************************************************************************/
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wformat-security"
 int main_entry(const dcgmDiagPluginEntityInfo_v1 &entityInfo,
                Memory *memory,
                TestParameters *tp,
@@ -654,3 +656,4 @@ int main_entry(const dcgmDiagPluginEntityInfo_v1 &entityInfo,
     mem_cleanup(memGlobals);
     return 0;
 }
+#pragma GCC diagnostic pop

@@ -207,6 +207,8 @@ BusGrind::BusGrind(dcgmHandle_t handle,
 }
 
 /*****************************************************************************/
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wformat-security"
 void BusGrind::Go(std::string const &testName,
                   dcgmDiagPluginEntityList_v1 const *entityInfo,
                   unsigned int numParameters,
@@ -316,6 +318,7 @@ void BusGrind::Go(std::string const &testName,
         return;
     }
 }
+#pragma GCC diagnostic pop
 
 /*****************************************************************************/
 /*****************************************************************************/
@@ -910,7 +913,7 @@ bool BusGrind::RunTest_sm(dcgmDiagPluginEntityList_v1 const *entityInfo)
 {
     int st = 0, Nrunning = 0;
     SmPerfWorker *workerThreads[SMSTRESS_MAX_DEVICES] = { 0 };
-    unsigned int timeCount                            = 0;
+    [[maybe_unused]] unsigned int timeCount           = 0;
     timelib64_t earliestStopTime;
     timelib64_t startTime = timelib_usecSince1970();
 

@@ -90,6 +90,8 @@ int L1TagCuda::AllocDeviceMem(int size, CUdeviceptr_v2 *ptr)
     return 0;
 }
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wformat-security"
 nvvsPluginResult_t L1TagCuda::GetMaxL1CacheSizePerSM(uint32_t &l1PerSMBytes)
 {
     // Determine L1 cache size
@@ -513,6 +515,7 @@ CLEANUP:
 
     return retVal;
 }
+#pragma GCC diagnostic pop
 
 nvvsPluginResult_t L1TagCuda::TestMain(unsigned int dcgmGpuIndex)
 {

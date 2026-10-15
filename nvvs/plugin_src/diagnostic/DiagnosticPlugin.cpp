@@ -348,6 +348,8 @@ int32_t GpuBurnPlugin::SetPrecisionFromString(bool supportsDoubles)
 }
 
 /*****************************************************************************/
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wformat-security"
 void GpuBurnPlugin::Go(std::string const &testName,
                        dcgmDiagPluginEntityList_v1 const *entityInfo,
                        unsigned int numParameters,
@@ -443,6 +445,7 @@ void GpuBurnPlugin::Go(std::string const &testName,
         log_debug("Go::RunTest: result=true, should_stop=false");
     }
 }
+#pragma GCC diagnostic pop
 
 /*************************************************************************/
 bool GpuBurnPlugin::CheckPassFail(const std::vector<long long> &errorCount, const std::vector<long long> &nanCount)

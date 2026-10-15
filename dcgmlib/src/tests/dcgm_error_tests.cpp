@@ -179,6 +179,8 @@ TEST_CASE("dcgm_errors: errorString maps public return codes")
  * Test that each error prints as expected with _NEXT message.
  * Results can be found in the _out/build directory
  */
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wformat-security"
 TEST_CASE("dcgm_errors: check full message")
 {
     DcgmError d { 0 };
@@ -792,3 +794,4 @@ TEST_CASE("dcgm_errors: check full message")
     WARN(d.GetMessage());
     CHECK(d.GetMessage().length() < DCGM_ERR_MSG_LENGTH);
 }
+#pragma GCC diagnostic pop

@@ -1855,6 +1855,8 @@ int outputP2PBandwidthMatrix(BusGrind *bg, CudaOpsAnyPtr cudaOps, bool p2p)
 // inputs:
 //        int numGPUs:  The number of GPUs to test
 //        bool p2p:   Indicates if GPUDirect P2P should be enabled or not
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wformat-security"
 int outputConcurrentPairsP2PBandwidthMatrix(BusGrind *bg, CudaOpsAnyPtr cudaOps, bool p2p)
 {
     // only run this test if p2p tests are enabled
@@ -2381,6 +2383,7 @@ int outputConcurrent1DExchangeBandwidthMatrix(BusGrind *bg, CudaOpsAnyPtr cudaOp
 
     return 0;
 }
+#pragma GCC diagnostic pop
 
 /*****************************************************************************/
 // This test measures the bus latency between pairs of GPUs one at a time
@@ -2641,6 +2644,8 @@ void bg_record_cliques(BusGrind *bg, CudaOpsAnyPtr cudaOps)
 }
 
 /*****************************************************************************/
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wformat-security"
 int bg_should_stop(BusGrind *bg)
 {
     if (!main_should_stop)
@@ -2654,6 +2659,7 @@ int bg_should_stop(BusGrind *bg)
     bg->SetResult(bg->GetPcieTestName(), NVVS_RESULT_SKIP);
     return 1;
 }
+#pragma GCC diagnostic pop
 
 /*****************************************************************************/
 dcgmReturn_t bg_check_per_second_error_conditions(BusGrind *bg,

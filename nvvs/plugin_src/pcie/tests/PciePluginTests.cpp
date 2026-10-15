@@ -31,7 +31,7 @@ unsigned int failingSwitchId = DCGM_MAX_NUM_SWITCHES;
 
 TEST_CASE("Pcie: pcie_gpu_id_in_list")
 {
-    std::unique_ptr<dcgmDiagPluginEntityList_v1> entityInfo = std::make_unique<dcgmDiagPluginEntityList_v1>();
+    std::unique_ptr<struct dcgmDiagPluginEntityList_v1> entityInfo = std::make_unique<struct dcgmDiagPluginEntityList_v1>();
     entityInfo->numEntities                                 = 2;
     for (unsigned idx = 0; idx < entityInfo->numEntities; ++idx)
     {
@@ -94,7 +94,7 @@ dcgmReturn_t dcgmGetNvLinkLinkStatus(dcgmHandle_t /* handle */, dcgmNvLinkStatus
 
 TEST_CASE("Pcie: pcie_check_nvlink_status_expected")
 {
-    std::unique_ptr<dcgmDiagPluginEntityList_v1> entityInfo = std::make_unique<dcgmDiagPluginEntityList_v1>();
+    std::unique_ptr<struct dcgmDiagPluginEntityList_v1> entityInfo = std::make_unique<struct dcgmDiagPluginEntityList_v1>();
     dcgmHandle_t handle                                     = {};
     entityInfo->numEntities                                 = 2;
     const unsigned int ourGpuId                             = 1;
@@ -192,7 +192,7 @@ TEST_CASE("Pcie: ProcessChildrenOutputs")
     dcgmHandle_t handle = {};
 
     auto entityResults                                      = MakeUniqueZero<dcgmDiagEntityResults_v2>();
-    std::unique_ptr<dcgmDiagPluginEntityList_v1> entityInfo = std::make_unique<dcgmDiagPluginEntityList_v1>();
+    std::unique_ptr<struct dcgmDiagPluginEntityList_v1> entityInfo = std::make_unique<struct dcgmDiagPluginEntityList_v1>();
     BusGrind bg(handle);
     entityInfo->numEntities                      = 1;
     entityInfo->entities[0].entity.entityId      = 0;
@@ -630,7 +630,7 @@ public:
 TEST_CASE("BusGrind: SetCudaCapabilityInfo, negative test for DCGM_FR_DCGM_API")
 {
     dcgmHandle_t handle                                     = 42;
-    std::unique_ptr<dcgmDiagPluginEntityList_v1> entityInfo = std::make_unique<dcgmDiagPluginEntityList_v1>();
+    std::unique_ptr<struct dcgmDiagPluginEntityList_v1> entityInfo = std::make_unique<struct dcgmDiagPluginEntityList_v1>();
     BusGrindTest bg(handle);
     entityInfo->numEntities                      = 2;
     entityInfo->entities[0].entity.entityId      = 0;
@@ -679,7 +679,7 @@ TEST_CASE("BusGrind: negative test for DCGM_FR_CONCURRENT_GPUS")
     unsigned int numGpus = 1;
 
     dcgmHandle_t handle                                     = 42;
-    std::unique_ptr<dcgmDiagPluginEntityList_v1> entityInfo = std::make_unique<dcgmDiagPluginEntityList_v1>();
+    std::unique_ptr<struct dcgmDiagPluginEntityList_v1> entityInfo = std::make_unique<struct dcgmDiagPluginEntityList_v1>();
     BusGrindTest bg(handle);
     entityInfo->numEntities                      = numGpus;
     entityInfo->entities[0].entity.entityId      = 0;
@@ -712,7 +712,7 @@ TEST_CASE("BusGrind: negative test for DCGM_FR_PCIE_WIDTH")
 {
     unsigned int gpuCount                                   = 4;
     unsigned int targetGpuId                                = 1;
-    std::unique_ptr<dcgmDiagPluginEntityList_v1> entityInfo = std::make_unique<dcgmDiagPluginEntityList_v1>();
+    std::unique_ptr<struct dcgmDiagPluginEntityList_v1> entityInfo = std::make_unique<struct dcgmDiagPluginEntityList_v1>();
     entityInfo->numEntities                                 = gpuCount;
     BusGrindTest bg(42);
 
@@ -784,7 +784,7 @@ TEST_CASE("BusGrind: negative test for DCGM_FR_PCIE_GENERATION")
 {
     unsigned int gpuCount                                   = 4;
     unsigned int targetGpuId                                = 1;
-    std::unique_ptr<dcgmDiagPluginEntityList_v1> entityInfo = std::make_unique<dcgmDiagPluginEntityList_v1>();
+    std::unique_ptr<struct dcgmDiagPluginEntityList_v1> entityInfo = std::make_unique<struct dcgmDiagPluginEntityList_v1>();
     entityInfo->numEntities                                 = gpuCount;
     BusGrindTest bg(42);
 

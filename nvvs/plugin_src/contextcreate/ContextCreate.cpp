@@ -70,7 +70,7 @@ bool ContextCreate::GpusAreNonExclusive()
     return true;
 }
 
-std::string ContextCreate::Init(const dcgmDiagPluginEntityList_v1 &entityList)
+std::string ContextCreate::Init(const struct dcgmDiagPluginEntityList_v1 &entityList)
 {
     std::vector<unsigned int> gpuVec;
 
@@ -129,7 +129,7 @@ int ContextCreate::CanCreateContext()
     return CanCreateContext(m_device);
 }
 
-int ContextCreate::Run(const dcgmDiagPluginEntityList_v1 &entityList)
+int ContextCreate::Run(const struct dcgmDiagPluginEntityList_v1 &entityList)
 {
     std::string error = Init(entityList);
 

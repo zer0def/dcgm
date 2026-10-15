@@ -75,7 +75,7 @@ NcclTestsPlugin::~NcclTestsPlugin()
 }
 
 void NcclTestsPlugin::Go(std::string const &testName,
-                         dcgmDiagPluginEntityList_v1 const *entityInfo,
+                         struct dcgmDiagPluginEntityList_v1 const *entityInfo,
                          unsigned int numParameters,
                          dcgmDiagPluginTestParameter_t const *testParameters)
 {

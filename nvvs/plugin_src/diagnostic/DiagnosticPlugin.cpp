@@ -199,7 +199,7 @@ void GpuBurnPlugin::UpdateForDGemmSupport(int deviceId)
 }
 
 /*****************************************************************************/
-bool GpuBurnPlugin::Init(dcgmDiagPluginEntityList_v1 const &entityInfo)
+bool GpuBurnPlugin::Init(struct dcgmDiagPluginEntityList_v1 const &entityInfo)
 {
     cudaError_t cudaSt;
 
@@ -328,7 +328,7 @@ int32_t GpuBurnPlugin::SetPrecisionFromString(bool supportsDoubles)
 #pragma GCC diagnostic push
 #pragma GCC diagnostic ignored "-Wformat-security"
 void GpuBurnPlugin::Go(std::string const &testName,
-                       dcgmDiagPluginEntityList_v1 const *entityInfo,
+                       struct dcgmDiagPluginEntityList_v1 const *entityInfo,
                        unsigned int numParameters,
                        dcgmDiagPluginTestParameter_t const *tpStruct)
 {
@@ -463,7 +463,7 @@ bool GpuBurnPlugin::CheckPassFail(const std::vector<long long> &errorCount, cons
  * GpuBurnPlugin::RunTest implementation.
  */
 /****************************************************************************/
-bool GpuBurnPlugin::RunTest(dcgmDiagPluginEntityList_v1 const *entityInfo)
+bool GpuBurnPlugin::RunTest(struct dcgmDiagPluginEntityList_v1 const *entityInfo)
 {
     std::vector<long long> errorCount;
     std::vector<long long> nanCount;

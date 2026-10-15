@@ -50,7 +50,7 @@ using nvlink_state_t = nscq_nvlink_state_t;
  */
 template <>
 std::optional<dcgmGroupEntityPair_t> DcgmNscqManager::Find(unsigned short fieldId,
-                                                           const std::vector<dcgm_field_update_info_t> &entities,
+                                                           const std::vector<struct dcgm_field_update_info_t> &entities,
                                                            std::tuple<uuid_p> index)
 {
     auto swIndex = FindSwitchByDevice(std::get<0>(index));
@@ -83,7 +83,7 @@ std::optional<dcgmGroupEntityPair_t> DcgmNscqManager::Find(unsigned short fieldI
  */
 template <>
 std::optional<dcgmGroupEntityPair_t> DcgmNscqManager::Find(unsigned short fieldId,
-                                                           const std::vector<dcgm_field_update_info_t> &entities,
+                                                           const std::vector<struct dcgm_field_update_info_t> &entities,
                                                            std::tuple<uuid_p, link_id_t> index)
 {
     auto swIndex = FindSwitchByDevice(std::get<0>(index));
@@ -168,7 +168,7 @@ static std::optional<lane_vc_id_t> FieldIdToLane(unsigned short fieldId)
  */
 template <>
 std::optional<dcgmGroupEntityPair_t> DcgmNscqManager::Find(unsigned short fieldId,
-                                                           const std::vector<dcgm_field_update_info_t> &entities,
+                                                           const std::vector<struct dcgm_field_update_info_t> &entities,
                                                            std::tuple<uuid_p, link_id_t, lane_vc_id_t> index)
 {
     auto swIndex = FindSwitchByDevice(std::get<0>(index));
@@ -308,12 +308,12 @@ dcgmReturn_t DcgmNscqManager::UpdateFatalErrorsAllSwitches()
 /**
  * Map of fieldIds to the entities for which we want the data for that field.
  */
-using fieldEntityMapType = std::map<unsigned short, std::vector<dcgm_field_update_info_t>>;
+using fieldEntityMapType = std::map<unsigned short, std::vector<struct dcgm_field_update_info_t>>;
 
 /*************************************************************************/
 dcgmReturn_t DcgmNscqManager::UpdateFieldsFromNvswitchLibrary(unsigned short fieldId,
                                                               DcgmFvBuffer &buf,
-                                                              const std::vector<dcgm_field_update_info_t> &entities,
+                                                              const std::vector<struct dcgm_field_update_info_t> &entities,
                                                               timelib64_t now)
 {
     const FieldIdControlType<DCGM_FI_SYSTEM_FIELD_UNKNOWN> *internalFieldId = FieldIdFind(fieldId);

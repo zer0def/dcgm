@@ -79,7 +79,7 @@ void PluginCoreFunctionality::PopulateFieldIds(const std::vector<unsigned short>
 }
 
 dcgmReturn_t PluginCoreFunctionality::PluginPreStart(const std::vector<unsigned short> &additionalFields,
-                                                     const std::vector<dcgmDiagPluginEntityInfo_v1> &entityInfo,
+                                                     const std::vector<struct dcgmDiagPluginEntityInfo_v1> &entityInfo,
                                                      const std::string &pluginName)
 {
     if (!m_initialized)

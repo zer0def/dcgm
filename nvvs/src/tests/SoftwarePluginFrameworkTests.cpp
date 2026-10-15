@@ -56,7 +56,7 @@ public:
     // methods
     WrapperSoftwareTestFramework(EntitySet &entitySet);
     WrapperSoftwareTestFramework(std::vector<Gpu *> gpuList, EntitySet &entitySet);
-    WrapperSoftwareTestFramework(std::unique_ptr<dcgmDiagPluginEntityList_v1> entityList, EntitySet &entitySet);
+    WrapperSoftwareTestFramework(std::unique_ptr<struct dcgmDiagPluginEntityList_v1> entityList, EntitySet &entitySet);
     void WrapperInitTestNameMap();
     void WrapperInitTestParametersMap();
     void WrapperPopulateGpuInfo(std::vector<Gpu *> &gpuList);
@@ -74,7 +74,7 @@ public:
         return getTestParamMap();
     }
 
-    dcgmDiagPluginEntityList_v1 const &WrapperGetEntityList() const
+    struct dcgmDiagPluginEntityList_v1 const &WrapperGetEntityList() const
     {
         return getEntityList();
     }
@@ -88,7 +88,7 @@ WrapperSoftwareTestFramework::WrapperSoftwareTestFramework(std::vector<Gpu *> gp
     : SoftwarePluginFramework(std::move(gpuList), entitySet)
 {}
 
-WrapperSoftwareTestFramework::WrapperSoftwareTestFramework(std::unique_ptr<dcgmDiagPluginEntityList_v1> entityList,
+WrapperSoftwareTestFramework::WrapperSoftwareTestFramework(std::unique_ptr<struct dcgmDiagPluginEntityList_v1> entityList,
                                                            EntitySet &entitySet)
     : SoftwarePluginFramework(std::move(entityList), entitySet)
 {}
@@ -159,7 +159,7 @@ TEST_CASE("Test 1 - Software object creation with Output obj")
 
     // ---------------
     // check the gpu information
-    dcgmDiagPluginEntityList_v1 const &entityInfo = softwareObj.WrapperGetEntityList();
+    struct dcgmDiagPluginEntityList_v1 const &entityInfo = softwareObj.WrapperGetEntityList();
     REQUIRE(entityInfo.numEntities == softwareObjLocal.m_visibleGpus.size());
 
     // ---------------------------------------
@@ -225,12 +225,12 @@ TEST_CASE("Test 3 - Init Test Parameters Map")
 TEST_CASE("Test 4 - Populate GPU Information")
 {
     EntitySet entitySet;
-    WrapperSoftwareTestFramework softwareObjLocal(std::make_unique<dcgmDiagPluginEntityList_v1>(), entitySet);
+    WrapperSoftwareTestFramework softwareObjLocal(std::make_unique<struct dcgmDiagPluginEntityList_v1>(), entitySet);
     softwareObjLocal.createGpuObject();
     softwareObjLocal.WrapperPopulateGpuInfo(softwareObjLocal.m_visibleGpus);
 
     // check m_AllGpuInformation
-    dcgmDiagPluginEntityList_v1 const &entityInfo = softwareObjLocal.WrapperGetEntityList();
+    struct dcgmDiagPluginEntityList_v1 const &entityInfo = softwareObjLocal.WrapperGetEntityList();
 
     // ---------------
     // check number of gpus

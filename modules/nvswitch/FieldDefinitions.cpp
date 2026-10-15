@@ -116,7 +116,7 @@ const FieldIdControlType<DCGM_FI_SYSTEM_FIELD_UNKNOWN> *FieldIdFind(unsigned sho
 template <typename nscqFieldType, typename storageType, bool is_vector, typename... indexTypes>
 dcgmReturn_t DcgmNscqManager::UpdateFields(unsigned short fieldId,
                                            DcgmFvBuffer &buf,
-                                           const std::vector<dcgm_field_update_info_t> &entities,
+                                           const std::vector<struct dcgm_field_update_info_t> &entities,
                                            timelib64_t now)
 {
     const FieldIdControlType<DCGM_FI_SYSTEM_FIELD_UNKNOWN> *internalFieldId = FieldIdFind(fieldId);

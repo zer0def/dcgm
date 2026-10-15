@@ -164,13 +164,13 @@ dcgmReturn_t Gpu::GetMigMode(bool &enabled) const
     return ret;
 }
 
-dcgmMigValidity_t Gpu::IsMigModeDiagCompatible() const
+struct dcgmMigValidity_t Gpu::IsMigModeDiagCompatible() const
 {
     dcgmHandle_t handle = dcgmHandle.GetHandle();
     dcgmMigHierarchy_v2 hierarchy {};
     hierarchy.version    = dcgmMigHierarchy_version2;
     dcgmReturn_t ret     = dcgmGetGpuInstanceHierarchy(handle, &hierarchy);
-    dcgmMigValidity_t mv = {};
+    struct dcgmMigValidity_t mv = {};
     std::set<unsigned int> relevantGpuInstanceIds;
 
     if (ret != DCGM_ST_OK)

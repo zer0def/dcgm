@@ -198,7 +198,7 @@ BusGrind::BusGrind(dcgmHandle_t handle)
 #pragma GCC diagnostic push
 #pragma GCC diagnostic ignored "-Wformat-security"
 void BusGrind::Go(std::string const &testName,
-                  dcgmDiagPluginEntityList_v1 const *entityInfo,
+                  struct dcgmDiagPluginEntityList_v1 const *entityInfo,
                   unsigned int numParameters,
                   dcgmDiagPluginTestParameter_t const *tpStruct)
 {
@@ -355,7 +355,7 @@ void BusGrind::Cleanup(void)
 }
 
 /*****************************************************************************/
-bool BusGrind::Init(dcgmDiagPluginEntityList_v1 const *entityInfo)
+bool BusGrind::Init(struct dcgmDiagPluginEntityList_v1 const *entityInfo)
 {
     SmPerfDevice *smDevice = 0;
 
@@ -900,7 +900,7 @@ private:
  * SmPerfPlugin RunTest
  */
 /*****************************************************************************/
-bool BusGrind::RunTest_sm(dcgmDiagPluginEntityList_v1 const *entityInfo)
+bool BusGrind::RunTest_sm(struct dcgmDiagPluginEntityList_v1 const *entityInfo)
 {
     int st = 0, Nrunning = 0;
     SmPerfWorker *workerThreads[SMSTRESS_MAX_DEVICES] = { 0 };

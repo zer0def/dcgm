@@ -169,7 +169,7 @@ private:
     dcgmReturn_t ProcessCoreMessage(dcgm_module_command_header_t *moduleCommand);
     std::chrono::system_clock::time_point ProcessTryRunOnce(bool forceRun);
     const SysmonUtilizationSample &ReadUtilizationSample(DcgmNs::Timelib::TimePoint now);
-    dcgmReturn_t UpdateField(DcgmNs::Timelib::TimePoint now, const dcgm_field_update_info_t &updateInfo);
+    dcgmReturn_t UpdateField(DcgmNs::Timelib::TimePoint now, const struct dcgm_field_update_info_t &updateInfo);
     void UpdateFields(timelib64_t &nextUpdateTimeUsec);
     double CalculateCoreUtilization(DcgmNs::Cpu::CoreId core,
                                     unsigned int fieldId,
@@ -188,7 +188,7 @@ private:
     unsigned int GetSocketIdFromThermalFile(const std::string &path);
     void PopulateTemperatureFileMap();
     double ReadTemperature(unsigned int cpuId, short fieldId);
-    void RecordMetrics(timelib64_t now, std::vector<dcgm_field_update_info_t> &toUpdate);
+    void RecordMetrics(timelib64_t now, std::vector<struct dcgm_field_update_info_t> &toUpdate);
     uint64_t ReadCoreSpeed(unsigned int entityGroupId, unsigned int entityId);
     dcgmReturn_t PopulateCpusIfNeeded();
     // Probably going to be replaced by a mechanism that relies on the watch table

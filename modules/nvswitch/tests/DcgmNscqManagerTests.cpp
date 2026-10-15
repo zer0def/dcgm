@@ -229,13 +229,13 @@ SCENARIO("Validating Fully Specialized entity matching methods")
 
         unsigned short fieldId = DCGM_FI_DEV_NVSWITCH_TEMP_CELSIUS;
 
-        dcgm_field_update_info_t entity;
+        struct dcgm_field_update_info_t entity;
 
         entity.entityGroupId = DCGM_FE_SWITCH;
         entity.entityId      = fakeSwitchIds[0];
         entity.fieldMeta     = DcgmFieldGetById(fieldId);
 
-        std::vector<dcgm_field_update_info_t> entities;
+        std::vector<struct dcgm_field_update_info_t> entities;
 
         entities.push_back(entity);
 
@@ -268,13 +268,13 @@ SCENARIO("Validating Fully Specialized entity matching methods")
         link.parsed.type     = DCGM_FE_SWITCH;
         link.parsed.index    = 1;
 
-        dcgm_field_update_info_t entity;
+        struct dcgm_field_update_info_t entity;
 
         entity.entityGroupId = DCGM_FE_LINK;
         entity.entityId      = link.raw;
         entity.fieldMeta     = DcgmFieldGetById(fieldId);
 
-        std::vector<dcgm_field_update_info_t> entities;
+        std::vector<struct dcgm_field_update_info_t> entities;
 
         entities.push_back(entity);
 
@@ -307,13 +307,13 @@ SCENARIO("Validating Fully Specialized entity matching methods")
         link.parsed.type     = DCGM_FE_SWITCH;
         link.parsed.index    = 1;
 
-        dcgm_field_update_info_t entity;
+        struct dcgm_field_update_info_t entity;
 
         entity.entityGroupId = DCGM_FE_LINK;
         entity.entityId      = link.raw;
         entity.fieldMeta     = DcgmFieldGetById(fieldId);
 
-        std::vector<dcgm_field_update_info_t> entities;
+        std::vector<struct dcgm_field_update_info_t> entities;
 
         entities.push_back(entity);
 

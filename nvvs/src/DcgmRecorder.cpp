@@ -1140,7 +1140,7 @@ void DcgmRecorder::AddDiagStats(const std::vector<dcgmDiagCustomStats_t> &custom
     m_customStatHolder.AddDiagStats(customStats);
 }
 
-long long DcgmRecorder::DetermineMaxTemp(const dcgmDiagPluginEntityInfo_v1 &entityInfo)
+long long DcgmRecorder::DetermineMaxTemp(const struct dcgmDiagPluginEntityInfo_v1 &entityInfo)
 {
     long long const fakeMaxTemp  = 85;
     unsigned int flags           = DCGM_FV_FLAG_LIVE_DATA;
@@ -1195,7 +1195,7 @@ void DcgmRecorder::CheckNonFatalErrors(timelib64_t startTime,
 void DcgmRecorder::CheckCommonErrors(TestParameters &tp,
                                      timelib64_t startTime,
                                      nvvsPluginResult_t &result,
-                                     std::vector<dcgmDiagPluginEntityInfo_v1> const &entityInfos,
+                                     std::vector<struct dcgmDiagPluginEntityInfo_v1> const &entityInfos,
                                      std::vector<DcgmError> &fatalErrors,
                                      std::vector<DcgmError> &ignoredErrors)
 {
@@ -1279,7 +1279,7 @@ unsigned int DcgmRecorder::GetCudaMajorVersion()
     return m_dcgmSystem.GetCudaMajorVersion();
 }
 
-int DcgmRecorder::CheckHBMErrorFields(dcgmDiagPluginEntityInfo_v1 const &entityInfo,
+int DcgmRecorder::CheckHBMErrorFields(struct dcgmDiagPluginEntityInfo_v1 const &entityInfo,
                                       std::vector<DcgmError> &errors,
                                       timelib64_t startTime)
 {

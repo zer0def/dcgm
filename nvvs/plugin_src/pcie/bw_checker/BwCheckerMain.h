@@ -63,13 +63,13 @@ typedef enum dcgmBandwidth_enum
 } dcgmBandwidth_t;
 
 
-typedef struct
+struct bwTestResult_t
 {
     unsigned int dcgmGpuId;
     std::string pciBusId;
     double bandwidths[BANDWIDTH_COUNT];
     std::string error = "";
-} bwTestResult_t;
+};
 
 typedef struct
 {
@@ -77,4 +77,4 @@ typedef struct
     std::string pciBusId;
 } dcgmGpuPciIdPair_t;
 
-void AppendResultsToJson(std::vector<bwTestResult_t> &results, Json::Value &root);
+void AppendResultsToJson(std::vector<struct bwTestResult_t> &results, Json::Value &root);

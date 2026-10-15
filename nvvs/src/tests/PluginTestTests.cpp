@@ -36,8 +36,8 @@ TEST_CASE("PluginTest::InitializeForEntityList")
 {
     std::string const testName = "capoo";
     PluginTest pluginTest(testName);
-    auto pEntityList                        = std::make_unique<dcgmDiagPluginEntityList_v1>();
-    dcgmDiagPluginEntityList_v1 &entityList = *(pEntityList.get());
+    auto pEntityList                        = std::make_unique<struct dcgmDiagPluginEntityList_v1>();
+    struct dcgmDiagPluginEntityList_v1 &entityList = *(pEntityList.get());
 
     entityList.numEntities                      = 1;
     entityList.entities[0].entity.entityGroupId = DCGM_FE_CPU;
@@ -52,8 +52,8 @@ TEST_CASE("PluginTest::AddError")
 {
     std::string const testName = "capoo";
     PluginTest pluginTest(testName);
-    std::unique_ptr<dcgmDiagPluginEntityList_v1> entityListUptr = std::make_unique<dcgmDiagPluginEntityList_v1>();
-    dcgmDiagPluginEntityList_v1 &entityList                     = *entityListUptr;
+    std::unique_ptr<struct dcgmDiagPluginEntityList_v1> entityListUptr = std::make_unique<struct dcgmDiagPluginEntityList_v1>();
+    struct dcgmDiagPluginEntityList_v1 &entityList                     = *entityListUptr;
     dcgmDiagError_v1 error;
     dcgmGroupEntityPair_t entity = { .entityGroupId = DCGM_FE_CPU, .entityId = 0 };
 
@@ -114,8 +114,8 @@ TEST_CASE("PluginTest::AddInfoVerboseForEntity")
     std::string const info     = "Starburst Stream";
     PluginTest pluginTest(testName);
 
-    auto pEntityList                        = std::make_unique<dcgmDiagPluginEntityList_v1>();
-    dcgmDiagPluginEntityList_v1 &entityList = *(pEntityList.get());
+    auto pEntityList                        = std::make_unique<struct dcgmDiagPluginEntityList_v1>();
+    struct dcgmDiagPluginEntityList_v1 &entityList = *(pEntityList.get());
 
     dcgmGroupEntityPair_t entity = { .entityGroupId = DCGM_FE_CPU, .entityId = 0 };
 
@@ -143,8 +143,8 @@ TEST_CASE("PluginTest::SetResultForEntity")
 {
     std::string const testName = "capoo";
     PluginTest pluginTest(testName);
-    auto pEntityList                        = std::make_unique<dcgmDiagPluginEntityList_v1>();
-    dcgmDiagPluginEntityList_v1 &entityList = *(pEntityList.get());
+    auto pEntityList                        = std::make_unique<struct dcgmDiagPluginEntityList_v1>();
+    struct dcgmDiagPluginEntityList_v1 &entityList = *(pEntityList.get());
     dcgmGroupEntityPair_t entity            = { .entityGroupId = DCGM_FE_CPU, .entityId = 0 };
 
     entityList.numEntities        = 1;
@@ -168,8 +168,8 @@ TEST_CASE("PluginTest::SetResult")
     std::string const testName = "capoo";
     PluginTest pluginTest(testName);
 
-    auto pEntityList                        = std::make_unique<dcgmDiagPluginEntityList_v1>();
-    dcgmDiagPluginEntityList_v1 &entityList = *(pEntityList.get());
+    auto pEntityList                        = std::make_unique<struct dcgmDiagPluginEntityList_v1>();
+    struct dcgmDiagPluginEntityList_v1 &entityList = *(pEntityList.get());
 
     dcgmGroupEntityPair_t entity  = { .entityGroupId = DCGM_FE_CPU, .entityId = 0 };
     dcgmGroupEntityPair_t entity2 = { .entityGroupId = DCGM_FE_CPU, .entityId = 1 };
@@ -198,8 +198,8 @@ TEST_CASE("PluginTest::InfoLimit")
     std::string const testName = "capoo";
     PluginTest pluginTest(testName);
 
-    auto pEntityList                        = std::make_unique<dcgmDiagPluginEntityList_v1>();
-    dcgmDiagPluginEntityList_v1 &entityList = *(pEntityList.get());
+    auto pEntityList                        = std::make_unique<struct dcgmDiagPluginEntityList_v1>();
+    struct dcgmDiagPluginEntityList_v1 &entityList = *(pEntityList.get());
 
     dcgmGroupEntityPair_t entity  = { .entityGroupId = DCGM_FE_CPU, .entityId = 0 };
     entityList.numEntities        = 1;

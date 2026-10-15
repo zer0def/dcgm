@@ -35,7 +35,7 @@ namespace DcgmNs
  */
 using UpdateFuncType = dcgmReturn_t (DcgmNscqManager::*)(unsigned short fieldId,
                                                          DcgmFvBuffer &buf,
-                                                         const std::vector<dcgm_field_update_info_t> &entities,
+                                                         const std::vector<struct dcgm_field_update_info_t> &entities,
                                                          timelib64_t now);
 
 /**

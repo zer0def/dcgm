@@ -782,7 +782,7 @@ const SysmonUtilizationSample &DcgmModuleSysmon::ReadUtilizationSample(DcgmNs::T
     return m_utilizationSamples[now];
 }
 
-dcgmReturn_t DcgmModuleSysmon::UpdateField(DcgmNs::Timelib::TimePoint now, const dcgm_field_update_info_t &updateInfo)
+dcgmReturn_t DcgmModuleSysmon::UpdateField(DcgmNs::Timelib::TimePoint now, const struct dcgm_field_update_info_t &updateInfo)
 {
     ASSERT_IS_SYSMON_THREAD;
 
@@ -884,7 +884,7 @@ void DcgmModuleSysmon::UpdateFields(timelib64_t &nextUpdateTimeUsec)
         return;
     }
 
-    std::vector<dcgm_field_update_info_t> toUpdate;
+    std::vector<struct dcgm_field_update_info_t> toUpdate;
     TimePoint now = Now();
     dcgmReturn_t ret
         = m_watchTable.GetFieldsToUpdate(DcgmModuleIdSysmon, ToLegacyTimestamp(now), toUpdate, nextUpdateTimeUsec);
@@ -895,7 +895,7 @@ void DcgmModuleSysmon::UpdateFields(timelib64_t &nextUpdateTimeUsec)
         return;
     }
 
-    for (const dcgm_field_update_info_t &updateInfo : toUpdate)
+    for (const struct dcgm_field_update_info_t &updateInfo : toUpdate)
     {
         milliseconds updateInterval = FromLegacyTimestamp<milliseconds>(updateInfo.updateIntervalUsec);
         UpdateField(now, updateInfo);
@@ -1260,7 +1260,7 @@ unsigned int DcgmModuleSysmon::GetSocketIdForEntity(unsigned char entityGroupId,
 }
 
 /*****************************************************************************/
-void DcgmModuleSysmon::RecordMetrics(timelib64_t now, std::vector<dcgm_field_update_info_t> &toUpdate)
+void DcgmModuleSysmon::RecordMetrics(timelib64_t now, std::vector<struct dcgm_field_update_info_t> &toUpdate)
 {
     ASSERT_IS_SYSMON_THREAD;
 

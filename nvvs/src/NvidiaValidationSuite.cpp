@@ -244,7 +244,7 @@ std::string NvidiaValidationSuite::BuildCommonGpusList(std::vector<unsigned int>
 
     for (size_t i = 0; i < visibleGpus.size(); i++)
     {
-        dcgmMigValidity_t mv = visibleGpus[i]->IsMigModeDiagCompatible();
+        struct dcgmMigValidity_t mv = visibleGpus[i]->IsMigModeDiagCompatible();
         if (mv.migInvalidConfiguration == true)
         {
             std::stringstream buf;

@@ -170,7 +170,7 @@ public:
      *
      */
     void Go(std::string const &testName,
-            dcgmDiagPluginEntityList_v1 const *entityInfo,
+            struct dcgmDiagPluginEntityList_v1 const *entityInfo,
             unsigned int numParameters,
             dcgmDiagPluginTestParameter_t const *testParameters) override;
 
@@ -197,7 +197,7 @@ private:
      * Returns: true on success
      *          false on error
      */
-    bool Init(dcgmDiagPluginEntityList_v1 const &entityInfo);
+    bool Init(struct dcgmDiagPluginEntityList_v1 const &entityInfo);
 
     /*************************************************************************/
     /*
@@ -229,7 +229,7 @@ private:
      *      false if there were issues running the test (test failures are not considered issues),
      *      true otherwise.
      */
-    bool RunTest(dcgmDiagPluginEntityList_v1 const *entityInfo);
+    bool RunTest(struct dcgmDiagPluginEntityList_v1 const *entityInfo);
 
     /*************************************************************************/
     /*

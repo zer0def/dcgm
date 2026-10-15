@@ -27,13 +27,13 @@
 
 /*****************************************************************************/
 /* Details for each field that needs to be updated in the cache */
-typedef struct
+struct dcgm_field_update_info_t
 {
     dcgm_field_entity_group_t entityGroupId;
     unsigned int entityId;
     dcgm_field_meta_p fieldMeta;
     timelib64_t updateIntervalUsec = 0;
-} dcgm_field_update_info_t;
+};
 
 /*****************************************************************************/
 /* Details for a single watcher of a field. Each fieldId has a vector of these */
@@ -233,7 +233,7 @@ public:
      */
     dcgmReturn_t GetFieldsToUpdate(dcgmModuleId_t currentModule,
                                    timelib64_t now,
-                                   std::vector<dcgm_field_update_info_t> &toUpdate,
+                                   std::vector<struct dcgm_field_update_info_t> &toUpdate,
                                    timelib64_t &earliestNextUpdate);
 
     /*****************************************************************************/

@@ -201,7 +201,7 @@ TEST_CASE("Software Subtest Context")
 
     std::string const subtestName { "Subtest" };
 
-    std::unique_ptr<dcgmDiagPluginEntityList_v1> pEntityList = std::make_unique<dcgmDiagPluginEntityList_v1>();
+    std::unique_ptr<struct dcgmDiagPluginEntityList_v1> pEntityList = std::make_unique<struct dcgmDiagPluginEntityList_v1>();
     std::unique_ptr<dcgmDiagEntityResults_v2> pEntityResults = std::make_unique<dcgmDiagEntityResults_v2>();
 
     s.InitializeForEntityList(SW_PLUGIN_NAME, *pEntityList);
@@ -279,7 +279,7 @@ TEST_CASE("Negative test for DCGM_FR_NO_ACCESS_TO_FILE")
     TestSoftware s(dcgmHandle, std::move(dcgmSystemMock));
     s.SetDeviceDirectory("./test_dev_" + std::to_string(std::chrono::steady_clock::now().time_since_epoch().count()));
     s.CreateFakeNvidiaDevices();
-    std::unique_ptr<dcgmDiagPluginEntityList_v1> pEntityList = std::make_unique<dcgmDiagPluginEntityList_v1>();
+    std::unique_ptr<struct dcgmDiagPluginEntityList_v1> pEntityList = std::make_unique<struct dcgmDiagPluginEntityList_v1>();
     std::unique_ptr<dcgmDiagEntityResults_v2> pEntityResults = std::make_unique<dcgmDiagEntityResults_v2>();
     s.InitializeForEntityList(SW_PLUGIN_NAME, *pEntityList);
 
@@ -322,7 +322,7 @@ TEST_CASE("Software: negative test for DCGM_FR_DEVICE_COUNT_MISMATCH")
     s.SetDeviceDirectory("./test_dev_" + std::to_string(std::chrono::steady_clock::now().time_since_epoch().count()));
     s.CreateFakeNvidiaDevices();
 
-    std::unique_ptr<dcgmDiagPluginEntityList_v1> pEntityList = std::make_unique<dcgmDiagPluginEntityList_v1>();
+    std::unique_ptr<struct dcgmDiagPluginEntityList_v1> pEntityList = std::make_unique<struct dcgmDiagPluginEntityList_v1>();
     std::unique_ptr<dcgmDiagEntityResults_v2> pEntityResults = std::make_unique<dcgmDiagEntityResults_v2>();
     s.InitializeForEntityList(SW_PLUGIN_NAME, *pEntityList);
 
@@ -361,7 +361,7 @@ TEST_CASE("Software: negative test for DCGM_FR_FAULTY_MEMORY")
 
     Software s(dcgmHandle, std::move(dcgmSystemMock));
 
-    auto pEntityList                              = std::make_unique<dcgmDiagPluginEntityList_v1>();
+    auto pEntityList                              = std::make_unique<struct dcgmDiagPluginEntityList_v1>();
     pEntityList->numEntities                      = 1;
     pEntityList->entities[0].entity.entityId      = faultyGpuId;
     pEntityList->entities[0].entity.entityGroupId = DCGM_FE_GPU;
@@ -399,7 +399,7 @@ TEST_CASE("Software: negative test for DCGM_FR_GRAPHICS_PROCESSES")
 
     Software s(dcgmHandle, std::move(dcgmSystemMock));
 
-    auto pEntityList                              = std::make_unique<dcgmDiagPluginEntityList_v1>();
+    auto pEntityList                              = std::make_unique<struct dcgmDiagPluginEntityList_v1>();
     pEntityList->numEntities                      = 1;
     pEntityList->entities[0].entity.entityId      = faultyGpuId;
     pEntityList->entities[0].entity.entityGroupId = DCGM_FE_GPU;
@@ -429,7 +429,7 @@ TEST_CASE("Software: negative test for DCGM_FR_CANNOT_OPEN_LIB")
     TestSoftware s(dcgmHandle);
     s.SetForceFindLibFailure();
 
-    auto pEntityList = std::make_unique<dcgmDiagPluginEntityList_v1>();
+    auto pEntityList = std::make_unique<struct dcgmDiagPluginEntityList_v1>();
     s.InitializeForEntityList(SW_PLUGIN_NAME, *pEntityList);
 
     Software::libraryCheck_t checkType {};
@@ -475,7 +475,7 @@ TEST_CASE("Software: negative test for DCGM_FR_BAD_CUDA_ENV")
 
     Software s(dcgmHandle);
 
-    auto pEntityList                              = std::make_unique<dcgmDiagPluginEntityList_v1>();
+    auto pEntityList                              = std::make_unique<struct dcgmDiagPluginEntityList_v1>();
     pEntityList->numEntities                      = 1;
     pEntityList->entities[0].entity.entityId      = 0;
     pEntityList->entities[0].entity.entityGroupId = DCGM_FE_GPU;
@@ -533,7 +533,7 @@ TEST_CASE("Software: negative test for DCGM_FR_PERSISTENCE_MODE")
 
             Software s(dcgmHandle, std::move(dcgmSystemMock));
 
-            auto pEntityList         = std::make_unique<dcgmDiagPluginEntityList_v1>();
+            auto pEntityList         = std::make_unique<struct dcgmDiagPluginEntityList_v1>();
             pEntityList->numEntities = gpuCount;
             for (unsigned int i = 0; i < gpuCount; i++)
             {
@@ -579,7 +579,7 @@ TEST_CASE("Software: negative test for DCGM_FR_DENYLISTED_DRIVER")
     std::string const denylistedDriver               = "nouveau";
 
     Software s(dcgmHandle);
-    auto pEntityList = std::make_unique<dcgmDiagPluginEntityList_v1>();
+    auto pEntityList = std::make_unique<struct dcgmDiagPluginEntityList_v1>();
     s.InitializeForEntityList(SW_PLUGIN_NAME, *pEntityList);
 
     // Atomically create a unique tmp dir for the symlink fixture

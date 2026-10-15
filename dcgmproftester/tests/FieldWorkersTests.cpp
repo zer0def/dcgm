@@ -24,7 +24,7 @@ namespace
 class TestFieldWorker : public FieldWorkerBase
 {
 public:
-    TestFieldWorker(CudaWorkerDevice_t cudaDevice, unsigned int fieldId)
+    TestFieldWorker(struct CudaWorkerDevice_t cudaDevice, unsigned int fieldId)
         : FieldWorkerBase(cudaDevice, fieldId)
     {}
 
@@ -32,9 +32,9 @@ public:
     {}
 };
 
-CudaWorkerDevice_t MakeCudaDevice()
+struct CudaWorkerDevice_t MakeCudaDevice()
 {
-    CudaWorkerDevice_t device {};
+    struct CudaWorkerDevice_t device {};
     device.m_multiProcessorCount         = 8;
     device.m_maxThreadsPerMultiProcessor = 2048;
     return device;

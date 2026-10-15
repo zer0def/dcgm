@@ -60,9 +60,9 @@ auto cuGetErrorStringMock = [](CUresult cuSt [[maybe_unused]], const char **errS
     return CUDA_SUCCESS;
 };
 
-dcgmDiagPluginEntityList_v1 MakeContextCreateEntityList(unsigned int gpuCount)
+struct dcgmDiagPluginEntityList_v1 MakeContextCreateEntityList(unsigned int gpuCount)
 {
-    dcgmDiagPluginEntityList_v1 entityList {};
+    struct dcgmDiagPluginEntityList_v1 entityList {};
     entityList.numEntities = gpuCount;
     for (unsigned int i = 0; i < gpuCount; ++i)
     {
@@ -73,9 +73,9 @@ dcgmDiagPluginEntityList_v1 MakeContextCreateEntityList(unsigned int gpuCount)
     return entityList;
 }
 
-std::unique_ptr<dcgmDiagPluginEntityList_v1> MakeContextCreateEntityListPtr(unsigned int gpuCount)
+std::unique_ptr<struct dcgmDiagPluginEntityList_v1> MakeContextCreateEntityListPtr(unsigned int gpuCount)
 {
-    auto entityList = std::make_unique<dcgmDiagPluginEntityList_v1>();
+    auto entityList = std::make_unique<struct dcgmDiagPluginEntityList_v1>();
     *entityList     = MakeContextCreateEntityList(gpuCount);
     return entityList;
 }
@@ -135,9 +135,9 @@ TEST_CASE("ContextCreate::CanCreateContext")
         dcgmHandle_t handle                              = GetDcgmHandle(*dcgmMockLib);
         auto plugin                                      = std::make_unique<ContextCreatePlugin>(handle);
 
-        auto pEntityList = std::make_unique<dcgmDiagPluginEntityList_v1>();
+        auto pEntityList = std::make_unique<struct dcgmDiagPluginEntityList_v1>();
 
-        dcgmDiagPluginEntityList_v1 &entityList = *(pEntityList.get());
+        struct dcgmDiagPluginEntityList_v1 &entityList = *(pEntityList.get());
 
         dcgmGroupEntityPair_t entity0 = { .entityGroupId = DCGM_FE_GPU, .entityId = 0 };
         dcgmGroupEntityPair_t entity1 = { .entityGroupId = DCGM_FE_GPU, .entityId = 1 };
@@ -205,7 +205,7 @@ TEST_CASE("ContextCreate::CanCreateContext")
 TEST_CASE("ContextCreate initializes and reports safe setup failures")
 {
     auto plugin     = std::make_unique<ContextCreatePlugin>((dcgmHandle_t)0);
-    auto entityList = std::make_unique<dcgmDiagPluginEntityList_v1>();
+    auto entityList = std::make_unique<struct dcgmDiagPluginEntityList_v1>();
     plugin->InitializeForEntityList(plugin->GetCtxCreateTestName(), *entityList);
     ContextCreate testContextCreate(plugin->GetInfoStruct().defaultTestParameters, plugin.get(), (dcgmHandle_t)0);
 
@@ -262,7 +262,7 @@ TEST_CASE("ContextCreatePlugin::Go handles disabled and empty-input cases")
 
         SECTION("empty GPU list fails with an empty-list error")
         {
-            auto entityList = std::make_unique<dcgmDiagPluginEntityList_v1>();
+            auto entityList = std::make_unique<struct dcgmDiagPluginEntityList_v1>();
 
             plugin->Go(plugin->GetCtxCreateTestName(), entityList.get(), 0, nullptr);
 

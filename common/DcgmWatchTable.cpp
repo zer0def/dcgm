@@ -291,7 +291,7 @@ static inline void UpdateNextUpdateTime(timelib64_t &earliestNextUpdate, timelib
 /*****************************************************************************/
 dcgmReturn_t DcgmWatchTable::GetFieldsToUpdate(dcgmModuleId_t currentModule,
                                                timelib64_t now,
-                                               std::vector<dcgm_field_update_info_t> &toUpdate,
+                                               std::vector<struct dcgm_field_update_info_t> &toUpdate,
                                                timelib64_t &earliestNextUpdate)
 {
     timelib64_t age;
@@ -346,7 +346,7 @@ dcgmReturn_t DcgmWatchTable::GetFieldsToUpdate(dcgmModuleId_t currentModule,
             earliestNextUpdate);
 
         // At this point we know we want to update the field
-        dcgm_field_update_info_t updateInfo;
+        struct dcgm_field_update_info_t updateInfo;
         updateInfo.entityGroupId      = static_cast<dcgm_field_entity_group_t>(watchInfo.watchKey.entityGroupId);
         updateInfo.entityId           = watchInfo.watchKey.entityId;
         updateInfo.fieldMeta          = fieldMeta;

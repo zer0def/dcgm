@@ -329,13 +329,13 @@ public:
     void CheckCommonErrors(TestParameters &tp,
                            timelib64_t startTime,
                            nvvsPluginResult_t &result,
-                           std::vector<dcgmDiagPluginEntityInfo_v1> const &entityInfos,
+                           std::vector<struct dcgmDiagPluginEntityInfo_v1> const &entityInfos,
                            std::vector<DcgmError> &fatalErrors,
                            std::vector<DcgmError> &ignoredErrors);
 
     /*
      */
-    long long DetermineMaxTemp(const dcgmDiagPluginEntityInfo_v1 &entityInfo);
+    long long DetermineMaxTemp(const struct dcgmDiagPluginEntityInfo_v1 &entityInfo);
 
     /*
      * Convert the dcgm return code to a string
@@ -354,7 +354,7 @@ public:
      * DR_COMM_ERROR  : if we couldn't get the information from DCGM
      * DR_VIOLATION   : if the temperature was ever too high
      */
-    int CheckHBMErrorFields(dcgmDiagPluginEntityInfo_v1 const &entityInfo,
+    int CheckHBMErrorFields(struct dcgmDiagPluginEntityInfo_v1 const &entityInfo,
                             std::vector<DcgmError> &errors,
                             timelib64_t startTime);
 

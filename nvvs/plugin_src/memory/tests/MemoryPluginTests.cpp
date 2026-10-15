@@ -29,7 +29,7 @@
 TEST_CASE("mem_init")
 {
     mem_globals_t memGlobals                                = {};
-    std::unique_ptr<dcgmDiagPluginEntityList_v1> entityList = std::make_unique<dcgmDiagPluginEntityList_v1>();
+    std::unique_ptr<struct dcgmDiagPluginEntityList_v1> entityList = std::make_unique<struct dcgmDiagPluginEntityList_v1>();
 
     entityList->numEntities = 4;
     for (unsigned int i = 0; i < entityList->numEntities; i++)
@@ -61,7 +61,7 @@ TEST_CASE("mem_init")
 TEST_CASE("Memory: negative test for DCGM_FR_CUDA_DEVICE")
 {
     mem_globals_t memGlobals                                = {};
-    std::unique_ptr<dcgmDiagPluginEntityList_v1> entityList = std::make_unique<dcgmDiagPluginEntityList_v1>();
+    std::unique_ptr<struct dcgmDiagPluginEntityList_v1> entityList = std::make_unique<struct dcgmDiagPluginEntityList_v1>();
 
     entityList->numEntities = 4;
     for (unsigned int i = 0; i < entityList->numEntities; i++)
@@ -145,7 +145,7 @@ TEST_CASE("Memory: negative test for DCGM_FR_ECC_DISABLED")
     unsigned int gpuCount    = 4;
     unsigned int targetGpuId = 1;
 
-    std::unique_ptr<dcgmDiagPluginEntityList_v1> entityList = std::make_unique<dcgmDiagPluginEntityList_v1>();
+    std::unique_ptr<struct dcgmDiagPluginEntityList_v1> entityList = std::make_unique<struct dcgmDiagPluginEntityList_v1>();
     entityList->numEntities                                 = gpuCount;
     for (unsigned int i = 0; i < entityList->numEntities; i++)
     {
@@ -186,7 +186,7 @@ TEST_CASE("Memory: negative test for DCGM_FR_CUDA_DBE")
     unsigned int gpuCount    = 4;
     unsigned int targetGpuId = 1;
 
-    std::unique_ptr<dcgmDiagPluginEntityList_v1> entityList = std::make_unique<dcgmDiagPluginEntityList_v1>();
+    std::unique_ptr<struct dcgmDiagPluginEntityList_v1> entityList = std::make_unique<struct dcgmDiagPluginEntityList_v1>();
     entityList->numEntities                                 = gpuCount;
     for (unsigned int i = 0; i < entityList->numEntities; i++)
     {
@@ -242,7 +242,7 @@ TEST_CASE("Memory: negative test for DCGM_FR_ECC_UNSUPPORTED")
     unsigned int gpuCount    = 4;
     unsigned int targetGpuId = 1;
 
-    std::unique_ptr<dcgmDiagPluginEntityList_v1> entityList = std::make_unique<dcgmDiagPluginEntityList_v1>();
+    std::unique_ptr<struct dcgmDiagPluginEntityList_v1> entityList = std::make_unique<struct dcgmDiagPluginEntityList_v1>();
     entityList->numEntities                                 = gpuCount;
     for (unsigned int i = 0; i < entityList->numEntities; i++)
     {
@@ -283,7 +283,7 @@ TEST_CASE("Memory: negative test for DCGM_FR_MEMORY_MISMATCH")
     unsigned int gpuCount    = 4;
     unsigned int targetGpuId = 1;
 
-    std::unique_ptr<dcgmDiagPluginEntityList_v1> entityList = std::make_unique<dcgmDiagPluginEntityList_v1>();
+    std::unique_ptr<struct dcgmDiagPluginEntityList_v1> entityList = std::make_unique<struct dcgmDiagPluginEntityList_v1>();
     entityList->numEntities                                 = gpuCount;
     for (unsigned int i = 0; i < entityList->numEntities; i++)
     {
@@ -349,7 +349,7 @@ TEST_CASE("Memory: negative test for DCGM_FR_MEMORY_ALLOC")
     unsigned int gpuCount    = 4;
     unsigned int targetGpuId = 1;
 
-    std::unique_ptr<dcgmDiagPluginEntityList_v1> entityList = std::make_unique<dcgmDiagPluginEntityList_v1>();
+    std::unique_ptr<struct dcgmDiagPluginEntityList_v1> entityList = std::make_unique<struct dcgmDiagPluginEntityList_v1>();
     entityList->numEntities                                 = gpuCount;
     for (unsigned int i = 0; i < entityList->numEntities; i++)
     {

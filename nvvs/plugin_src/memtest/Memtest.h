@@ -140,7 +140,7 @@ public:
      *        <0 on plugin / test initialization failure
      *
      */
-    int Run(dcgmHandle_t handle, const dcgmDiagPluginEntityList_v1 &entityList);
+    int Run(dcgmHandle_t handle, const struct dcgmDiagPluginEntityList_v1 &entityList);
 
     /*************************************************************************/
 
@@ -152,7 +152,7 @@ private:
      * Returns: 0 on success
      *         <0 on error
      */
-    dcgmReturn_t Init(const dcgmDiagPluginEntityList_v1 &entityList);
+    dcgmReturn_t Init(const struct dcgmDiagPluginEntityList_v1 &entityList);
 
     /*************************************************************************/
     /*

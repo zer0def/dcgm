@@ -49,7 +49,7 @@ public:
      * Prepares everything needed before we start the plugin
      */
     dcgmReturn_t PluginPreStart(const std::vector<unsigned short> &additionalFields,
-                                const std::vector<dcgmDiagPluginEntityInfo_v1> &entityInfo,
+                                const std::vector<struct dcgmDiagPluginEntityInfo_v1> &entityInfo,
                                 const std::string &pluginName);
 
     /********************************************************************/
@@ -94,7 +94,7 @@ public:
 private:
     DcgmRecorder m_dcgmRecorder;
     HangDetectMonitor *m_hangDetectMonitor = nullptr;
-    std::vector<dcgmDiagPluginEntityInfo_v1> m_entityInfos;
+    std::vector<struct dcgmDiagPluginEntityInfo_v1> m_entityInfos;
     bool m_initialized;
     std::vector<DcgmError> m_fatalErrors;
     std::vector<DcgmError> m_ignoredErrors;
@@ -117,5 +117,5 @@ private:
     /*
      * Determine the maximum temperature allowed for this gpu
      */
-    long long DetermineMaxTemp(const dcgmDiagPluginEntityInfo_v1 &entityInfo, TestParameters &tp);
+    long long DetermineMaxTemp(const struct dcgmDiagPluginEntityInfo_v1 &entityInfo, TestParameters &tp);
 };

@@ -485,7 +485,7 @@ int Memtest::CudaInit()
 }
 
 /*****************************************************************************/
-dcgmReturn_t Memtest::Init(const dcgmDiagPluginEntityList_v1 &entityList)
+dcgmReturn_t Memtest::Init(const struct dcgmDiagPluginEntityList_v1 &entityList)
 {
     /* Need to call cuInit before we call cuDeviceGetByPCIBusId */
     if (auto const cuSt = cuInit(0); cuSt != CUDA_SUCCESS)
@@ -532,7 +532,7 @@ dcgmReturn_t Memtest::Init(const dcgmDiagPluginEntityList_v1 &entityList)
 }
 
 /*****************************************************************************/
-int Memtest::Run(dcgmHandle_t handle, const dcgmDiagPluginEntityList_v1 &entityList)
+int Memtest::Run(dcgmHandle_t handle, const struct dcgmDiagPluginEntityList_v1 &entityList)
 {
     std::vector<std::unique_ptr<MemtestWorker>> workerThreads;
 
